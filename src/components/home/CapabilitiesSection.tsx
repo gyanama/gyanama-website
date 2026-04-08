@@ -63,7 +63,6 @@ const capabilities = [
     icon: Shield,
     title: 'Operations & Safety',
     points: [
-      'Transport tracking',
       'Visitor management',
       'Emergency protocols',
     ],

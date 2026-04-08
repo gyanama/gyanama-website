@@ -25,7 +25,7 @@ const reasons = [
   {
     icon: Layers,
     title: '50+ Powerful Features',
-    description: 'Attendance, fees, reports, communication, transport tracking — everything in one unified platform.',
+    description: 'Attendance, fees, reports, communication — everything in one unified platform.',
     color: 'from-emerald-500 to-teal-500',
   },
   {

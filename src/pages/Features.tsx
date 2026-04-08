@@ -17,7 +17,6 @@ import {
   Calendar,
   FileText,
   CreditCard,
-  Bus,
   Users,
   BarChart3,
   Smartphone
@@ -78,7 +77,6 @@ const featureBlocks = [
     description: 'Keep your campus safe and running smoothly.',
     color: 'secondary',
     features: [
-      { icon: Bus, text: 'Transport tracking' },
       { icon: Users, text: 'Visitor management' },
       { icon: Bell, text: 'Emergency alerts' },
       { icon: Shield, text: 'Security protocols' },
