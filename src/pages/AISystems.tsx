@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { GlassCard } from '@/components/ui/GlassCard';
@@ -320,11 +321,13 @@ function HealthScoreVisual() {
 }
 
 const AISystems = () => {
-  useDocumentTitle('AI Systems');
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <PageLayout>
+      <SEOHead />
+      <OrganizationSchema />
+      <BreadcrumbSchema pageName="AI Systems" pagePath="/ai-systems" />
       {/* Hero Section */}
       <section className="section-padding gradient-hero relative overflow-hidden">
         {/* Floating School Elements */}

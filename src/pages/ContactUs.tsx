@@ -5,13 +5,15 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '@/lib/constants';
 import { CalPopupButton } from '@/components/scheduling';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 
 const ContactUs = () => {
-    useDocumentTitle('Contact Us');
-
     return (
         <PageLayout>
+            <SEOHead />
+            <OrganizationSchema />
+            <BreadcrumbSchema pageName="Contact Us" pagePath="/contact-us" />
             <div className="section-padding min-h-screen flex items-center bg-slate-50 relative overflow-hidden">
                 {/* Decorative Background */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">

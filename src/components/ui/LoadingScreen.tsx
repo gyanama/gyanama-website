@@ -19,8 +19,10 @@ export function LoadingScreen() {
                 >
                     <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center mb-4">
                         <img
-                            src="/v2 transparent.png"
+                            src="/gyanama-logo.png"
                             alt="GYANAMA Logo"
+                            width={128}
+                            height={128}
                             className="w-full h-full object-contain"
                             onError={(e) => { e.currentTarget.style.display = 'none'; }}
                         />

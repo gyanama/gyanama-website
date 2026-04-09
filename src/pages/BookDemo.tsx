@@ -21,7 +21,8 @@ import { toast } from '@/hooks/use-toast';
 import { SITE_CONFIG } from '@/lib/constants';
 import { createRateLimiter } from '@/lib/rate-limit';
 import { CalEmbed } from '@/components/scheduling';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { TurnstileWidget } from '@/components/ui/TurnstileWidget';
 
 // Client-side rate limiter (defense in depth — server has its own)
@@ -54,8 +55,6 @@ const benefits = [
 ];
 
 const BookDemo = () => {
-  useDocumentTitle('Book a Demo');
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -368,6 +367,9 @@ const BookDemo = () => {
 
   return (
     <PageLayout>
+      <SEOHead />
+      <OrganizationSchema />
+      <BreadcrumbSchema pageName="Book a Demo" pagePath="/book-demo" />
       {/* Hero Section */}
       <section className="section-padding gradient-hero relative overflow-hidden">
         <div className="container-wide relative z-10">

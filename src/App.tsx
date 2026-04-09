@@ -33,12 +33,17 @@ function RouteLoadingFallback() {
   );
 }
 
+// Skip loading screen during prerendering (Playwright sets navigator.webdriver)
+const isPrerender = typeof navigator !== 'undefined' && navigator.webdriver;
+
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [pageReady, setPageReady] = useState(false);
-  const [timerDone, setTimerDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(!isPrerender);
+  const [pageReady, setPageReady] = useState(isPrerender);
+  const [timerDone, setTimerDone] = useState(isPrerender);
 
   useEffect(() => {
+    if (isPrerender) return;
+
     // Preload the Index page during loading screen
     import("./pages/Index").then(() => setPageReady(true));
 

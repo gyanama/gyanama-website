@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { PageLayout } from '@/components/layout/PageLayout';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/button';
@@ -31,9 +32,11 @@ const values = [
 ];
 
 const About = () => {
-  useDocumentTitle('About');
   return (
     <PageLayout>
+      <SEOHead />
+      <OrganizationSchema />
+      <BreadcrumbSchema pageName="About" pagePath="/about" />
       {/* Hero Section */}
       <section className="section-padding gradient-hero relative overflow-hidden">
         <div className="container-wide relative z-10">

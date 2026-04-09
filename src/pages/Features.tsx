@@ -1,5 +1,6 @@
 import { PageLayout } from '@/components/layout/PageLayout';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/button';
@@ -85,9 +86,11 @@ const featureBlocks = [
 ];
 
 const Features = () => {
-  useDocumentTitle('Features');
   return (
     <PageLayout>
+      <SEOHead />
+      <OrganizationSchema />
+      <BreadcrumbSchema pageName="Features" pagePath="/features" />
       {/* Hero Section */}
       <section className="section-padding gradient-hero relative overflow-hidden">
         <div className="container-wide relative z-10">

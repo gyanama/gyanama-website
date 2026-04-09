@@ -1,12 +1,13 @@
 import { PageLayout } from '@/components/layout/PageLayout';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { BreadcrumbSchema } from '@/components/seo/JsonLd';
 
 const TermsOfService = () => {
-  useDocumentTitle('Terms of Service');
-
   return (
     <PageLayout>
+      <SEOHead />
+      <BreadcrumbSchema pageName="Terms of Service" pagePath="/terms-of-service" />
       <section className="section-padding gradient-hero relative overflow-hidden">
         <div className="container-wide relative z-10">
           <AnimatedSection className="max-w-3xl mx-auto text-center">

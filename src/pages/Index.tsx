@@ -1,5 +1,7 @@
 import { PageLayout } from '@/components/layout/PageLayout';
-import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { SEOHead } from '@/components/seo/SEOHead';
+import { OrganizationSchema, WebSiteSchema, SoftwareApplicationSchema, FAQPageSchema } from '@/components/seo/JsonLd';
+import { faqData } from '@/lib/faq-data';
 import { HeroSection } from '@/components/home/HeroSection';
 import { RoleSection } from '@/components/home/RoleSection';
 import { DashboardSection } from '@/components/home/DashboardSection';
@@ -14,10 +16,13 @@ import { CTASection } from '@/components/home/CTASection';
 import { MobileAppSection } from '@/components/home/MobileAppSection';
 
 const Index = () => {
-  useDocumentTitle('AI-Powered School Management');
-
   return (
     <PageLayout>
+      <SEOHead />
+      <OrganizationSchema />
+      <WebSiteSchema />
+      <SoftwareApplicationSchema />
+      <FAQPageSchema faqs={faqData} />
       <HeroSection />
       <RoleSection />
       <MobileAppSection />
