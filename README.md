@@ -3,6 +3,7 @@
 Marketing website for **GYANAMA** — an AI-powered school management platform.
 **Live:** [gyanama.com](https://gyanama.com)
 
+
 ## Tech Stack
 
 - **React 18** + **TypeScript** (strict mode)
