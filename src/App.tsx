@@ -59,27 +59,6 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Initialize Cal.com embed globally for popup buttons
-  useEffect(() => {
-    if (SITE_CONFIG.isCalConfigured) {
-      import("@calcom/embed-react").then(({ getCalApi }) => {
-        getCalApi().then((cal) => {
-          cal("ui", {
-            theme: "light",
-            cssVarsPerTheme: {
-              light: {
-                "cal-brand": "#2563eb",
-                "cal-brand-emphasis": "#1d4ed8",
-              },
-            },
-            hideEventTypeDetails: false,
-            layout: "month_view",
-          });
-        });
-      });
-    }
-  }, []);
-
   // Only hide loading when BOTH timer is done AND page is ready
   useEffect(() => {
     if (timerDone && pageReady) {
