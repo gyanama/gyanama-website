@@ -42,8 +42,11 @@ const App = () => {
   const [timerDone, setTimerDone] = useState(isPrerender);
 
   // Remove the HTML loading overlay once React has mounted (LoadingScreen is now visible)
+  // Skip during prerendering so the overlay stays in the captured HTML
   useEffect(() => {
-    document.getElementById('initial-loader')?.remove();
+    if (!isPrerender) {
+      document.getElementById('initial-loader')?.remove();
+    }
   }, []);
 
   useEffect(() => {
