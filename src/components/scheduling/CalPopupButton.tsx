@@ -1,5 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
-import { getCalApi } from '@calcom/embed-react';
+import { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, type ButtonProps } from '@/components/ui/button';
 import { SITE_CONFIG, ROUTES } from '@/lib/constants';
@@ -9,24 +8,7 @@ interface CalPopupButtonProps extends ButtonProps {
 }
 
 export function CalPopupButton({ children, className, ...props }: CalPopupButtonProps) {
-  useEffect(() => {
-    if (!SITE_CONFIG.isCalConfigured) return;
-
-    (async function () {
-      const cal = await getCalApi();
-      cal('ui', {
-        theme: 'light',
-        cssVarsPerTheme: {
-          light: {
-            'cal-brand': '#2563eb',
-            'cal-brand-emphasis': '#1d4ed8',
-          },
-        },
-        hideEventTypeDetails: false,
-        layout: 'month_view',
-      });
-    })();
-  }, []);
+  // Cal UI theme is configured globally in App.tsx — no duplicate getCalApi() call here
 
   // Graceful fallback: if Cal.com is not configured, link to the BookDemo page
   if (!SITE_CONFIG.isCalConfigured) {

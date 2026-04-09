@@ -41,16 +41,21 @@ const App = () => {
   const [pageReady, setPageReady] = useState(isPrerender);
   const [timerDone, setTimerDone] = useState(isPrerender);
 
+  // Remove the HTML loading overlay once React has mounted (LoadingScreen is now visible)
+  useEffect(() => {
+    document.getElementById('initial-loader')?.remove();
+  }, []);
+
   useEffect(() => {
     if (isPrerender) return;
 
     // Preload the Index page during loading screen
     import("./pages/Index").then(() => setPageReady(true));
 
-    // Show loading screen for minimum 2.8 seconds
+    // Show loading screen for minimum 1.8 seconds
     const timer = setTimeout(() => {
       setTimerDone(true);
-    }, 2800);
+    }, 1800);
     return () => clearTimeout(timer);
   }, []);
 

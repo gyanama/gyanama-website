@@ -18,6 +18,13 @@
 
 <body>
   <div id="root"></div>
+
+  <!-- Instant loading overlay — covers prerendered content until React mounts -->
+  <div id="initial-loader" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column">
+    <img src="/gyanama-logo.png" alt="" width="128" height="128" style="width:96px;height:96px;object-fit:contain;margin-bottom:16px">
+    <span style="font-size:1.5rem;font-weight:700;background:linear-gradient(to right,#2563eb,#7c3aed,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.025em">GYANAMA</span>
+  </div>
+
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
