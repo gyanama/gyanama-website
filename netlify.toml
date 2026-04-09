@@ -1,5 +1,5 @@
 [build]
-  command = "npx playwright install chromium --with-deps && npm run build:seo"
+  command = "npx playwright install chromium && npm run build:seo"
   publish = "dist"
   functions = "netlify/functions"
 
