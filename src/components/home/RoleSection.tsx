@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { GraduationCap, Users, BookOpen, ClipboardList, Shield, Sparkles } from 'lucide-react';
+import { GraduationCap, Users, BookOpen, Sparkles } from 'lucide-react';
 
 const roles = [
     {
@@ -23,20 +23,6 @@ const roles = [
         tagline: 'Stay connected',
         color: 'text-amber-600',
         bgColor: 'bg-amber-500',
-    },
-    {
-        icon: ClipboardList,
-        title: 'Administrators',
-        tagline: 'Simplify operations',
-        color: 'text-violet-600',
-        bgColor: 'bg-violet-500',
-    },
-{
-        icon: Shield,
-        title: 'Management',
-        tagline: 'Oversee everything',
-        color: 'text-rose-600',
-        bgColor: 'bg-rose-500',
     },
 ];
 

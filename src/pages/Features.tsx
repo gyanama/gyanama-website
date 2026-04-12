@@ -10,30 +10,30 @@ import {
   MessageSquare,
   BookOpen,
   Settings,
-  Shield,
+  ClipboardCheck,
   ArrowRight,
-  CheckCircle,
   Clock,
   Bell,
   Calendar,
   FileText,
-  CreditCard,
   Users,
   BarChart3,
-  Smartphone
+  Smartphone,
+  HelpCircle,
+  CheckCircle
 } from 'lucide-react';
 
 const featureBlocks = [
   {
     icon: UserCheck,
     title: 'Attendance & Automation',
-    description: 'Complete attendance management with AI-powered insights.',
+    description: 'Complete attendance management with smart tracking.',
     color: 'primary',
     features: [
-      { icon: CheckCircle, text: 'Biometric & RFID tracking' },
-      { icon: Clock, text: 'Real-time absence detection' },
+      { icon: CheckCircle, text: 'Smart attendance tracking' },
+      { icon: Clock, text: 'Leave management system' },
+      { icon: Users, text: 'Substitute teacher management' },
       { icon: Bell, text: 'Automated parent alerts' },
-      { icon: BarChart3, text: 'Attendance analytics & trends' },
     ],
   },
   {
@@ -42,10 +42,10 @@ const featureBlocks = [
     description: 'Seamless multi-channel communication that builds trust.',
     color: 'secondary',
     features: [
-      { icon: Smartphone, text: 'Mobile app & SMS notifications' },
+      { icon: Smartphone, text: 'Direct messaging & chat' },
       { icon: Calendar, text: 'Scheduled announcements' },
-      { icon: MessageSquare, text: 'Two-way messaging' },
-      { icon: FileText, text: 'Digital circulars & notices' },
+      { icon: FileText, text: 'Forms & surveys' },
+      { icon: Bell, text: 'Push notifications' },
     ],
   },
   {
@@ -54,10 +54,22 @@ const featureBlocks = [
     description: 'Modern tools for teaching and learning.',
     color: 'accent',
     features: [
-      { icon: FileText, text: 'Digital gradebooks' },
-      { icon: Calendar, text: 'Assignment management' },
+      { icon: FileText, text: 'Homework management' },
+      { icon: Calendar, text: 'Timetable scheduling' },
+      { icon: HelpCircle, text: 'Doubt resolution system' },
       { icon: BarChart3, text: 'Performance dashboards' },
-      { icon: BookOpen, text: 'Curriculum planning' },
+    ],
+  },
+  {
+    icon: ClipboardCheck,
+    title: 'Exams & Grading',
+    description: 'End-to-end exam management and report cards.',
+    color: 'secondary',
+    features: [
+      { icon: Calendar, text: 'Exam scheduling' },
+      { icon: CheckCircle, text: 'Marks entry & grading' },
+      { icon: FileText, text: 'Report card generation' },
+      { icon: BarChart3, text: 'Grade analytics' },
     ],
   },
   {
@@ -66,21 +78,10 @@ const featureBlocks = [
     description: 'Streamlined operations for maximum efficiency.',
     color: 'primary',
     features: [
-      { icon: Users, text: 'Staff management' },
-      { icon: CreditCard, text: 'Fee collection & tracking' },
-      { icon: FileText, text: 'Document management' },
-      { icon: BarChart3, text: 'Custom reports' },
-    ],
-  },
-  {
-    icon: Shield,
-    title: 'Operations & Safety',
-    description: 'Keep your campus safe and running smoothly.',
-    color: 'secondary',
-    features: [
-      { icon: Users, text: 'Visitor management' },
-      { icon: Bell, text: 'Emergency alerts' },
-      { icon: Shield, text: 'Security protocols' },
+      { icon: Users, text: 'Staff & student management' },
+      { icon: BookOpen, text: 'Class & section organization' },
+      { icon: BarChart3, text: 'School-wide analytics' },
+      { icon: FileText, text: 'Audit logging' },
     ],
   },
 ];
@@ -100,7 +101,7 @@ const Features = () => {
               <span className="text-gradient-primary">Nothing you don't.</span>
             </h1>
             <p className="text-subtitle">
-              Five capability blocks. Complete school control. Each feature designed to save time and build trust.
+              Six capability blocks. Complete school control. Each feature designed to save time and build trust.
             </p>
           </AnimatedSection>
         </div>
