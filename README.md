@@ -1,5 +1,6 @@
 # GYANAMA Website
 
+
 Marketing website for **GYANAMA** — an AI-powered school management platform.
 **Live:** [gyanama.com](https://gyanama.com)
 
