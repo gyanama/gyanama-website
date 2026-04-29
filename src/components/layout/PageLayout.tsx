@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { IntroVideoFloater } from '@/components/IntroVideoFloater';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ export function PageLayout({ children }: PageLayoutProps) {
         {children}
       </main>
       <Footer />
+      <IntroVideoFloater />
     </div>
   );
 }
