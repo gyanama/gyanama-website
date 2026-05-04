@@ -21,18 +21,24 @@ export function IntroVideoFloater() {
   }, [muted]);
 
   useEffect(() => {
-    if (!fullscreen) return;
+    const lock = fullscreen && !dismissed;
+    if (!lock) {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      return;
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setFullscreen(false);
     };
     window.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prev;
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
-  }, [fullscreen]);
+  }, [fullscreen, dismissed]);
 
   if (dismissed) return null;
 
@@ -56,7 +62,7 @@ export function IntroVideoFloater() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setFullscreen(false)}
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-md"
+            className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-md"
           />
         )}
       </AnimatePresence>
@@ -81,12 +87,12 @@ export function IntroVideoFloater() {
           fullscreen
             ? {
                 ...sizeWhenFullscreen,
-                top: '50%',
-                left: '50%',
+                top: `calc(50vh - (${sizeWhenFullscreen.height}) / 2)`,
+                left: `calc(50vw - (${sizeWhenFullscreen.width}) / 2)`,
                 right: 'auto',
                 bottom: 'auto',
-                x: '-50%',
-                y: '-50%',
+                x: 0,
+                y: 0,
               }
             : {
                 ...sizeWhenFloating,
@@ -99,7 +105,7 @@ export function IntroVideoFloater() {
               }
         }
         transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-        className={`fixed z-50 overflow-hidden rounded-xl bg-black shadow-2xl ring-1 ring-black/10 ${
+        className={`fixed z-[70] overflow-hidden rounded-xl bg-black shadow-2xl ring-1 ring-black/10 ${
           fullscreen ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'
         }`}
       >
