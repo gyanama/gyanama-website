@@ -92,7 +92,7 @@ gyanama-website/
 2. Import the repo in the Vercel Dashboard (or run `vercel` CLI)
 3. Vercel auto-detects `vercel.json`:
    - Framework: Vite
-   - Build command: `npx playwright install chromium && npm run build:seo`
+   - Build command: `npm run build:seo`
    - Output directory: `dist`
    - API routes: anything under `/api/*` is deployed as a serverless function
 4. Set environment variables in **Project Settings > Environment Variables**:

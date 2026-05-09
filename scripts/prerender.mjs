@@ -7,7 +7,8 @@
  * Runs automatically as part of: npm run build:seo
  */
 
-import { chromium } from 'playwright';
+import { chromium } from 'playwright-core';
+import sparticuzChromium from '@sparticuz/chromium';
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, extname } from 'path';
@@ -81,7 +82,17 @@ async function prerender() {
   const server = await startServer(PORT);
 
   console.log('[prerender] Launching Playwright browser...');
-  const browser = await chromium.launch({ headless: true });
+  // Use @sparticuz/chromium when running on Vercel/serverless (provides bundled libs);
+  // fall back to a system Chrome/Chromium for local dev.
+  const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+  const launchOptions = isServerless
+    ? {
+        args: sparticuzChromium.args,
+        executablePath: await sparticuzChromium.executablePath(),
+        headless: true,
+      }
+    : { headless: true, channel: 'chrome' };
+  const browser = await chromium.launch(launchOptions);
 
   for (const route of ROUTES) {
     const url = `http://localhost:${PORT}${route}`;
@@ -90,13 +101,13 @@ async function prerender() {
     const page = await browser.newPage();
 
     try {
-      await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
       // Wait for the main content to appear (PageLayout renders <main>)
       await page.waitForSelector('main', { timeout: 15000 });
 
-      // Small extra wait to ensure react-helmet-async has updated <head>
-      await page.waitForTimeout(500);
+      // Wait for react-helmet-async to settle the <head> and any post-mount work
+      await page.waitForTimeout(1500);
 
       // Get the fully rendered HTML
       const html = await page.content();
