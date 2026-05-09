@@ -113,8 +113,8 @@ const BookDemo = () => {
         return;
       }
 
-      // Send to Netlify Function (credentials stay server-side)
-      const res = await fetch('/.netlify/functions/send-demo-request', {
+      // Send to serverless function (credentials stay server-side)
+      const res = await fetch('/api/send-demo-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

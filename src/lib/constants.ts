@@ -23,7 +23,7 @@ export const SITE_CONFIG = {
   },
 } as const;
 
-// EmailJS credentials are now server-side only (Netlify Function)
+// EmailJS credentials are now server-side only (Vercel API route)
 // No EMAILJS config exposed to the client bundle
 
 export const ROUTES = {

@@ -1,6 +1,6 @@
 // Environment variable validation
 // Called once at app startup to surface missing config early
-// NOTE: EmailJS credentials are now server-side only (Netlify Function)
+// NOTE: EmailJS credentials are now server-side only (Vercel API route)
 
 export function validateEnv(): void {
   if (!import.meta.env.DEV) return; // Only log in development

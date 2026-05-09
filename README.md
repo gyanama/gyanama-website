@@ -9,7 +9,7 @@ Marketing website for **GYANAMA** — an AI-powered school management platform.
 - **Tailwind CSS** + **shadcn/ui** — styling & components
 - **Framer Motion** — animations
 - **Cal.com** — scheduling (optional)
-- **Netlify Functions** — server-side email handling
+- **Vercel Serverless Functions** — server-side email handling
 - **Cloudflare Turnstile** — CAPTCHA (optional)
 
 ## Getting Started
@@ -34,7 +34,7 @@ Dev server runs at `http://localhost:8080`
 
 ## Environment Variables
 
-### Server-side only (Netlify Function — never exposed to browser)
+### Server-side only (Vercel API route — never exposed to browser)
 
 | Variable | Required | Description |
 |----------|----------|-------------|
@@ -58,9 +58,8 @@ Dev server runs at `http://localhost:8080`
 
 ```
 gyanama-website/
-├── netlify/
-│   └── functions/
-│       └── send-demo-request.ts   # Server-side email handler
+├── api/
+│   └── send-demo-request.ts       # Vercel serverless function (email handler)
 ├── public/                         # Static assets
 ├── src/
 │   ├── components/
@@ -71,7 +70,7 @@ gyanama-website/
 │   ├── hooks/                      # useDocumentTitle, useMobile, useToast
 │   ├── lib/                        # constants, env validation, rate limiter
 │   └── pages/                      # Route pages
-├── netlify.toml                    # Build config, headers, redirects
+├── vercel.json                     # Build config, headers, redirects, rewrites
 ├── .env.example                    # Environment variable template
 └── package.json
 ```
@@ -90,20 +89,26 @@ gyanama-website/
 | `/privacy-policy` | Privacy policy |
 | `/terms-of-service` | Terms of service |
 
-## Deploying to Netlify
+## Deploying to Vercel
 
 1. Push code to GitHub
-2. Connect repo in Netlify Dashboard
-3. Netlify auto-detects `netlify.toml`:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-   - Functions directory: `netlify/functions`
-4. Set environment variables in **Site settings > Environment variables**:
+2. Import the repo in the Vercel Dashboard (or run `vercel` CLI)
+3. Vercel auto-detects `vercel.json`:
+   - Framework: Vite
+   - Build command: `npx playwright install chromium && npm run build:seo`
+   - Output directory: `dist`
+   - API routes: anything under `/api/*` is deployed as a serverless function
+4. Set environment variables in **Project Settings > Environment Variables**:
    - `EMAILJS_SERVICE_ID`
    - `EMAILJS_TEMPLATE_ID`
    - `EMAILJS_PUBLIC_KEY`
+   - `CONTACT_EMAIL` (optional)
+   - `TURNSTILE_SECRET_KEY` (optional)
    - `VITE_CAL_USERNAME` (optional)
-5. Set custom domain to `gyanama.com`
+   - `VITE_CAL_EVENT_SLUG` (optional)
+   - `VITE_TURNSTILE_SITE_KEY` (optional)
+5. Add custom domain `gyanama.com` in **Project Settings > Domains**
+   (the `www` → apex redirect is configured in `vercel.json`)
 6. Done
 
 ## Scripts
@@ -118,8 +123,8 @@ gyanama-website/
 
 ## Security
 
-- EmailJS credentials are **server-side only** (Netlify Function) — never in the browser bundle
-- HTTP security headers configured in `netlify.toml` (CSP, HSTS, X-Frame-Options, etc.)
+- EmailJS credentials are **server-side only** (Vercel API route) — never in the browser bundle
+- HTTP security headers configured in `vercel.json` (CSP, HSTS, X-Frame-Options, etc.)
 - Input sanitization on both client and server
 - Server-side rate limiting by IP (5 requests / 5 min)
 - Client-side rate limiting (3 submissions / 5 min)
