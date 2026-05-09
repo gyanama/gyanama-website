@@ -23,7 +23,6 @@ import { createRateLimiter } from '@/lib/rate-limit';
 import { CalEmbed } from '@/components/scheduling';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
-import { TurnstileWidget } from '@/components/ui/TurnstileWidget';
 
 // Client-side rate limiter (defense in depth — server has its own)
 const formRateLimiter = createRateLimiter(3, 5 * 60 * 1000);
@@ -58,7 +57,6 @@ const BookDemo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,16 +67,6 @@ const BookDemo = () => {
       toast({
         title: "Too many requests",
         description: "Please wait a few minutes before trying again.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // CAPTCHA check (only if Turnstile is configured)
-    if (SITE_CONFIG.turnstileSiteKey && !turnstileToken) {
-      toast({
-        title: "Please complete the verification",
-        description: "Check the CAPTCHA box before submitting.",
         variant: "destructive",
       });
       return;
@@ -125,7 +113,6 @@ const BookDemo = () => {
           school: sanitize(formData.get('school')),
           students: sanitize(formData.get('students')),
           message: sanitize(formData.get('message')) || 'No specific challenges mentioned',
-          turnstileToken: turnstileToken || undefined,
         }),
       });
 
@@ -270,21 +257,12 @@ const BookDemo = () => {
             />
           </div>
 
-          {SITE_CONFIG.turnstileSiteKey && (
-            <TurnstileWidget
-              siteKey={SITE_CONFIG.turnstileSiteKey}
-              onVerify={(token) => setTurnstileToken(token)}
-              onExpire={() => setTurnstileToken(null)}
-              className="flex justify-center"
-            />
-          )}
-
           <Button
             type="submit"
             variant="hero"
             size="lg"
             className="w-full"
-            disabled={isSubmitting || (!!SITE_CONFIG.turnstileSiteKey && !turnstileToken)}
+            disabled={isSubmitting}
           >
             {isSubmitting ? (
               <span className="flex items-center gap-2">

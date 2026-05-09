@@ -11,7 +11,6 @@ interface DemoRequestBody {
   school: string;
   students: string;
   message: string;
-  turnstileToken?: string;
 }
 
 // Simple in-memory rate limiter (per function instance)
@@ -99,31 +98,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (!isValidPhone(phone)) {
     return res.status(400).json({ error: "Invalid phone number" });
-  }
-
-  // Verify Turnstile CAPTCHA (if configured)
-  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-  if (turnstileSecret && body.turnstileToken) {
-    try {
-      const verifyRes = await fetch(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            secret: turnstileSecret,
-            response: body.turnstileToken,
-            remoteip: clientIp,
-          }),
-        }
-      );
-      const verifyData = (await verifyRes.json()) as { success: boolean };
-      if (!verifyData.success) {
-        return res.status(403).json({ error: "CAPTCHA verification failed" });
-      }
-    } catch {
-      // If Turnstile verification fails, continue anyway (don't block the user)
-    }
   }
 
   // Read EmailJS credentials from server-side env vars (NOT exposed to frontend)

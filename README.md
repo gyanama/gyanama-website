@@ -10,7 +10,6 @@ Marketing website for **GYANAMA** — an AI-powered school management platform.
 - **Framer Motion** — animations
 - **Cal.com** — scheduling (optional)
 - **Vercel Serverless Functions** — server-side email handling
-- **Cloudflare Turnstile** — CAPTCHA (optional)
 
 ## Getting Started
 
@@ -42,7 +41,6 @@ Dev server runs at `http://localhost:8080`
 | `EMAILJS_TEMPLATE_ID` | Yes | EmailJS template ID |
 | `EMAILJS_PUBLIC_KEY` | Yes | EmailJS public key |
 | `CONTACT_EMAIL` | No | Recipient email (defaults to gyanamaedu@gmail.com) |
-| `TURNSTILE_SECRET_KEY` | No | Cloudflare Turnstile secret key |
 
 ### Client-side (VITE_ prefix — safe public values only)
 
@@ -50,9 +48,8 @@ Dev server runs at `http://localhost:8080`
 |----------|----------|-------------|
 | `VITE_CAL_USERNAME` | No | Cal.com username for scheduling widget |
 | `VITE_CAL_EVENT_SLUG` | No | Cal.com event slug (defaults to `15min-demo`) |
-| `VITE_TURNSTILE_SITE_KEY` | No | Cloudflare Turnstile site key |
 
-**The site works without any optional variables.** Cal.com buttons fall back to the email form. Turnstile CAPTCHA simply doesn't render.
+**The site works without any optional variables.** Cal.com buttons fall back to the email form.
 
 ## Project Structure
 
@@ -103,10 +100,8 @@ gyanama-website/
    - `EMAILJS_TEMPLATE_ID`
    - `EMAILJS_PUBLIC_KEY`
    - `CONTACT_EMAIL` (optional)
-   - `TURNSTILE_SECRET_KEY` (optional)
    - `VITE_CAL_USERNAME` (optional)
    - `VITE_CAL_EVENT_SLUG` (optional)
-   - `VITE_TURNSTILE_SITE_KEY` (optional)
 5. Add custom domain `gyanama.com` in **Project Settings > Domains**
    (the `www` → apex redirect is configured in `vercel.json`)
 6. Done
@@ -130,7 +125,6 @@ gyanama-website/
 - Client-side rate limiting (3 submissions / 5 min)
 - TypeScript strict mode enabled
 - No source maps in production
-- Optional Cloudflare Turnstile CAPTCHA support
 
 ## License
 
