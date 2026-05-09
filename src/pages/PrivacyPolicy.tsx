@@ -120,14 +120,22 @@ const PrivacyPolicy = () => {
             <div className="not-prose rounded-xl border border-slate-200 bg-white p-5 mb-6">
               <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Data we collect, by Google Play category</div>
               <ul className="text-sm text-slate-700 space-y-2 list-disc pl-5">
-                <li><strong>Personal info:</strong> name, email, phone number, date of birth, gender, role, school identifiers (employee ID, roll number).</li>
-                <li><strong>Photos &amp; videos:</strong> profile pictures and chat / homework attachments that the user explicitly chooses to upload.</li>
-                <li><strong>Files &amp; docs:</strong> documents the user explicitly chooses to share or upload (e.g. PDFs in the Quiz feature).</li>
-                <li><strong>Messages:</strong> in-app chats, announcements, doubts, and form responses entered by the user.</li>
+                <li><strong>Personal info:</strong> full name, email, mobile number, date of birth, gender, role, school identifiers (employee ID, roll number), parent / guardian names and contact numbers and emails (entered by the school for student records).</li>
+                <li><strong>Photos &amp; videos:</strong> chat / homework / doubt / announcement attachments that the user explicitly captures with the camera or picks from the gallery.</li>
+                <li><strong>Files &amp; docs:</strong> documents the user explicitly chooses to share or upload (PDF, Word, Excel, PowerPoint, MP4/MOV video).</li>
+                <li><strong>Messages:</strong> in-app chats, announcements, doubts, leave applications, anti-bullying reports, and form responses entered by the user.</li>
                 <li><strong>App activity:</strong> features used, screens viewed, last-seen presence, audit logs, crash logs.</li>
                 <li><strong>App info and performance:</strong> device model, OS version, app version, language, IP address.</li>
                 <li><strong>Device or other identifiers:</strong> push-notification token, per-device identifier used to bind the token to your account.</li>
                 <li><strong>Audio (AI Voice Assistant only):</strong> audio is streamed to a multimodal AI model during outbound calls placed by the school&apos;s AI School Voice Assistant; raw call audio is not retained after the call ends.</li>
+              </ul>
+              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-5">Data shared with sub-processors</div>
+              <ul className="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                <li><strong>Personal info (name, mobile number)</strong> is shared with our SMS gateway provider so it can deliver one-time passwords to your phone.</li>
+                <li><strong>Mobile number</strong> is shared with our telephony provider when the school&apos;s AI Voice Assistant places an outbound absentee call to a parent.</li>
+                <li><strong>Photos, videos, files, and documents</strong> uploaded by the user are stored on our object-storage provider, Cloudflare R2.</li>
+                <li><strong>Push token and notification text</strong> are shared with our push-notification provider when you have notifications enabled.</li>
+                <li><strong>Prompts and uploaded documents</strong> for AI features are sent to our AI-model provider only for the duration of the requested output.</li>
               </ul>
             </div>
 
@@ -141,7 +149,9 @@ const PrivacyPolicy = () => {
               <li><strong>Demo and contact requests (website):</strong> first name, last name, email address, phone number, school name, approximate number of students, and any message you choose to send.</li>
               <li><strong>School onboarding:</strong> school name, address, principal contact details, school logo (optional), academic configuration (classes, sections, subjects), and the subscription plan.</li>
               <li><strong>Internal administrator accounts (used only by GYANAMA staff and authorised school super-admins on the operations console):</strong> username and a password stored as a one-way salted hash, plus an optional time-based one-time password (TOTP) secret for two-factor authentication.</li>
-              <li><strong>App user accounts (Principal, Teacher, Coordinator, Manager, Student):</strong> name, mobile phone number, optional email, gender (Male/Female), date of birth, role, school, role-specific identifiers (employee ID, roll number, class, section, subjects, designation), and an optional profile setup. App users sign in with their mobile number and a one-time password (OTP); the platform does not store an app-user password.</li>
+              <li><strong>App user accounts (Principal, Teacher, Coordinator, Manager, Student):</strong> full name, mobile phone number, email address (optional), gender (Male/Female), date of birth, role, school, and role-specific identifiers (employee ID, designation, and the classes/subjects assigned to a teacher; class and roll number for a student). App users sign in with their mobile number and a one-time password (OTP); the platform does not store an app-user password.</li>
+              <li><strong>OTP delivery to your phone:</strong> when you request a sign-in OTP, the platform passes your <strong>full name and mobile number</strong> to our SMS gateway sub-processor (see Section 7) so the OTP message can be addressed to you and delivered to that number. The OTP itself is stored only as a one-way hash in our cache and is automatically removed after 5 minutes.</li>
+              <li><strong>Photos, videos, and documents you choose to upload:</strong> if you tap the camera or photo-picker button to attach an image or video to a chat message, or pick a document for the chat, homework, doubt, announcement, or AI Quiz workflows, that file is uploaded to our object-storage sub-processor (Cloudflare R2 &mdash; see Section 7) and is referenced by the relevant record in our database.</li>
               <li><strong>Student records (entered by the school):</strong> name, date of birth, gender, class and section, roll number, attendance counts, marks and assessments, and parent/guardian information including father&apos;s name, mother&apos;s name, guardian&apos;s name, and their phone numbers and email addresses.</li>
               <li><strong>Communication and academic content:</strong> chat messages, announcements, homework, doubts, calendar events, leave requests, forms and form responses, syllabus entries, and chat attachments (images, videos in MP4/MOV, and documents in PDF / Word / Excel / PowerPoint formats) that users send through the platform.</li>
               <li><strong>Anti-bullying / incident reports:</strong> if a user submits a Report Bullying entry from inside the app, we record the reporter, the name of the alleged bully, the class concerned, and the description of the incident, so that the school administration can review and resolve it.</li>
@@ -233,12 +243,13 @@ const PrivacyPolicy = () => {
               <li><strong>Within the school:</strong> Information entered into the Services is visible to authorised users of the same school based on role-based permissions configured by the school administrator (for example, a class teacher sees their class; a parent sees only their own child).</li>
               <li><strong>With service providers</strong> who help us run the Services. Each is bound by confidentiality and data-protection obligations and processes data only on our instructions, strictly for the purposes described below:
                 <ul className="list-disc pl-6 mt-2 space-y-1">
-                  <li>Cloud hosting and database services (located in India) for application servers, databases, and backups.</li>
-                  <li>Object storage for files you upload, accessed via short-lived signed URLs.</li>
-                  <li>Push-notification delivery services for in-app and lock-screen notifications.</li>
-                  <li>Telephony services to place outbound voice calls from the AI School Voice Assistant.</li>
-                  <li>Artificial-intelligence model services to power the AI Quiz, summarisation, and Voice Assistant features.</li>
-                  <li>Website hosting, form processing, scheduling, and bot-protection services for the public marketing site at <a href="https://gyanama.com/" className="text-primary hover:underline">gyanama.com</a>.</li>
+                  <li>Cloud hosting and database services (located in India) for application servers, MongoDB databases, and backups.</li>
+                  <li><strong>Cloudflare R2</strong>: S3-compatible object storage where every photo, video, document, and AI-feature PDF that a user uploads is stored. Each file is accessed only via short-lived signed URLs (typically a few minutes for direct uploads and up to an hour for downloads), so links cannot be shared indefinitely.</li>
+                  <li><strong>SMS gateway provider</strong>: when you request a sign-in OTP, we transmit your <strong>full name, mobile number, and the OTP message body</strong> to this provider so it can deliver the SMS to your phone. The provider is contractually restricted to using this information solely to deliver our messages.</li>
+                  <li>Push-notification delivery services for in-app and lock-screen notifications, which receive your device push-token and the notification payload.</li>
+                  <li>Telephony services to place outbound voice calls from the AI School Voice Assistant for the absentee-call workflow, which receive the parent&apos;s mobile number and the call script.</li>
+                  <li>Artificial-intelligence model services to power the AI Quiz, in-app AI assistant, summarisation, and Voice Assistant features. Inputs are limited to the prompt or document you submit for the requested output.</li>
+                  <li>Website hosting, serverless form-processing, email delivery, and a scheduling/booking service for the public marketing site at <a href="https://gyanama.com/" className="text-primary hover:underline">gyanama.com</a> (used only for marketing-website interactions, not for in-app data).</li>
                 </ul>
               </li>
               <li><strong>For legal reasons:</strong> when required to comply with Indian law, a valid court order, or a lawful request from a competent authority, or to protect the rights, safety, or property of GYANAMA, our users, or the public.</li>
@@ -316,7 +327,7 @@ const PrivacyPolicy = () => {
 
             <h2 id="cookies" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">14. Cookies and Similar Technologies</h2>
             <p className="text-muted-foreground mb-6">
-              Our website and web dashboard use strictly necessary cookies and local storage to keep you signed in, remember preferences, and protect against abuse (including a bot-protection token from our security provider). We do not use third-party advertising cookies or cross-site tracking. The Android application does not use browser cookies; it uses encrypted local secure storage for session tokens and an on-device database for offline data, as described in Section 3(d).
+              Our website and web dashboard use strictly necessary cookies and local storage to keep you signed in, remember preferences, and protect against abuse. We do not use third-party advertising cookies or cross-site tracking. The Android application does not use browser cookies; it uses encrypted local secure storage for session tokens and an on-device database for offline data, as described in Section 3(d).
             </p>
 
             <h2 id="third-party-links" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">15. Third-Party Links</h2>

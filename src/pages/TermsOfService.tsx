@@ -264,7 +264,8 @@ const TermsOfService = () => {
 
               <TermsSection num={16} id="third-party" title="Third-Party Services">
                 <p>
-                  The Services rely on a number of third-party service providers (such as cloud hosting, push-notification, telephony, AI-model, and storage providers). Their performance is outside our direct control, and your use of the Services is subject to those providers&apos; underlying terms where they apply to you. We will use commercially reasonable efforts to select reputable providers and to manage their performance.
+                  The Services rely on a number of third-party service providers (including cloud hosting, object storage for files and photos you upload, push-notification, SMS gateways for OTP delivery, telephony for outbound voice calls, and AI-model providers). Their performance is outside our direct control, and your use of the Services is subject to those providers&apos; underlying terms where they apply to you. We will use commercially reasonable efforts to select reputable providers and to manage their performance. The current categories of providers and the data they receive are described in our{' '}
+                  <a href="/privacy-policy#sharing" className="text-amber-800 font-medium hover:underline">Privacy Policy &sect; 7</a>.
                 </p>
               </TermsSection>
 
