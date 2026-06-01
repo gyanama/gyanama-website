@@ -163,7 +163,10 @@ const TermsOfService = () => {
                   Schools subscribe to the Services on the basis of a written agreement, order form, or invoice that specifies the subscription plan, term, fees, and payment schedule. Unless otherwise agreed in writing, fees are payable in Indian Rupees (INR) and are exclusive of applicable taxes (including GST), which the School is responsible for paying. Late payments may attract interest and may result in suspension of the Services after reasonable written notice.
                 </p>
                 <p>
-                  Individual app users (teachers, students, parents) do not pay GYANAMA directly; their access is provided by the subscribing School.
+                  Unless expressly stated otherwise in the School&apos;s order form or agreement, subscription fees are non-refundable, and cancellation and any pro-rata treatment are governed by that order form or agreement.
+                </p>
+                <p>
+                  Individual app users (teachers, students, parents) do not pay GYANAMA directly for access; their access is provided by the subscribing School. Where the Services make an online fee-payment feature available, any school fees a parent or student pays through that feature are collected on behalf of, and payable to, the relevant School, and are processed by a third-party payment provider; refunds for such fee payments are handled by the School in accordance with the School&apos;s own fee and refund policy.
                 </p>
               </TermsSection>
 
@@ -177,7 +180,7 @@ const TermsOfService = () => {
                   <li>Promptly removing or correcting School Content that becomes inaccurate, obsolete, or unlawful.</li>
                 </ul>
                 <p>
-                  As between GYANAMA and the School, the School owns its School Content. By using the Services, the School grants GYANAMA a limited, non-exclusive, worldwide, royalty-free licence to host, store, transmit, display, back up, and otherwise process the School Content solely as needed to provide and improve the Services and to comply with law.
+                  As between GYANAMA and the School, the School owns its School Content. By using the Services, the School grants GYANAMA a limited, non-exclusive, worldwide, royalty-free licence to host, store, transmit, display, back up, and otherwise process the School Content solely as needed to provide, secure, maintain, and troubleshoot the Services and to comply with law. We do not use School Content to train general-purpose AI models.
                 </p>
               </TermsSection>
 
@@ -284,6 +287,9 @@ const TermsOfService = () => {
                 </div>
                 <p>
                   These Terms are governed by the laws of India, without regard to its conflict-of-laws principles. Subject to any mandatory jurisdiction of the consumer&apos;s place of residence, the parties submit to the exclusive jurisdiction of the courts at Gautam Buddh Nagar (Noida), Uttar Pradesh, India for any dispute arising out of or in connection with these Terms or the Services.
+                </p>
+                <p>
+                  <strong>Dispute resolution.</strong> The parties will first attempt to resolve any dispute amicably through good-faith discussions. Any dispute that is not resolved within thirty (30) days shall be referred to and finally resolved by arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Gautam Buddh Nagar (Noida), Uttar Pradesh, India, and the language of the arbitration shall be English. Nothing in this clause prevents either party from seeking interim or injunctive relief from the courts identified above.
                 </p>
               </TermsSection>
 
