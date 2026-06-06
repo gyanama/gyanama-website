@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, MessageCircle } from 'lucide-react';
+import { Linkedin, MessageCircle, MapPin } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
 const footerLinks = {
@@ -36,6 +36,14 @@ export function Footer() {
             <p className="text-muted-foreground text-sm max-w-xs leading-relaxed mb-6">
               Because every child's day matters. An AI-powered system that runs your entire school from one clean dashboard.
             </p>
+
+            {/* Address */}
+            <div className="flex items-start gap-2 text-sm text-muted-foreground mb-6">
+              <MapPin size={18} className="shrink-0 mt-0.5" />
+              <address className="not-italic leading-relaxed">
+                C30, Sector 63, Noida
+              </address>
+            </div>
 
             {/* Social Links */}
             <div className="flex items-center gap-3">
