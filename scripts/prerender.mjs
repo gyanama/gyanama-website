@@ -7,7 +7,8 @@
  * Runs automatically as part of: npm run build:seo
  */
 
-import { chromium } from 'playwright';
+import { chromium } from 'playwright-core';
+import sparticuzChromium from '@sparticuz/chromium';
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, extname } from 'path';
@@ -75,33 +76,36 @@ function startServer(port) {
   });
 }
 
-async function prerender() {
-  const PORT = 4173;
-  console.log(`[prerender] Starting local server on port ${PORT}...`);
-  const server = await startServer(PORT);
+// Build launch options once. On serverless we use @sparticuz/chromium's
+// bundled binary + libs; locally we use system Chrome.
+async function buildLaunchOptions() {
+  const isServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+  if (!isServerless) return { headless: true, channel: 'chrome' };
 
-  console.log('[prerender] Launching Playwright browser...');
-  const browser = await chromium.launch({ headless: true });
+  // Vercel's build sandbox is happier without the zygote/multi-process model.
+  const extraArgs = ['--single-process', '--no-zygote'];
+  return {
+    args: [...sparticuzChromium.args, ...extraArgs],
+    executablePath: await sparticuzChromium.executablePath(),
+    headless: true,
+  };
+}
 
-  for (const route of ROUTES) {
-    const url = `http://localhost:${PORT}${route}`;
-    console.log(`[prerender] Rendering ${route}...`);
-
+async function renderRoute(launchOptions, port, route) {
+  // Launch a dedicated browser per route. Slower but resilient — a crash on
+  // one route can't take down subsequent renders, which @sparticuz/chromium
+  // is prone to in tight memory environments.
+  const browser = await chromium.launch(launchOptions);
+  try {
     const page = await browser.newPage();
-
     try {
-      await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-
-      // Wait for the main content to appear (PageLayout renders <main>)
+      const url = `http://localhost:${port}${route}`;
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await page.waitForSelector('main', { timeout: 15000 });
+      await page.waitForTimeout(1500);
 
-      // Small extra wait to ensure react-helmet-async has updated <head>
-      await page.waitForTimeout(500);
-
-      // Get the fully rendered HTML
       const html = await page.content();
 
-      // Determine output path
       if (route === '/') {
         writeFileSync(join(DIST_DIR, 'index.html'), html, 'utf-8');
       } else {
@@ -109,18 +113,37 @@ async function prerender() {
         mkdirSync(dir, { recursive: true });
         writeFileSync(join(dir, 'index.html'), html, 'utf-8');
       }
+    } finally {
+      await page.close().catch(() => {});
+    }
+  } finally {
+    await browser.close().catch(() => {});
+  }
+}
 
+async function prerender() {
+  const PORT = 4173;
+  console.log(`[prerender] Starting local server on port ${PORT}...`);
+  const server = await startServer(PORT);
+
+  console.log('[prerender] Preparing browser launch options...');
+  const launchOptions = await buildLaunchOptions();
+
+  let failures = 0;
+  for (const route of ROUTES) {
+    console.log(`[prerender] Rendering ${route}...`);
+    try {
+      await renderRoute(launchOptions, PORT, route);
       console.log(`[prerender]   OK: ${route}`);
     } catch (err) {
+      failures++;
       console.error(`[prerender]   FAIL: ${route} — ${err.message}`);
-    } finally {
-      await page.close();
     }
   }
 
-  await browser.close();
   server.close();
-  console.log('[prerender] Done! All routes prerendered.');
+  console.log(`[prerender] Done. ${ROUTES.length - failures}/${ROUTES.length} routes rendered.`);
+  if (failures > 0) process.exit(1);
 }
 
 prerender().catch((err) => {

@@ -10,7 +10,11 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { SITE_CONFIG } from "./lib/constants";
 
-// Lazy load pages for code-splitting to reduce initial bundle size
+// Lazy load richer pages for code-splitting to reduce initial bundle size.
+// Privacy/Terms are imported eagerly because they're small static legal pages
+// and we don't want any loading flash when users tap their footer links.
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 const Index = lazy(() => import("./pages/Index"));
 const AISystems = lazy(() => import("./pages/AISystems"));
 const Features = lazy(() => import("./pages/Features"));
@@ -18,20 +22,9 @@ const UseCases = lazy(() => import("./pages/UseCases"));
 const About = lazy(() => import("./pages/About"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BookDemo = lazy(() => import("./pages/BookDemo"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
-
-// Loading spinner shown between route transitions
-function RouteLoadingFallback() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-8 h-8 border-3 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
-    </div>
-  );
-}
 
 // Skip loading screen during prerendering (Playwright sets navigator.webdriver)
 const isPrerender = typeof navigator !== 'undefined' && navigator.webdriver;
@@ -81,7 +74,7 @@ const App = () => {
             ) : (
               <BrowserRouter>
                 <ScrollToTop />
-                <Suspense fallback={<RouteLoadingFallback />}>
+                <Suspense fallback={null}>
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/ai-systems" element={<AISystems />} />

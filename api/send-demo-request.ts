@@ -1,7 +1,7 @@
-import type { Context } from "@netlify/functions";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 // Server-side email handler — EmailJS credentials NEVER leave the server
-// These env vars are set in Netlify Dashboard (no VITE_ prefix = server-only)
+// These env vars are set in Vercel Dashboard (no VITE_ prefix = server-only)
 
 interface DemoRequestBody {
   firstName: string;
@@ -11,7 +11,6 @@ interface DemoRequestBody {
   school: string;
   students: string;
   message: string;
-  turnstileToken?: string;
 }
 
 // Simple in-memory rate limiter (per function instance)
@@ -50,33 +49,34 @@ function isValidPhone(phone: string): boolean {
   return /^\+?[\d\s\-()]{7,20}$/.test(phone);
 }
 
-export default async (req: Request, context: Context) => {
+function getClientIp(req: VercelRequest): string {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string") return forwarded.split(",")[0].trim();
+  if (Array.isArray(forwarded) && forwarded.length > 0) return forwarded[0];
+  return req.socket?.remoteAddress || "unknown";
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow POST
   if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   // Rate limit by IP
-  const clientIp = context.ip || "unknown";
+  const clientIp = getClientIp(req);
   if (isRateLimited(clientIp)) {
-    return new Response(
-      JSON.stringify({ error: "Too many requests. Please wait a few minutes." }),
-      { status: 429, headers: { "Content-Type": "application/json" } }
-    );
+    return res
+      .status(429)
+      .json({ error: "Too many requests. Please wait a few minutes." });
   }
 
-  // Parse body
+  // Parse body (Vercel auto-parses JSON when Content-Type is application/json)
   let body: DemoRequestBody;
   try {
-    body = await req.json();
+    body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body as DemoRequestBody);
+    if (!body) throw new Error("empty body");
   } catch {
-    return new Response(JSON.stringify({ error: "Invalid request body" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return res.status(400).json({ error: "Invalid request body" });
   }
 
   // Validate required fields
@@ -89,52 +89,15 @@ export default async (req: Request, context: Context) => {
   const message = sanitize(body.message || "No specific challenges mentioned");
 
   if (!firstName || !lastName || !email || !phone || !school || !students) {
-    return new Response(
-      JSON.stringify({ error: "All fields are required" }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
-    );
+    return res.status(400).json({ error: "All fields are required" });
   }
 
   if (!isValidEmail(email)) {
-    return new Response(
-      JSON.stringify({ error: "Invalid email address" }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
-    );
+    return res.status(400).json({ error: "Invalid email address" });
   }
 
   if (!isValidPhone(phone)) {
-    return new Response(
-      JSON.stringify({ error: "Invalid phone number" }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
-    );
-  }
-
-  // Verify Turnstile CAPTCHA (if configured)
-  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-  if (turnstileSecret && body.turnstileToken) {
-    try {
-      const verifyRes = await fetch(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            secret: turnstileSecret,
-            response: body.turnstileToken,
-            remoteip: clientIp,
-          }),
-        }
-      );
-      const verifyData = await verifyRes.json() as { success: boolean };
-      if (!verifyData.success) {
-        return new Response(
-          JSON.stringify({ error: "CAPTCHA verification failed" }),
-          { status: 403, headers: { "Content-Type": "application/json" } }
-        );
-      }
-    } catch {
-      // If Turnstile verification fails, continue anyway (don't block the user)
-    }
+    return res.status(400).json({ error: "Invalid phone number" });
   }
 
   // Read EmailJS credentials from server-side env vars (NOT exposed to frontend)
@@ -144,10 +107,9 @@ export default async (req: Request, context: Context) => {
   const toEmail = process.env.CONTACT_EMAIL || "gyanamaedu@gmail.com";
 
   if (!serviceId || !templateId || !publicKey) {
-    return new Response(
-      JSON.stringify({ error: "Email service not configured. Please contact us directly." }),
-      { status: 503, headers: { "Content-Type": "application/json" } }
-    );
+    return res
+      .status(503)
+      .json({ error: "Email service not configured. Please contact us directly." });
   }
 
   // Send via EmailJS REST API (server-side — credentials never reach the browser)
@@ -177,14 +139,10 @@ export default async (req: Request, context: Context) => {
 
     recordRequest(clientIp);
 
-    return new Response(
-      JSON.stringify({ success: true, message: "Demo request sent successfully" }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
-    );
+    return res.status(200).json({ success: true, message: "Demo request sent successfully" });
   } catch {
-    return new Response(
-      JSON.stringify({ error: "Failed to send email. Please try again or contact us directly." }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    return res
+      .status(500)
+      .json({ error: "Failed to send email. Please try again or contact us directly." });
   }
-};
+}

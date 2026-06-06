@@ -11,7 +11,6 @@ export const SITE_CONFIG = {
     return `https://wa.me/${this.whatsapp.replace('+', '')}`;
   },
   linkedIn: 'https://www.linkedin.com/company/gyanama/',
-  turnstileSiteKey: import.meta.env.VITE_TURNSTILE_SITE_KEY || '',
   calUsername: import.meta.env.VITE_CAL_USERNAME || '',
   calEventSlug: import.meta.env.VITE_CAL_EVENT_SLUG || '15min-demo',
   get calLink() {
@@ -23,7 +22,7 @@ export const SITE_CONFIG = {
   },
 } as const;
 
-// EmailJS credentials are now server-side only (Netlify Function)
+// EmailJS credentials are now server-side only (Vercel API route)
 // No EMAILJS config exposed to the client bundle
 
 export const ROUTES = {
