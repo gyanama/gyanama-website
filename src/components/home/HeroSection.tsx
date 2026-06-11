@@ -2,12 +2,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, BookOpen, GraduationCap, School, Pencil, Calculator, Globe, Lightbulb, Users } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function HeroSection() {
+  const isMobile = useIsMobile();
   return (
     <>
       <section className="relative min-h-[90vh] flex items-center gradient-hero overflow-hidden">
-        {/* Enhanced Glassmorphic Background Elements */}
+        {/* Enhanced Glassmorphic Background Elements.
+            Skipped entirely on phones — ~14 blurred, infinitely-animating
+            panels here are the heaviest part of the page and tank mobile FPS.
+            The gradient-hero background alone keeps the section looking clean. */}
+        {!isMobile && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Large Glassmorphic Panels */}
           <motion.div
@@ -311,6 +317,7 @@ export function HeroSection() {
           {/* Grid pattern overlay */}
           <div className="absolute inset-0 grid-pattern opacity-30" />
         </div>
+        )}
 
         <div className="container-wide relative z-10">
           <div className="max-w-4xl mx-auto text-center">

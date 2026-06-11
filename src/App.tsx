@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { SITE_CONFIG } from "./lib/constants";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Lazy load richer pages for code-splitting to reduce initial bundle size.
 // Privacy/Terms are imported eagerly because they're small static legal pages
@@ -30,6 +31,7 @@ const queryClient = new QueryClient();
 const isPrerender = typeof navigator !== 'undefined' && navigator.webdriver;
 
 const App = () => {
+  const isMobile = useIsMobile();
   const [isLoading, setIsLoading] = useState(!isPrerender);
   const [pageReady, setPageReady] = useState(isPrerender);
   const [timerDone, setTimerDone] = useState(isPrerender);
@@ -68,6 +70,11 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          {/* On phones, disable framer-motion transform/scale/rotate animations
+              globally. The many infinite floating/orbital loops are the main
+              cause of mobile jank; reducedMotion="always" stops them while
+              keeping opacity fades. Desktop keeps "user" (respects OS setting). */}
+          <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
           <AnimatePresence mode="wait">
             {isLoading ? (
               <LoadingScreen key="loading" />
@@ -92,6 +99,7 @@ const App = () => {
               </BrowserRouter>
             )}
           </AnimatePresence>
+          </MotionConfig>
         </TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>

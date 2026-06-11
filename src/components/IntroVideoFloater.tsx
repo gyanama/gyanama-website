@@ -1,15 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Maximize2, Minimize2, Volume2, VolumeX, X } from 'lucide-react';
+import { Maximize2, Minimize2, Play, Volume2, VolumeX, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function IntroVideoFloater() {
+  const isMobile = useIsMobile();
   const [hovered, setHovered] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [muted, setMuted] = useState(true);
   const [dismissed, setDismissed] = useState(false);
+  // Desktop autoplays; on phones we wait for a tap so we don't download and
+  // continuously decode the 7 MB video on load (the main mobile cost here).
+  const [playing, setPlaying] = useState(!isMobile);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const expanded = hovered || fullscreen;
+  // Controls are hover-gated on desktop; phones have no hover, so always show
+  // them there — otherwise the close/unmute buttons are unreachable on touch.
+  const expanded = hovered || fullscreen || isMobile;
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play().then(() => setPlaying(true)).catch(() => {});
+    } else {
+      v.pause();
+      setPlaying(false);
+    }
+  };
 
   useEffect(() => {
     const v = videoRef.current;
@@ -112,12 +130,33 @@ export function IntroVideoFloater() {
         <video
           ref={videoRef}
           src="/intro.mp4"
-          autoPlay
+          autoPlay={!isMobile}
           loop
           muted
           playsInline
+          preload={isMobile ? 'none' : 'auto'}
           className="pointer-events-none h-full w-full object-cover"
         />
+
+        {/* Tap-to-play overlay on phones (video doesn't autoplay there).
+            pointer-events-none on the dim layer so the close/control buttons
+            below stay tappable; only the centred Play button captures taps. */}
+        {isMobile && !playing && (
+          <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-black/40">
+            <button
+              type="button"
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                togglePlay();
+              }}
+              aria-label="Play intro video"
+              className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-black shadow"
+            >
+              <Play className="h-5 w-5 translate-x-0.5" />
+            </button>
+          </div>
+        )}
 
         <AnimatePresence>
           {expanded && (

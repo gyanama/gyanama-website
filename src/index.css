@@ -292,4 +292,43 @@
   .blend-soft-light {
     mix-blend-mode: soft-light;
   }
+
+  /* Hide scrollbar while keeping the element scrollable */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile performance overrides
+   Phones lag badly with backdrop-filter: blur() — each blurred element forces
+   the GPU to re-sample everything behind it on every scrolled/animated frame.
+   On small screens we drop the blur (elements keep a slightly more opaque
+   solid background so text stays readable) and turn off smooth scrolling,
+   which is janky when combined with sticky/animated content.
+--------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Kill blur on the shared glass utility... */
+  .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* ...and on any element using inline backdrop-filter (decorative panels,
+     floating cards, etc.). Stylesheet !important overrides inline styles. */
+  [style*="backdrop-filter"],
+  [style*="backdropFilter"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
 }

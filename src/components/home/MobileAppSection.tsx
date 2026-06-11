@@ -110,7 +110,7 @@ export function MobileAppSection() {
                                     </div>
 
                                     {/* Role Cards Scroll */}
-                                    <div className="flex-1 p-5 space-y-4 overflow-y-auto">
+                                    <div className="flex-1 p-5 space-y-4 overflow-y-auto no-scrollbar">
                                         {/* Principal Card */}
                                         <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
                                             <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">

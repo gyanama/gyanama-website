@@ -24,10 +24,12 @@ export function Footer() {
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img
-                src="/gyanama-logo.png"
+                src="/gyanama-logo-256.png"
                 alt="GYANAMA - AI School Management System"
                 width={56}
                 height={56}
+                loading="lazy"
+                decoding="async"
                 className="h-14 w-auto"
                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />

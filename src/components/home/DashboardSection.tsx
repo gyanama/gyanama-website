@@ -302,11 +302,19 @@ export function DashboardSection() {
                                                 padding: '8px',
                                             }}
                                         >
-                                            <img
-                                                src={slide.image}
-                                                alt={`${slide.role} Dashboard`}
-                                                className="w-full h-auto block rounded-xl md:rounded-2xl"
-                                            />
+                                            <picture>
+                                                {/* ~40 KB WebP for modern browsers; original PNG is the fallback */}
+                                                <source srcSet={slide.image.replace('.PNG', '.webp')} type="image/webp" />
+                                                <img
+                                                    src={slide.image}
+                                                    alt={`${slide.role} Dashboard`}
+                                                    width={828}
+                                                    height={1792}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    className="w-full h-auto block rounded-xl md:rounded-2xl"
+                                                />
+                                            </picture>
                                         </div>
                                     </motion.div>
                                 );
