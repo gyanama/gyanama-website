@@ -102,6 +102,54 @@ export function FAQPageSchema({ faqs }: { faqs: { question: string; answer: stri
   return <JsonLd data={data} />;
 }
 
+export function ArticleSchema({
+  title,
+  description,
+  slug,
+  coverImage,
+  datePublished,
+  dateModified,
+  author,
+}: {
+  title: string;
+  description: string;
+  slug: string;
+  coverImage?: string | null;
+  datePublished?: string | null;
+  dateModified?: string | null;
+  author?: string | null;
+}) {
+  const url = `${CANONICAL_DOMAIN}/blog/${slug}`;
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    headline: title,
+    description,
+    image: coverImage || `${CANONICAL_DOMAIN}/og-image.png`,
+    datePublished: datePublished || undefined,
+    dateModified: dateModified || datePublished || undefined,
+    author: { '@type': author ? 'Person' : 'Organization', name: author || 'GYANAMA' },
+    publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
+    url,
+  };
+  return <JsonLd data={data} />;
+}
+
+export function BlogListingSchema() {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${CANONICAL_DOMAIN}/blog#blog`,
+    name: 'GYANAMA Blog',
+    description:
+      'Insights, guides, and updates on AI-powered school management for Indian K-12 schools.',
+    url: `${CANONICAL_DOMAIN}/blog`,
+    publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
+  };
+  return <JsonLd data={data} />;
+}
+
 export function BreadcrumbSchema({ pageName, pagePath }: { pageName: string; pagePath: string }) {
   const data = {
     '@context': 'https://schema.org',

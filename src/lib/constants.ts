@@ -33,6 +33,7 @@ export const ROUTES = {
   about: '/about',
   contactUs: '/contact-us',
   bookDemo: '/book-demo',
+  blog: '/blog',
   privacyPolicy: '/privacy-policy',
   termsOfService: '/terms-of-service',
 } as const;

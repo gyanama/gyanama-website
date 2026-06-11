@@ -51,6 +51,12 @@ export const SEO_CONFIG: Record<string, SEOData> = {
       'Book a free demo of GYANAMA and see how AI-powered school management can save your staff hours every week. Setup takes less than a day.',
     canonical: '/book-demo',
   },
+  '/blog': {
+    title: 'Blog — School Management Insights & Updates',
+    description:
+      'Insights, guides, and updates from GYANAMA on AI-powered school management, attendance, fees, and running modern Indian K-12 schools.',
+    canonical: '/blog',
+  },
   '/privacy-policy': {
     title: 'Privacy Policy',
     description:

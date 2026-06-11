@@ -10,6 +10,7 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { SITE_CONFIG } from "./lib/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 
 // Lazy load richer pages for code-splitting to reduce initial bundle size.
 // Privacy/Terms are imported eagerly because they're small static legal pages
@@ -23,6 +24,11 @@ const UseCases = lazy(() => import("./pages/UseCases"));
 const About = lazy(() => import("./pages/About"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BookDemo = lazy(() => import("./pages/BookDemo"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+// Admin panel is a self-contained app (auth + nested routes). Lazy-loaded so
+// none of its code (or Supabase auth) ships in the public bundle.
+const AdminApp = lazy(() => import("./pages/admin/AdminApp"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -81,6 +87,7 @@ const App = () => {
             ) : (
               <BrowserRouter>
                 <ScrollToTop />
+                <AnalyticsTracker />
                 <Suspense fallback={null}>
                   <Routes>
                     <Route path="/" element={<Index />} />
@@ -90,6 +97,10 @@ const App = () => {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="/book-demo" element={<BookDemo />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<BlogPost />} />
+                    {/* Admin panel — noindex, never prerendered, excluded from sitemap */}
+                    <Route path="/adminpanel/*" element={<AdminApp />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/terms-of-service" element={<TermsOfService />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -8,6 +8,7 @@ const navLinks = [
   { name: 'AI Systems', href: '/ai-systems' },
   { name: 'Features', href: '/features' },
   { name: 'Use Cases', href: '/use-cases' },
+  { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'Contact Us', href: '/contact-us' },
 ];
