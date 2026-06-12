@@ -46,7 +46,7 @@ export function RoleSection() {
                 {/* Solar System of Books - Orbiting clockwise */}
                 {/* Inner Orbit - 3 books, fast */}
                 <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
                     style={{ width: 'min(350px, 80vw)', height: 'min(350px, 80vw)' }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
@@ -64,7 +64,7 @@ export function RoleSection() {
 
                 {/* Middle Orbit - 3 books, medium speed */}
                 <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
                     style={{ width: 'min(500px, 95vw)', height: 'min(400px, 75vw)' }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
@@ -82,7 +82,7 @@ export function RoleSection() {
 
                 {/* Outer Orbit - 2 books, slow */}
                 <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
                     style={{ width: 'min(700px, 100vw)', height: 'min(500px, 90vw)' }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 60, repeat: Infinity, ease: "linear" }}

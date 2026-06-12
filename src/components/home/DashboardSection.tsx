@@ -197,17 +197,17 @@ export function DashboardSection() {
                 </div>
 
                 {/* Content wrapper - vertical on mobile, horizontal on wide screens */}
-                <div className={`relative z-20 w-full max-w-7xl mx-auto flex-1 flex ${isWideScreen ? 'flex-row items-center gap-8 px-8' : 'flex-col items-center gap-8'}`}>
+                <div className={`relative z-20 w-full max-w-7xl mx-auto flex-1 flex ${isWideScreen ? 'flex-row items-center gap-8 px-8' : 'flex-col items-center gap-4'}`}>
 
                     {/* Text section */}
-                    <div className={`${isWideScreen ? 'w-[45%] text-left' : 'w-full text-center mb-6'}`}>
-                        <AnimatePresence mode="wait">
+                    <div className={`${isWideScreen ? 'w-[45%] text-left' : 'w-full text-center mb-2'}`}>
+                        <AnimatePresence mode="popLayout">
                         <motion.div
                             key={activeIndex}
-                            initial={{ opacity: 0, y: 15 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -15 }}
-                            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                         >
                             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm md:text-base backdrop-blur-sm">
                                 {dashboardSlides[activeIndex].role} Dashboard
@@ -280,6 +280,8 @@ export function DashboardSection() {
                                         style={{
                                             transformStyle: 'preserve-3d',
                                             zIndex,
+                                            backfaceVisibility: 'hidden',
+                                            willChange: 'transform, opacity',
                                         }}
                                         animate={{
                                             x: translateX,
@@ -308,15 +310,16 @@ export function DashboardSection() {
                                             }}
                                         >
                                             <picture>
-                                                {/* ~40 KB WebP for modern browsers; original PNG is the fallback */}
                                                 <source srcSet={slide.image.replace('.PNG', '.webp')} type="image/webp" />
                                                 <img
                                                     src={slide.image}
                                                     alt={`${slide.role} Dashboard`}
                                                     width={828}
                                                     height={1792}
-                                                    loading="lazy"
+                                                    loading={isActive ? 'eager' : 'lazy'}
                                                     decoding="async"
+                                                    fetchPriority={isActive ? 'high' : 'low'}
+                                                    sizes="(max-width: 1024px) 60vw, 20vw"
                                                     className="w-full h-auto block rounded-xl md:rounded-2xl"
                                                 />
                                             </picture>
@@ -328,7 +331,7 @@ export function DashboardSection() {
 
                         {/* Scroll Indicator Dots - only on mobile */}
                         {!isWideScreen && (
-                            <div className="relative z-10 flex justify-center gap-2 mt-20">
+                            <div className="relative z-10 flex justify-center gap-2 mt-12">
                                 {dashboardSlides.map((_, index) => (
                                     <div
                                         key={index}
