@@ -1,4 +1,4 @@
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
 
 const dashboardSlides = [
@@ -79,10 +79,10 @@ export function DashboardSection() {
         <div
             ref={containerRef}
             className="relative gradient-hero"
-            style={{ height: '300vh' }} // Scroll space for 3 cards
+            style={{ height: isWideScreen ? '300vh' : 'auto' }} // Scroll space only on desktop for scroll-driven animation
         >
-            {/* Sticky container that locks viewport */}
-            <div className="sticky top-0 h-screen flex flex-col items-center justify-start overflow-hidden px-4 pt-16 md:pt-20">
+            {/* Sticky container on desktop; normal flow on mobile */}
+            <div className={`${isWideScreen ? 'sticky top-0 h-screen' : ''} flex flex-col items-center justify-start overflow-hidden px-4 pt-16 md:pt-20 ${!isWideScreen ? 'py-16' : ''}`}>
                 {/* Background continuation */}
                 <div className="absolute inset-0 gradient-hero" />
 
@@ -197,15 +197,17 @@ export function DashboardSection() {
                 </div>
 
                 {/* Content wrapper - vertical on mobile, horizontal on wide screens */}
-                <div className={`relative z-20 w-full max-w-7xl mx-auto flex-1 flex ${isWideScreen ? 'flex-row items-center gap-8 px-8' : 'flex-col'}`}>
+                <div className={`relative z-20 w-full max-w-7xl mx-auto flex-1 flex ${isWideScreen ? 'flex-row items-center gap-8 px-8' : 'flex-col items-center gap-8'}`}>
 
                     {/* Text section */}
-                    <div className={`${isWideScreen ? 'w-[45%] text-left' : 'w-full text-center mb-6 md:mb-10'}`}>
+                    <div className={`${isWideScreen ? 'w-[45%] text-left' : 'w-full text-center mb-6'}`}>
+                        <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex}
-                            initial={{ opacity: 0, y: -20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4 }}
+                            exit={{ opacity: 0, y: -15 }}
+                            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
                         >
                             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm md:text-base backdrop-blur-sm">
                                 {dashboardSlides[activeIndex].role} Dashboard
@@ -240,6 +242,7 @@ export function DashboardSection() {
                                 </>
                             )}
                         </motion.div>
+                        </AnimatePresence>
                     </div>
 
                     {/* Cards section */}
@@ -248,9 +251,9 @@ export function DashboardSection() {
                         <div
                             className="relative flex justify-center items-center mx-auto"
                             style={{
-                                height: isWideScreen ? 'clamp(300px, 50vh, 500px)' : '45vh',
-                                maxHeight: isWideScreen ? undefined : '450px',
-                                minHeight: isWideScreen ? undefined : '300px',
+                                height: isWideScreen ? 'clamp(300px, 50vh, 500px)' : '520px',
+                                maxHeight: isWideScreen ? undefined : '550px',
+                                minHeight: isWideScreen ? undefined : '400px',
                                 perspective: '1000px'
                             }}
                         >
@@ -261,7 +264,9 @@ export function DashboardSection() {
                                 const isBehindRight = position > 0;
 
                                 // Responsive transforms
-                                const translateX = isBehindLeft ? -60 : isBehindRight ? 60 : 0;
+                                const translateX = isWideScreen
+                                    ? (isBehindLeft ? -60 : isBehindRight ? 60 : 0)
+                                    : (isBehindLeft ? -40 : isBehindRight ? 40 : 0);
                                 const translateZ = isActive ? 0 : -80;
                                 const rotateY = isBehindLeft ? 12 : isBehindRight ? -12 : 0;
                                 const scale = isActive ? 1 : 0.8;
@@ -284,15 +289,15 @@ export function DashboardSection() {
                                             opacity: cardOpacity,
                                         }}
                                         transition={{
-                                            duration: 0.5,
-                                            ease: [0.25, 0.1, 0.25, 1],
+                                            duration: 0.8,
+                                            ease: [0.4, 0, 0.2, 1],
                                         }}
                                     >
                                         {/* Glass card wrapper */}
                                         <div
                                             className="relative rounded-2xl md:rounded-3xl overflow-hidden"
                                             style={{
-                                                width: isWideScreen ? 'clamp(200px, 20vw, 280px)' : 'min(260px, 65vw)',
+                                                width: isWideScreen ? 'clamp(200px, 20vw, 280px)' : 'min(240px, 60vw)',
                                                 background: 'rgba(255, 255, 255, 0.1)',
                                                 backdropFilter: 'blur(10px)',
                                                 border: '1px solid rgba(255, 255, 255, 0.2)',
@@ -323,27 +328,17 @@ export function DashboardSection() {
 
                         {/* Scroll Indicator Dots - only on mobile */}
                         {!isWideScreen && (
-                            <div className="flex justify-center gap-2 mt-4 md:mt-6">
+                            <div className="relative z-10 flex justify-center gap-2 mt-20">
                                 {dashboardSlides.map((_, index) => (
                                     <div
                                         key={index}
                                         className={`transition-all duration-300 rounded-full ${activeIndex === index
-                                            ? 'w-6 md:w-8 h-2 md:h-3 bg-primary'
-                                            : 'w-2 md:w-3 h-2 md:h-3 bg-muted-foreground/30'
+                                            ? 'w-6 h-2 bg-primary'
+                                            : 'w-2 h-2 bg-muted-foreground/30'
                                             }`}
                                     />
                                 ))}
                             </div>
-                        )}
-
-                        {/* Scroll hint - only on mobile */}
-                        {!isWideScreen && (
-                            <motion.p
-                                className="text-center text-xs md:text-sm text-muted-foreground mt-4"
-                                animate={{ opacity: activeIndex < 2 ? 1 : 0 }}
-                            >
-                                ↓ Scroll to explore all dashboards
-                            </motion.p>
                         )}
                     </div>
                 </div>
