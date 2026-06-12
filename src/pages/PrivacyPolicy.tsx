@@ -5,7 +5,7 @@ import { BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { Shield, Lock, BookOpen, Mail } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
-const EFFECTIVE_DATE = 'May 4, 2026';
+const EFFECTIVE_DATE = 'June 12, 2026';
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: 'who-we-are', label: '1. Who We Are' },
@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
             </div>
             <h1 className="text-display mb-6">Privacy Policy</h1>
             <p className="text-subtitle">
-              How GYANAMA collects, uses, stores, shares, and protects information across our website, web dashboard, and Android application.
+              How GYANAMA collects, uses, stores, shares, and protects information across our website, web dashboard, and Android and iOS mobile applications.
             </p>
             <p className="text-sm text-muted-foreground/80 mt-4">
               Effective {EFFECTIVE_DATE} &middot; ARCOS Technologies Private Limited &middot; India
@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
           <div className="prose prose-slate max-w-none">
             <p className="text-muted-foreground mb-6">
               This Privacy Policy describes how ARCOS Technologies Private Limited, operator of the GYANAMA brand (&ldquo;GYANAMA&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), handles personal information when you use the GYANAMA website at{' '}
-              <a href="https://gyanama.com/" className="text-primary hover:underline">https://gyanama.com</a>, our school management dashboard, and the &ldquo;Gyanama&rdquo; Android mobile application (collectively, the &ldquo;Services&rdquo;). We are based in India and currently serve schools and users located in India only. By using the Services, you agree to the practices described below.
+              <a href="https://gyanama.com/" className="text-primary hover:underline">https://gyanama.com</a>, our school management dashboard, and the &ldquo;Gyanama&rdquo; mobile application for Android and iOS (collectively, the &ldquo;Services&rdquo;). We are based in India and currently serve schools and users located in India only. By using the Services, you agree to the practices described below.
             </p>
 
             <h2 id="who-we-are" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">1. Who We Are</h2>
@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
             {/* At a Glance — visually distinctive panel mapping to Google Play Data Safety categories */}
             <h2 id="at-a-glance" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">2. At a Glance &mdash; Data Safety Summary</h2>
             <p className="text-muted-foreground mb-4">
-              The plain-language summary below mirrors the categories that the Google Play &ldquo;Data Safety&rdquo; form asks about. Complete details and qualifications are in the rest of this Policy.
+              The plain-language summary below mirrors the categories that the Google Play &ldquo;Data Safety&rdquo; form and the Apple App Store &ldquo;Privacy Nutrition Label&rdquo; ask about. Complete details and qualifications are in the rest of this Policy.
             </p>
             <div className="not-prose grid sm:grid-cols-2 gap-4 mb-6">
               <div className="rounded-xl border border-emerald-100 bg-emerald-50/50 p-5">
@@ -127,7 +127,7 @@ const PrivacyPolicy = () => {
                 <li><strong>App activity:</strong> features used, screens viewed, last-seen presence, audit logs, crash logs.</li>
                 <li><strong>App info and performance:</strong> device model, OS version, app version, language, IP address.</li>
                 <li><strong>Device or other identifiers:</strong> push-notification token, per-device identifier used to bind the token to your account.</li>
-                <li><strong>Audio (AI Voice Assistant only):</strong> audio is streamed to a multimodal AI model during outbound calls placed by the school&apos;s AI School Voice Assistant. A recording of the call is kept securely only for a short period (currently up to 3 days) to produce and verify the transcript and to investigate disputes, and is then automatically and permanently deleted; the text transcript and summary are retained with the school&apos;s other records.</li>
+                <li><strong>Audio (AI Voice Assistant only):</strong> this is the audio of an outbound <em>telephone call</em> that the school&apos;s AI School Voice Assistant places to a parent&apos;s phone number &mdash; not audio captured from your device microphone. During the call the audio is streamed to a multimodal AI model so it can understand the parent and reply. A recording of the call is kept securely only as long as needed to produce and verify the transcript and to investigate disputes &mdash; in normal operation the recording is automatically and permanently deleted within about 3 days of the call being processed, and in no case is a recording retained for more than 30 days. The text transcript and summary are retained with the school&apos;s other records, and our voice-call transcripts, conversation logs, and session records are automatically purged after 30 days.</li>
               </ul>
               <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-5">Data shared with sub-processors</div>
               <ul className="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
@@ -135,8 +135,9 @@ const PrivacyPolicy = () => {
                 <li><strong>Mobile number</strong> is shared with our telephony provider when the school&apos;s AI Voice Assistant places an outbound absentee call to a parent.</li>
                 <li><strong>Photos, videos, files, and documents</strong> uploaded by the user are stored on our object-storage provider, Cloudflare R2.</li>
                 <li><strong>Push token and notification text</strong> are shared with our push-notification provider when you have notifications enabled.</li>
-                <li><strong>Prompts and uploaded documents</strong> for AI features are sent to our AI-model provider only for the duration of the requested output.</li>
-                <li><strong>For an AI Voice Assistant call</strong>, the parent&apos;s and student&apos;s names, the school name, and the relevant attendance summary are shared with our AI voice provider (which operates outside India) so it can speak naturally about the right child. No other student records are shared during the call.</li>
+                <li><strong>AI Quiz inputs</strong> &mdash; the textbook or chapter PDF you upload and the prompts built from it &mdash; are sent to our AI-model provider only for the duration of the requested output.</li>
+                <li><strong>In-app AI Assistant:</strong> when you ask the AI assistant a question, the specific school records needed to answer it &mdash; such as student names, attendance (present/absent/leave), marks and grades, homework, timetable, announcements, and leave details, limited to what your role is allowed to see &mdash; are sent to our AI-model provider (Microsoft Azure OpenAI, which operates outside India) to generate the answer. A short record of your AI conversation is also stored to provide continuity and for security auditing, and is automatically purged.</li>
+                <li><strong>For an AI Voice Assistant call</strong>, the parent&apos;s and student&apos;s names, the school name, the relevant attendance summary, and any recent approved leave dates and reasons are shared with our AI voice provider (Google, which operates outside India) so it can speak naturally about the right child. No other student records are shared during the call.</li>
               </ul>
             </div>
 
@@ -169,8 +170,8 @@ const PrivacyPolicy = () => {
               The mobile app does not collect precise location (GPS), contacts, SMS, call logs, microphone audio, or background activity from your device.
             </p>
 
-            <h3 className="text-xl font-semibold mb-3 mt-6">c. Information from optional Android permissions</h3>
-            <p className="text-muted-foreground mb-4">The app requests the following permissions only when needed:</p>
+            <h3 className="text-xl font-semibold mb-3 mt-6">c. Information from optional device permissions</h3>
+            <p className="text-muted-foreground mb-4">The mobile app requests the following permissions only when needed. The names below are the Android permissions; the iOS app requests the equivalent system permissions (notifications, camera, and photo-library access) at the moment the corresponding feature is first used:</p>
             <ul className="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
               <li><strong>INTERNET:</strong> required for the app to talk to GYANAMA servers.</li>
               <li><strong>POST_NOTIFICATIONS</strong> (Android 13+): used to deliver alerts you have subscribed to (announcements, attendance, homework, fee reminders, chat messages, etc.).</li>
@@ -184,7 +185,7 @@ const PrivacyPolicy = () => {
 
             <h3 className="text-xl font-semibold mb-3 mt-6">d. Information stored on your device</h3>
             <p className="text-muted-foreground mb-6">
-              The Android app stores authentication tokens in Android&apos;s encrypted secure storage and keeps an on-device cache of your messages, drafts, and conversations (using a local database) so the app works offline and starts quickly. This data stays on your device and is removed when you sign out or uninstall the app.
+              The mobile app stores authentication tokens in the device&apos;s encrypted secure storage (the Android Keystore or the iOS Keychain) and keeps an on-device cache of your messages, drafts, and conversations (using a local database) so the app works offline and starts quickly. This data stays on your device and is removed when you sign out or uninstall the app.
             </p>
 
             <h2 id="how-we-use" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">4. How We Use Information</h2>
@@ -208,12 +209,13 @@ const PrivacyPolicy = () => {
               GYANAMA includes optional AI-powered features. These features are enabled by the subscribing school for its own users.
             </p>
             <ul className="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
-              <li><strong>AI Quiz / homework generator:</strong> when an authorised user uploads a textbook PDF or chapter, the file (or the relevant portion of it) is sent to a large-language-model service to extract chapters, build a search index, and generate quiz questions. Numeric representations of the text are stored in our infrastructure to power retrieval.</li>
-              <li><strong>AI School Voice Assistant:</strong> when the school enables attendance escalation or similar workflows, our system can place an outbound voice call to the parent&apos;s registered phone number. During the call the audio is streamed in real time to a multimodal AI model that understands the audio and generates a spoken reply. To conduct the call we share the parent&apos;s and student&apos;s names, the school name, and the relevant attendance summary with this AI voice provider so it can speak naturally about the right child; we do not share other student records during the call. We store call metadata (start/end time, status, duration), a text transcript and summary of the conversation, and the alert that triggered the call. A recording of the call is stored securely on our servers in India for a short period (currently up to 3 days) to generate and verify the transcript and summary and to investigate disputes or suspected fraud; after this period the recording is automatically and permanently deleted. Transcripts and summaries are retained with the school&apos;s other records under Section 11.</li>
+              <li><strong>AI Quiz / homework generator:</strong> when an authorised user uploads a textbook PDF or chapter, the file (or the relevant portion of it) is sent to a large-language-model service (Microsoft Azure OpenAI) to extract chapters, build a search index, and generate quiz questions. Numeric representations of the text (embeddings) are stored in our own infrastructure in India to power retrieval. This feature processes academic content, not individual student records.</li>
+              <li><strong>In-app AI Assistant:</strong> the dashboard and app include a conversational AI assistant that answers questions about a school&apos;s own data. When a parent, student, teacher, or principal asks it a question, our system retrieves the relevant records the user is authorised to see and sends them, together with the question, to a large-language-model service (Microsoft Azure OpenAI) to generate the answer. Depending on the question, those records can include <strong>student names, daily attendance (present / absent / leave), marks and grades, homework, timetable, subjects, announcements, leave applications, and &mdash; for a principal &mdash; bullying-incident summaries</strong>. The assistant is read-only and cannot change any data, and access is always limited by the user&apos;s role (a parent only sees their own child, a teacher only their assigned classes, and so on). We store a short record of the conversation (the question and the assistant&apos;s reply) to provide continuity within a session and a security-audit log of AI usage; these AI conversation records are automatically purged (generally within 30 days).</li>
+              <li><strong>AI School Voice Assistant:</strong> when the school enables attendance escalation or similar workflows, our system can place an outbound voice call to the parent&apos;s registered phone number through a telephony provider (Telnyx). During the call the audio is streamed in real time to a multimodal AI model (Google&apos;s Gemini) that understands the audio and generates a spoken reply. To conduct the call we share the parent&apos;s and student&apos;s names, the school name, the relevant attendance summary, and any recent approved leave dates and reasons with this AI voice provider so it can speak naturally about the right child; we do not share other student records during the call. We store call metadata (start/end time, status, duration), a text transcript and summary of the conversation (which is itself produced by an AI model from the call audio), and the alert that triggered the call. A recording of the call is stored securely on our servers in India only as long as needed to generate and verify the transcript and summary and to investigate disputes or suspected fraud; in normal operation it is automatically and permanently deleted within about 3 days of being processed, and in no case is a recording kept for more than 30 days. Transcripts, summaries, and conversation logs are retained under Section 11 and are automatically purged after 30 days.</li>
               <li><strong>AI helpers in the dashboard</strong> (where present) operate on inputs explicitly submitted by an authorised user for that feature.</li>
             </ul>
             <p className="text-muted-foreground mb-6">
-              We do not want our AI sub-processors to use student personal data to train their general-purpose foundation models, and we send only the minimum data required for the requested output. We use these providers under terms that, to our knowledge, do not permit them to use that data to train their general-purpose models, and we are continuing to strengthen these contractual protections. AI outputs may be incomplete or inaccurate; the school is responsible for reviewing AI-generated content before relying on it or distributing it.
+              Our AI features rely on third-party AI providers &mdash; principally Microsoft Azure OpenAI (for the AI Quiz, the in-app AI Assistant, and call-summary generation) and Google (for the real-time voice agent and call transcription). These providers operate infrastructure outside India, so the data described above is processed outside India for the duration of the request. We send only the minimum data required for the requested output, and we use these providers under enterprise terms that, to our knowledge, do not permit them to use the data we send to train their general-purpose foundation models; we are continuing to strengthen these contractual protections. AI outputs may be incomplete, inaccurate, or biased; the school is responsible for reviewing AI-generated content before relying on it or distributing it.
             </p>
 
             <h2 id="children" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">6. Children&apos;s Privacy &amp; Google Play Families Policy</h2>
@@ -235,6 +237,9 @@ const PrivacyPolicy = () => {
               <li>Where age-restricted features become available, the app applies a neutral age-screen and treats users under the relevant threshold as children for the purposes of this Policy.</li>
             </ul>
             <p className="text-muted-foreground mb-6">
+              Where the Gyanama application is distributed through the Apple App Store, we likewise commit to Apple&apos;s requirements for apps used by or available to minors: the app shows no third-party advertising, does not use data for advertising or behavioural tracking, does not request App Tracking Transparency permission to track users across other companies&apos; apps or websites, and limits children&apos;s data collection to what the school needs to operate the Services. Our App Store privacy disclosures are kept consistent with this Policy.
+            </p>
+            <p className="text-muted-foreground mb-6">
               Parents and guardians who wish to review, correct, or request deletion of their child&apos;s data should contact the school directly; the school can act on the request through its GYANAMA administrator console, and we will assist the school as needed. Parents may also contact our Grievance Officer (Section 16) at any time.
             </p>
 
@@ -248,8 +253,8 @@ const PrivacyPolicy = () => {
                   <li><strong>Cloudflare R2</strong>: S3-compatible object storage where every photo, video, document, and AI-feature PDF that a user uploads is stored. Each file is accessed only via short-lived signed URLs (typically about 15 minutes for direct uploads and about 30 minutes for downloads), so links cannot be shared indefinitely.</li>
                   <li><strong>SMS gateway provider</strong>: when you request a sign-in OTP, we transmit your <strong>mobile number and the OTP message body</strong> to this provider so it can deliver the SMS to your phone. The provider is contractually restricted to using this information solely to deliver our messages.</li>
                   <li>Push-notification delivery services for in-app and lock-screen notifications, which receive your device push-token and the notification payload.</li>
-                  <li>Telephony services to place outbound voice calls from the AI School Voice Assistant for the absentee-call workflow, which receive the parent&apos;s mobile number and the call script.</li>
-                  <li>Artificial-intelligence model services to power the AI Quiz, in-app AI assistant, summarisation, and Voice Assistant features. Inputs are limited to the prompt or document you submit for the requested output.</li>
+                  <li><strong>Telephony provider (Telnyx)</strong> to place outbound voice calls from the AI School Voice Assistant for the absentee-call workflow, which receives the parent&apos;s mobile number and routes the call.</li>
+                  <li><strong>Artificial-intelligence model providers (Microsoft Azure OpenAI and Google)</strong> to power the AI Quiz, the in-app AI Assistant, summarisation, and the Voice Assistant. The data sent depends on the feature: for the AI Quiz it is the document you upload; for the in-app AI Assistant it is the student records needed to answer your question (such as names, attendance, marks, homework, and leave details, limited by your role); and for the Voice Assistant it is the call audio plus the parent&apos;s and student&apos;s names, school name, and attendance summary. These providers operate outside India and process the data only for the duration of the request and, under our terms, do not use it to train their general-purpose models. See Section 5 for full detail.</li>
                   <li>Website hosting, serverless form-processing, email delivery, and a scheduling/booking service for the public marketing site at <a href="https://gyanama.com/" className="text-primary hover:underline">gyanama.com</a> (used only for marketing-website interactions, not for in-app data).</li>
                 </ul>
               </li>
@@ -291,7 +296,7 @@ const PrivacyPolicy = () => {
 
             <h2 id="retention" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">11. Data Retention</h2>
             <p className="text-muted-foreground mb-6">
-              We retain personal data for as long as the school&apos;s subscription is active and for a reasonable period thereafter to allow the school to export records and to meet our legal, accounting, and audit obligations. When a school terminates its subscription, we delete or anonymise the school&apos;s personal data within 90 days of the end of the contractual wind-down period, except where retention is required by law. AI voice-call recordings are kept securely for a short period (currently up to 3 days) and then automatically and permanently deleted; transcripts and summaries follow the same retention as the school&apos;s other records. OTPs are stored as one-way hashes in our cache and are automatically removed after 5 minutes. Demo and enquiry leads submitted through the website are retained for up to 24 months and then deleted, unless you become a customer.
+              We retain personal data for as long as the school&apos;s subscription is active and for a reasonable period thereafter to allow the school to export records and to meet our legal, accounting, and audit obligations. When a school terminates its subscription, we delete or anonymise the school&apos;s personal data within 90 days of the end of the contractual wind-down period, except where retention is required by law. AI voice-call recordings are kept securely only as long as needed to produce and verify the transcript &mdash; normally deleted within about 3 days of processing and in no case retained for more than 30 days, after which they are automatically and permanently deleted. AI voice-call transcripts, summaries, session records, and conversation logs are automatically purged after 30 days. Records of in-app AI Assistant conversations (the question and the assistant&apos;s reply) and the related AI-usage audit log are likewise automatically purged (generally within 30 days). OTPs are stored as one-way hashes in our cache and are automatically removed after 5 minutes. Administrative audit logs are automatically removed after 7 days. Demo and enquiry leads submitted through the website are retained for up to 24 months and then deleted, unless you become a customer.
             </p>
 
             <h2 id="rights" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">12. Your Rights Under the DPDP Act</h2>
@@ -323,7 +328,7 @@ const PrivacyPolicy = () => {
               </ol>
             </div>
             <p className="text-muted-foreground mb-6">
-              The web URL of this section, <a href="#account-deletion" className="text-primary hover:underline">https://gyanama.com/privacy-policy#account-deletion</a>, can be used as the &ldquo;Account deletion&rdquo; URL when filling out the Google Play store listing.
+              The web URL of this section, <a href="#account-deletion" className="text-primary hover:underline">https://gyanama.com/privacy-policy#account-deletion</a>, can be used as the &ldquo;Account deletion&rdquo; URL when filling out the Google Play store listing and the equivalent account-deletion disclosure on the Apple App Store.
             </p>
 
             <h2 id="cookies" className="text-2xl font-semibold mb-4 mt-10 scroll-mt-24">14. Cookies and Similar Technologies</h2>

@@ -5,7 +5,7 @@ import { BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { ScrollText, Scale, Gavel } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
-const EFFECTIVE_DATE = 'May 4, 2026';
+const EFFECTIVE_DATE = 'June 12, 2026';
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: 'parties', label: 'Who These Terms Apply To' },
@@ -127,7 +127,7 @@ const TermsOfService = () => {
               <div className="rounded-xl border-l-4 border-amber-400 bg-amber-50/30 p-6 mb-12">
                 <p className="text-slate-700 leading-relaxed">
                   These Terms of Service (&ldquo;Terms&rdquo;) form a binding agreement between you and ARCOS Technologies Private Limited, the operator of the GYANAMA brand (&ldquo;GYANAMA&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), governing your access to and use of the GYANAMA website at{' '}
-                  <a href="https://gyanama.com/" className="text-amber-800 font-medium hover:underline">https://gyanama.com</a>, our school management dashboard, the &ldquo;Gyanama&rdquo; Android mobile application, and any related products, APIs, content, and features (collectively, the &ldquo;Services&rdquo;). By creating an account, signing in, or using any part of the Services, you agree to these Terms.
+                  <a href="https://gyanama.com/" className="text-amber-800 font-medium hover:underline">https://gyanama.com</a>, our school management dashboard, the &ldquo;Gyanama&rdquo; mobile application for Android and iOS, and any related products, APIs, content, and features (collectively, the &ldquo;Services&rdquo;). By creating an account, signing in, or using any part of the Services, you agree to these Terms.
                 </p>
               </div>
 
@@ -149,7 +149,7 @@ const TermsOfService = () => {
 
               <TermsSection num={3} id="accounts" title="Accounts and Authentication">
                 <p>
-                  App users sign in to the GYANAMA Android application using their registered mobile phone number and a one-time password (OTP). The administrator console for school super-admins and GYANAMA staff uses username, password, and two-factor authentication. You are responsible for keeping your sign-in credentials and OTPs confidential, for all activity that occurs under your account, and for promptly notifying us at{' '}
+                  App users sign in to the GYANAMA mobile application (Android and iOS) using their registered mobile phone number and a one-time password (OTP). The administrator console for school super-admins and GYANAMA staff uses username, password, and two-factor authentication. You are responsible for keeping your sign-in credentials and OTPs confidential, for all activity that occurs under your account, and for promptly notifying us at{' '}
                   <a href="mailto:info@gyanama.com" className="text-amber-800 font-medium hover:underline">info@gyanama.com</a>{' '}
                   if you suspect unauthorised access to your account.
                 </p>
@@ -200,7 +200,11 @@ const TermsOfService = () => {
 
               <TermsSection num={7} id="ai-features" title="AI Features">
                 <p>
-                  The Services include AI-powered features such as the AI Quiz / homework generator, AI summarisation, and the AI School Voice Assistant. These features rely on third-party machine-learning models and are subject to known limitations of generative AI: outputs may be incomplete, inaccurate, biased, or unsuitable for a particular purpose. AI outputs are provided for the convenience of educators and parents and are <strong>not</strong> a substitute for human review, professional advice, or formal academic assessment. The School is responsible for reviewing AI-generated content (such as quizzes, summaries, or messages) before relying on it or distributing it.
+                  The Services include AI-powered features such as the AI Quiz / homework generator, the in-app AI Assistant, AI summarisation, and the AI School Voice Assistant. These features rely on third-party machine-learning model providers (principally Microsoft Azure OpenAI and Google), which operate infrastructure outside India. To provide these features, certain School Content and personal data &mdash; including, for the in-app AI Assistant, the student records needed to answer a question (such as names, attendance, marks, homework, and leave details, limited by the user&apos;s role), and, for the Voice Assistant, the call audio and the relevant student and attendance details &mdash; is sent to those providers for the duration of the request. Exactly what is shared, and the applicable retention periods, are described in our{' '}
+                  <a href="/privacy-policy#ai-features" className="text-amber-800 font-medium hover:underline">Privacy Policy &sect; 5</a>. By enabling these features the School authorises this processing and confirms it has obtained the consents required under the Digital Personal Data Protection Act, 2023.
+                </p>
+                <p>
+                  These features are subject to known limitations of generative AI: outputs may be incomplete, inaccurate, biased, or unsuitable for a particular purpose. AI outputs are provided for the convenience of educators and parents and are <strong>not</strong> a substitute for human review, professional advice, or formal academic assessment. The School is responsible for reviewing AI-generated content (such as quizzes, summaries, or messages) before relying on it or distributing it.
                 </p>
                 <p>
                   You must not use the AI features to generate content that violates Section 6 (Acceptable Use), that targets a child for harm, or that misrepresents an AI output as the work of a specific human.
@@ -267,7 +271,7 @@ const TermsOfService = () => {
 
               <TermsSection num={16} id="third-party" title="Third-Party Services">
                 <p>
-                  The Services rely on a number of third-party service providers (including cloud hosting, object storage for files and photos you upload, push-notification, SMS gateways for OTP delivery, telephony for outbound voice calls, and AI-model providers). Their performance is outside our direct control, and your use of the Services is subject to those providers&apos; underlying terms where they apply to you. We will use commercially reasonable efforts to select reputable providers and to manage their performance. The current categories of providers and the data they receive are described in our{' '}
+                  The Services rely on a number of third-party service providers (including cloud hosting in India, Cloudflare R2 object storage for files and photos you upload, push-notification delivery, an SMS gateway for OTP delivery, Telnyx telephony for outbound voice calls, and AI-model providers Microsoft Azure OpenAI and Google &mdash; some of which operate outside India). Their performance is outside our direct control, and your use of the Services is subject to those providers&apos; underlying terms where they apply to you. We will use commercially reasonable efforts to select reputable providers and to manage their performance. The current categories of providers and the data they receive are described in our{' '}
                   <a href="/privacy-policy#sharing" className="text-amber-800 font-medium hover:underline">Privacy Policy &sect; 7</a>.
                 </p>
               </TermsSection>
