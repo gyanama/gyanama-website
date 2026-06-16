@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { Button } from '@/components/ui/button';
-import { Phone, Bell, Zap, Shield, ArrowRight, CheckCircle2, GraduationCap, Users, Heart } from 'lucide-react';
+import { Phone, Bell, Zap, Shield, ArrowRight, CheckCircle2, GraduationCap, Users, Heart, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export function MobileAppSection() {
     return (
@@ -81,12 +82,29 @@ export function MobileAppSection() {
                                 ))}
                             </div>
 
-                            <Link to="/book-demo">
-                                <Button variant="hero" size="lg" className="group">
-                                    Book a Demo to See App
-                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                                </Button>
-                            </Link>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                                <Link to="/book-demo">
+                                    <Button variant="hero" size="lg" className="group">
+                                        Book a Demo to See App
+                                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                    </Button>
+                                </Link>
+
+                                {/* Google Play badge */}
+                                <a
+                                    href={SITE_CONFIG.playStore}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Get GYANAMA on Google Play"
+                                    className="inline-flex items-center gap-3 rounded-xl bg-foreground text-background px-5 py-2.5 hover:opacity-90 transition-opacity"
+                                >
+                                    <Play className="w-6 h-6 fill-current" />
+                                    <span className="flex flex-col leading-none text-left">
+                                        <span className="text-[10px] uppercase tracking-wider opacity-80">Get it on</span>
+                                        <span className="text-lg font-semibold leading-tight">Google Play</span>
+                                    </span>
+                                </a>
+                            </div>
                         </AnimatedSection>
                     </div>
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import {
   Type,
-  Heading,
+  Heading2,
   Image as ImageIcon,
   List as ListIcon,
   Quote,
@@ -15,7 +15,7 @@ import {
   X,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextArea } from '@/components/admin/RichTextArea';
 import {
   Select,
   SelectContent,
@@ -27,13 +27,19 @@ import { uploadImage } from '@/hooks/queries/usePosts';
 import type { ContentBlock, BlockType, SplitSectionValue } from '@/lib/blog-types';
 import { makeBlock } from '@/lib/blog-types';
 
-const BLOCK_BUTTONS: { type: BlockType; label: string; icon: typeof Type }[] = [
+const BLOCK_BUTTONS: { type: BlockType; label: string; icon: typeof Type; level?: 'h2' | 'h3' | 'h4' }[] = [
   { type: 'paragraph', label: 'Paragraph', icon: Type },
-  { type: 'heading', label: 'Heading', icon: Heading },
+  { type: 'heading', label: 'Heading', icon: Heading2, level: 'h2' },
   { type: 'image', label: 'Image', icon: ImageIcon },
   { type: 'list', label: 'List', icon: ListIcon },
   { type: 'quote', label: 'Quote', icon: Quote },
   { type: 'split_section', label: 'Split Section', icon: Columns2 },
+];
+
+const HEADING_LEVELS: { level: 'h2' | 'h3' | 'h4'; label: string }[] = [
+  { level: 'h2', label: 'H2 · Heading' },
+  { level: 'h3', label: 'H3 · Subheading' },
+  { level: 'h4', label: 'H4 · Sub-subheading' },
 ];
 
 interface BlockEditorProps {
@@ -44,7 +50,11 @@ interface BlockEditorProps {
 export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
 
-  const addBlock = (type: BlockType) => onChange([...blocks, makeBlock(type)]);
+  const addBlock = (type: BlockType, level?: 'h2' | 'h3' | 'h4') => {
+    const block = makeBlock(type);
+    if (level) block.level = level;
+    onChange([...blocks, block]);
+  };
 
   const updateBlock = (index: number, patch: Partial<ContentBlock>) => {
     const next = [...blocks];
@@ -86,9 +96,9 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
       <div className="flex flex-wrap gap-2">
         {BLOCK_BUTTONS.map((b) => (
           <button
-            key={b.type}
+            key={b.label}
             type="button"
-            onClick={() => addBlock(b.type)}
+            onClick={() => addBlock(b.type, b.level)}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-white text-sm font-medium hover:bg-muted transition-colors"
           >
             <b.icon className="w-4 h-4" /> {b.label}
@@ -107,7 +117,9 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
           {/* Block header */}
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {block.type.replace('_', ' ')}
+              {block.type === 'heading'
+                ? `heading · ${(block.level ?? 'h2').toUpperCase()}`
+                : block.type.replace('_', ' ')}
             </span>
             <div className="flex items-center gap-1">
               <IconBtn title="Move up" onClick={() => moveBlock(index, 'up')} disabled={index === 0}>
@@ -128,31 +140,56 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
 
           {/* Paragraph */}
           {block.type === 'paragraph' && (
-            <Textarea
+            <RichTextArea
               rows={3}
               value={block.value as string}
-              onChange={(e) => updateBlock(index, { value: e.target.value })}
+              onChange={(value) => updateBlock(index, { value })}
               placeholder="Enter paragraph text…"
             />
           )}
 
-          {/* Heading */}
+          {/* Heading (with H2 / H3 / H4 levels — subheadings nest under headings) */}
           {block.type === 'heading' && (
-            <Input
-              className="text-lg font-semibold"
-              value={block.value as string}
-              onChange={(e) => updateBlock(index, { value: e.target.value })}
-              placeholder="Enter heading text…"
-            />
+            <div className="space-y-2">
+              <div className="inline-flex rounded-lg border border-border overflow-hidden text-xs">
+                {HEADING_LEVELS.map((lvl, i) => {
+                  const active = (block.level ?? 'h2') === lvl.level;
+                  return (
+                    <button
+                      key={lvl.level}
+                      type="button"
+                      onClick={() => updateBlock(index, { level: lvl.level })}
+                      className={`px-3 py-1.5 font-medium ${i > 0 ? 'border-l border-border' : ''} ${
+                        active ? 'bg-primary text-primary-foreground' : 'bg-white text-muted-foreground'
+                      }`}
+                    >
+                      {lvl.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <Input
+                className={
+                  block.level === 'h4'
+                    ? 'text-sm font-semibold'
+                    : block.level === 'h3'
+                      ? 'text-base font-semibold'
+                      : 'text-lg font-bold'
+                }
+                value={block.value as string}
+                onChange={(e) => updateBlock(index, { value: e.target.value })}
+                placeholder={block.level && block.level !== 'h2' ? 'Enter subheading text…' : 'Enter heading text…'}
+              />
+            </div>
           )}
 
           {/* Quote */}
           {block.type === 'quote' && (
-            <Textarea
+            <RichTextArea
               rows={2}
               className="italic"
               value={block.value as string}
-              onChange={(e) => updateBlock(index, { value: e.target.value })}
+              onChange={(value) => updateBlock(index, { value })}
               placeholder="Enter quote…"
             />
           )}
@@ -333,10 +370,10 @@ function SplitEditor({
           onChange={(e) => patch({ title: e.target.value })}
           placeholder="Section title"
         />
-        <Textarea
+        <RichTextArea
           rows={3}
           value={v.description}
-          onChange={(e) => patch({ description: e.target.value })}
+          onChange={(description) => patch({ description })}
           placeholder="Section description"
         />
         <Input

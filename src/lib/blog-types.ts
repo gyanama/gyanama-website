@@ -29,6 +29,7 @@ export interface ContentBlock {
   imageCaption?: string; // image blocks
   image?: string; // split_section image url
   layout?: 'left' | 'right'; // split_section layout
+  level?: 'h2' | 'h3' | 'h4'; // heading blocks: h2 = heading, h3/h4 = subheadings
 }
 
 export const BLOG_CATEGORIES = [
@@ -107,6 +108,8 @@ export function makeBlock(type: BlockType): ContentBlock {
         image: '',
         value: { title: '', description: '', subTitle: '', list: [''], footer: '' },
       };
+    case 'heading':
+      return { type, value: '', level: 'h2' };
     default:
       return { type, value: '' };
   }

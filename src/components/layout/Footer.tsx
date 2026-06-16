@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, MessageCircle, MapPin } from 'lucide-react';
+import { Linkedin, MessageCircle, MapPin, Instagram, Play } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
 const footerLinks = {
@@ -60,6 +60,15 @@ export function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
+                href={SITE_CONFIG.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Instagram"
+                className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center text-pink-600 hover:bg-pink-100 transition-colors"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
                 href={SITE_CONFIG.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -69,6 +78,21 @@ export function Footer() {
                 <MessageCircle size={18} />
               </a>
             </div>
+
+            {/* Get the app */}
+            <a
+              href={SITE_CONFIG.playStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get GYANAMA on Google Play"
+              className="mt-6 inline-flex items-center gap-2.5 rounded-xl bg-foreground text-background px-4 py-2 hover:opacity-90 transition-opacity"
+            >
+              <Play className="w-5 h-5 fill-current" />
+              <span className="flex flex-col leading-none text-left">
+                <span className="text-[9px] uppercase tracking-wider opacity-80">Get it on</span>
+                <span className="text-sm font-semibold leading-tight">Google Play</span>
+              </span>
+            </a>
           </div>
 
           {/* Product Links */}
