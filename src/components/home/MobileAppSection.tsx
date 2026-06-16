@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Phone, Bell, Zap, Shield, ArrowRight, CheckCircle2, GraduationCap, Users, Heart, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG } from '@/lib/constants';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function MobileAppSection() {
+    const isMobile = useIsMobile();
     return (
         <section className="section-padding relative overflow-hidden">
             {/* Background Decor */}
@@ -113,9 +115,11 @@ export function MobileAppSection() {
                         {/* Blob Background */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-violet-500/20 to-blue-500/20 rounded-full blur-3xl -z-10" />
 
-                        <AnimatedSection direction="right" className="relative">
-                            {/* Phone Frame */}
-                            <div className="relative w-full max-w-[300px] md:max-w-[320px] h-[500px] md:h-[640px] bg-gray-900 rounded-[2.5rem] md:rounded-[3rem] border-8 border-gray-900 shadow-2xl overflow-hidden mx-auto">
+                        <AnimatedSection direction="right" className="relative" disabled={isMobile}>
+                            {/* Phone Frame — transform-gpu + backface-hidden stabilize the
+                                rounded/overflow-hidden dark frame so it doesn't flash black
+                                during compositing/scroll on mobile GPUs. */}
+                            <div className="relative w-full max-w-[300px] md:max-w-[320px] h-[500px] md:h-[640px] bg-gray-900 rounded-[2.5rem] md:rounded-[3rem] border-8 border-gray-900 shadow-2xl overflow-hidden mx-auto transform-gpu [backface-visibility:hidden] [-webkit-backface-visibility:hidden]">
                                 {/* Notch */}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-2xl z-20" />
 
