@@ -12,6 +12,8 @@ export const SITE_CONFIG = {
   },
   linkedIn: 'https://www.linkedin.com/company/gyanama/',
   instagram: 'https://www.instagram.com/gyanama_edu',
+  facebook: 'https://www.facebook.com/profile.php?id=61590886200138',
+  twitter: 'https://x.com/Gyanama_in',
   playStore: 'https://play.google.com/store/apps/details?id=com.arcostechnologies.gyanama',
   calUsername: import.meta.env.VITE_CAL_USERNAME || '',
   calEventSlug: import.meta.env.VITE_CAL_EVENT_SLUG || '15min-demo',
