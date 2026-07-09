@@ -18,6 +18,9 @@ import { fileURLToPath } from 'url';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const DIST_DIR = join(__dirname, '..', 'dist');
 const CANONICAL_DOMAIN = 'https://gyanama.com';
+const TODAY = new Date().toISOString().slice(0, 10);
+const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
+const INDEXNOW_KEY_PATTERN = /^[A-Za-z0-9-]{8,128}$/;
 
 // Static routes with sitemap metadata. Blog posts are appended dynamically.
 // NOTE: /adminpanel is intentionally absent — it must never be prerendered or
@@ -63,31 +66,86 @@ async function fetchBlogPosts() {
   }
 }
 
-function generateSitemap(blogPosts) {
-  const today = new Date().toISOString().slice(0, 10);
-  const urls = [];
-  for (const r of STATIC_ROUTES) {
-    urls.push(
-      `  <url>\n    <loc>${CANONICAL_DOMAIN}${r.path === '/' ? '/' : r.path}</loc>\n` +
-        `    <lastmod>${today}</lastmod>\n    <changefreq>${r.changefreq}</changefreq>\n` +
-        `    <priority>${r.priority}</priority>\n  </url>`,
-    );
-  }
+function buildSitemapEntries(blogPosts) {
+  const entries = STATIC_ROUTES.map((r) => ({
+    loc: `${CANONICAL_DOMAIN}${r.path}`,
+    lastmod: TODAY,
+    changefreq: r.changefreq,
+    priority: r.priority,
+    isPost: false,
+  }));
   for (const post of blogPosts) {
-    const lastmod = (post.updated_at || post.published_at || '').slice(0, 10) || today;
-    urls.push(
-      `  <url>\n    <loc>${CANONICAL_DOMAIN}/blog/${post.slug}</loc>\n` +
-        `    <lastmod>${lastmod}</lastmod>\n    <changefreq>monthly</changefreq>\n` +
-        `    <priority>0.7</priority>\n  </url>`,
-    );
+    entries.push({
+      loc: `${CANONICAL_DOMAIN}/blog/${post.slug}`,
+      lastmod: (post.updated_at || post.published_at || '').slice(0, 10) || TODAY,
+      changefreq: 'monthly',
+      priority: '0.7',
+      isPost: true,
+    });
   }
+  return entries;
+}
+
+function generateSitemap(entries) {
+  const urls = entries.map(
+    (e) =>
+      `  <url>\n    <loc>${e.loc}</loc>\n` +
+      `    <lastmod>${e.lastmod}</lastmod>\n    <changefreq>${e.changefreq}</changefreq>\n` +
+      `    <priority>${e.priority}</priority>\n  </url>`,
+  );
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     urls.join('\n') +
     '\n</urlset>\n';
   writeFileSync(join(DIST_DIR, 'sitemap.xml'), xml, 'utf-8');
-  console.log(`[prerender] Wrote sitemap.xml (${STATIC_ROUTES.length} static + ${blogPosts.length} posts).`);
+  const postCount = entries.filter((e) => e.isPost).length;
+  console.log(`[prerender] Wrote sitemap.xml (${entries.length - postCount} static + ${postCount} posts).`);
+}
+
+function selectIndexNowUrls(entries) {
+  if (process.env.INDEXNOW_SUBMIT_ALL === 'true') return entries.map((e) => e.loc);
+  const changedPosts = entries.filter((e) => e.isPost && e.lastmod === TODAY);
+  if (changedPosts.length === 0) return [];
+  return [`${CANONICAL_DOMAIN}/blog`, ...changedPosts.map((e) => e.loc)];
+}
+
+async function submitToIndexNow(entries) {
+  const key = process.env.INDEXNOW_KEY;
+  if (!key) {
+    console.log('[indexnow] INDEXNOW_KEY not set — skipping submission.');
+    return;
+  }
+  if (!INDEXNOW_KEY_PATTERN.test(key)) {
+    console.warn('[indexnow] INDEXNOW_KEY must be 8–128 chars of [A-Za-z0-9-] — skipping submission.');
+    return;
+  }
+
+  writeFileSync(join(DIST_DIR, `${key}.txt`), key, 'utf-8');
+  console.log(`[indexnow] Wrote key file ${key}.txt`);
+
+  const urlList = selectIndexNowUrls(entries);
+  if (urlList.length === 0) {
+    console.log('[indexnow] No URLs changed today — nothing to submit.');
+    return;
+  }
+
+  try {
+    const res = await fetch(INDEXNOW_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        host: new URL(CANONICAL_DOMAIN).host,
+        key,
+        keyLocation: `${CANONICAL_DOMAIN}/${key}.txt`,
+        urlList,
+      }),
+    });
+    if (!res.ok) throw new Error(`endpoint responded ${res.status}`);
+    console.log(`[indexnow] Submitted ${urlList.length} URL(s).`);
+  } catch (err) {
+    console.warn(`[indexnow] Submission failed (${err.message}). Continuing — the sitemap still covers these URLs.`);
+  }
 }
 
 const MIME_TYPES = {
@@ -216,7 +274,9 @@ async function prerender() {
   }
 
   // Always (re)generate the sitemap from the current route + post set.
-  generateSitemap(blogPosts);
+  const entries = buildSitemapEntries(blogPosts);
+  generateSitemap(entries);
+  await submitToIndexNow(entries);
 
   server.close();
   console.log(`[prerender] Done. ${allRoutes.length - failures}/${allRoutes.length} routes rendered.`);
