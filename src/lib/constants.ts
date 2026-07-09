@@ -11,9 +11,11 @@ export const SITE_CONFIG = {
     return `https://wa.me/${this.whatsapp.replace('+', '')}`;
   },
   linkedIn: 'https://www.linkedin.com/company/gyanama/',
-  instagram: 'https://www.instagram.com/gyanama_edu/',
+  instagram: 'https://www.instagram.com/gyanama_edu',
+  facebook: 'https://www.facebook.com/profile.php?id=61590886200138',
   twitter: 'https://x.com/Gyanama_in',
   twitterHandle: '@Gyanama_in',
+  playStore: 'https://play.google.com/store/apps/details?id=com.arcostechnologies.gyanama',
   calUsername: import.meta.env.VITE_CAL_USERNAME || '',
   calEventSlug: import.meta.env.VITE_CAL_EVENT_SLUG || '15min-demo',
   get calLink() {

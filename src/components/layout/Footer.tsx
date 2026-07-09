@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, MessageCircle, MapPin, Instagram, Twitter } from 'lucide-react';
+import { Linkedin, MessageCircle, MapPin, Instagram, Play, Facebook } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
+
+// lucide's `X` is the close icon, not the brand mark — use the official X logo.
+function XIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 const footerLinks = {
   product: [
@@ -61,15 +70,6 @@ export function Footer() {
                 <Linkedin size={18} />
               </a>
               <a
-                href={SITE_CONFIG.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Chat with us on WhatsApp"
-                className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600 hover:bg-green-100 transition-colors"
-              >
-                <MessageCircle size={18} />
-              </a>
-              <a
                 href={SITE_CONFIG.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -79,15 +79,48 @@ export function Footer() {
                 <Instagram size={18} />
               </a>
               <a
+                href={SITE_CONFIG.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Facebook"
+                className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition-colors"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
                 href={SITE_CONFIG.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on X"
-                className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800 hover:bg-slate-200 transition-colors"
+                className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-900 hover:bg-neutral-200 transition-colors"
               >
-                <Twitter size={18} />
+                <XIcon size={18} />
+              </a>
+              <a
+                href={SITE_CONFIG.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat with us on WhatsApp"
+                className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600 hover:bg-green-100 transition-colors"
+              >
+                <MessageCircle size={18} />
               </a>
             </div>
+
+            {/* Get the app */}
+            <a
+              href={SITE_CONFIG.playStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get GYANAMA on Google Play"
+              className="mt-6 inline-flex items-center gap-2.5 rounded-xl bg-foreground text-background px-4 py-2 hover:opacity-90 transition-opacity"
+            >
+              <Play className="w-5 h-5 fill-current" />
+              <span className="flex flex-col leading-none text-left">
+                <span className="text-[9px] uppercase tracking-wider opacity-80">Get it on</span>
+                <span className="text-sm font-semibold leading-tight">Google Play</span>
+              </span>
+            </a>
           </div>
 
           {/* Product Links */}

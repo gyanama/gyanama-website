@@ -6,6 +6,8 @@ interface AnimatedSectionProps {
   className?: string;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+  /** Render children with no entrance animation (e.g. to avoid mobile paint flashes). */
+  disabled?: boolean;
 }
 
 const variants: Record<string, Variants> = {
@@ -31,14 +33,19 @@ const variants: Record<string, Variants> = {
   },
 };
 
-export function AnimatedSection({ 
-  children, 
-  className, 
+export function AnimatedSection({
+  children,
+  className,
   delay = 0,
-  direction = 'up' 
+  direction = 'up',
+  disabled = false,
 }: AnimatedSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  if (disabled) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
