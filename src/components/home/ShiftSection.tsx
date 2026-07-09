@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import { Eye, Radar, Zap } from 'lucide-react';
 
 const PILLARS = [
-  { icon: Eye, title: 'It understands', body: 'Gyanama reads what’s happening across attendance, academics, fees and communication — not as separate reports, but as one live picture of your school.' },
-  { icon: Radar, title: 'It identifies', body: 'It surfaces what actually needs attention today — the student slipping, the fees overdue, the class falling behind — before it becomes a problem.' },
-  { icon: Zap, title: 'It acts', body: 'Then it takes action: calling the parent, sending the reminder, generating the assignment — automatically, so your staff don’t have to.' },
+  { icon: Eye, title: 'It understands', body: 'Gyanama reads what’s happening across attendance, academics, fees and communication. Not as separate reports, but as one live picture of your school.' },
+  { icon: Radar, title: 'It identifies', body: 'It surfaces what actually needs attention today: the student slipping, the fees overdue, the class falling behind. All before it becomes a problem.' },
+  { icon: Zap, title: 'It acts', body: 'Then it takes action: calling the parent, sending the reminder, generating the assignment. Automatically, so your staff don’t have to.' },
 ];
 
 export function ShiftSection() {
@@ -17,7 +17,7 @@ export function ShiftSection() {
             Gyanama doesn’t just store your school’s data. It understands it.
           </h2>
           <p className="text-muted-foreground text-lg">
-            Think of it as an operating layer over everything your school already does — one
+            Think of it as an operating layer over everything your school already does. One
             intelligence connecting management, teachers, students and parents.
           </p>
         </div>

@@ -66,7 +66,7 @@ export function Navbar() {
             <Link to="/" className="flex items-center gap-3 group">
               <img
                 src="/gyanama-logo-256.png"
-                alt="GYANAMA — AI school platform"
+                alt="GYANAMA: AI school platform"
                 width={56}
                 height={56}
                 fetchPriority="high"

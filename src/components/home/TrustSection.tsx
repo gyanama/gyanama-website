@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Smartphone, ShieldCheck, Lock, MapPin } from 'lucide-react';
 
 const CHIPS = [
-  { icon: Smartphone, label: 'Real product — web, Android & iOS' },
+  { icon: Smartphone, label: 'Real product: web, Android & iOS' },
   { icon: ShieldCheck, label: 'Secure infrastructure' },
   { icon: Lock, label: 'DPDP-aligned data handling' },
   { icon: MapPin, label: 'Built for Indian schools' },
@@ -20,7 +20,7 @@ export function TrustSection() {
           <p className="text-muted-foreground text-lg">
             Gyanama was built by Yash Bhardwaj and Rachit Mittal after watching teachers lose their
             evenings to paper registers, hand-built assignments, and fee-chasing calls. It’s a real,
-            working product — already live in a school — designed around India’s DPDP data-protection
+            working product (already live in a school) designed around India’s DPDP data-protection
             rules and built to be trusted with student data.
           </p>
         </div>

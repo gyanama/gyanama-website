@@ -73,7 +73,7 @@ export function CTASection() {
             viewport={{ once: false }}
           >
             Book a 20-minute demo. We’ll show the attendance calling, the health scores, and
-            assignment generation — on real screens, with your school in mind.
+            assignment generation. All on real screens, with your school in mind.
           </motion.p>
 
           {/* CTA Button - Zoom In */}

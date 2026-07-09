@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const BELIEFS = [
-  { title: 'Software should act, not just store', body: 'A school already has the data. The job worth doing is acting on it — that conviction is the whole product.' },
-  { title: 'AI with a purpose', body: 'No AI for marketing’s sake. Every AI feature does something a human can’t do at a school’s scale — like calling every absent child’s parent, every day.' },
-  { title: 'Built from real classrooms', body: 'We started from what we actually saw teachers and principals doing by hand — not from a feature list.' },
+  { title: 'Software should act, not just store', body: 'A school already has the data. The job worth doing is acting on it. That conviction is the whole product.' },
+  { title: 'AI with a purpose', body: 'No AI for marketing’s sake. Every AI feature does something a human can’t do at a school’s scale. Like calling every absent child’s parent, every day.' },
+  { title: 'Built from real classrooms', body: 'We started from what we actually saw teachers and principals doing by hand. Not from a feature list.' },
 ];
 
 const About = () => {
@@ -26,7 +26,7 @@ const About = () => {
             <span className="text-gradient-primary">So we built Gyanama.</span>
           </h1>
           <p className="text-subtitle max-w-2xl mx-auto">
-            Gyanama is an AI operating system for schools — built by two founders who saw, up close,
+            Gyanama is an AI operating system for schools. Built by two founders who saw, up close,
             how much of a school runs on registers, spreadsheets, and manual phone calls.
           </p>
         </div>
@@ -36,24 +36,24 @@ const About = () => {
         <div className="container mx-auto px-6 max-w-2xl">
           <div className="prose-lg space-y-5 text-lg text-foreground/85 leading-relaxed">
             <p>
-              It started with a teacher we knew — a friend’s mother. Every evening she’d sit with a
+              It started with a teacher we knew: a friend’s mother. Every evening she’d sit with a
               paper register, squinting to tally attendance, then hand-build the next day’s
               assignments, then call the parents of the children who’d been absent for too long. One
               by one.
             </p>
             <p>
               We saw the same thing in a family member’s school: a principal running the entire place
-              out of Excel — a separate sheet for student details, marks, exams, fees. The data was
-              all there. But acting on it was completely manual, and things slipped through.
+              out of Excel, with a separate sheet for student details, marks, exams, and fees. The
+              data was all there. But acting on it was completely manual, and things slipped through.
             </p>
             <p>
-              We’re young — we were still in college when we started. Maybe that’s why the whole thing
+              We’re young. We were still in college when we started. Maybe that’s why the whole thing
               looked so obviously broken to us. The school already knew who was slipping and who
               hadn’t paid. The software just sat on it and waited for a human to notice.
             </p>
             <p className="font-medium text-foreground">
               So we built the thing that doesn’t wait. Gyanama understands what’s happening across a
-              school, flags what needs attention, and takes action — so the people running the school
+              school, flags what needs attention, and takes action. So the people running the school
               can get back to running the school.
             </p>
           </div>

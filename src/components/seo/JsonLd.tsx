@@ -43,7 +43,7 @@ export function OrganizationSchema() {
       url: `${CANONICAL_DOMAIN}/gyanama-logo.png`,
     },
     description:
-      'Gyanama is the AI platform that runs Indian K-12 schools — it does not just record attendance, fees and marks, it acts on them: calling parents, flagging at-risk students, and collecting fees.',
+      'Gyanama is the AI platform that runs Indian K-12 schools. It does not just record attendance, fees and marks, it acts on them: calling parents, flagging at-risk students, and collecting fees.',
     founder: FOUNDERS,
     foundingDate: '2025',
     areaServed: 'IN',
@@ -67,7 +67,7 @@ export function WebSiteSchema() {
     name: 'GYANAMA',
     url: CANONICAL_DOMAIN,
     description:
-      'The AI platform that runs Indian schools — beyond a school management system.',
+      'The AI platform that runs Indian schools. Beyond a school management system.',
     inLanguage: 'en-IN',
     publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
   };
@@ -87,12 +87,12 @@ export function SoftwareApplicationSchema() {
       'Gyanama is the AI platform for Indian K-12 schools. Beyond a school management system, it acts on school data: automated attendance calls to parents, an AI Brain that flags at-risk students, AI quiz & assignment generation, timetable generation, online fee collection, and daily health scores.',
     featureList: [
       'Automated AI attendance calls to parents',
-      'AI Brain — at-risk student and weak-spot detection',
+      'AI Brain: at-risk student and weak-spot detection',
       'AI quiz & assignment generation from books',
       'AI timetable generation',
       'Online fee collection (UPI, cards, cash) with invoices',
       'Daily school, class and student health scores',
-      'Real-time parent–teacher chat and notifications',
+      'Real-time parent-teacher chat and notifications',
       'Exams, marks and PDF report cards',
       'Mobile apps for principals, teachers, parents and students',
     ],
@@ -168,7 +168,7 @@ export function BlogListingSchema() {
     '@id': `${CANONICAL_DOMAIN}/blog#blog`,
     name: 'GYANAMA Blog',
     description:
-      'Insights and guides on running a modern Indian school with AI — attendance, fees, parent communication, and moving beyond registers and spreadsheets.',
+      'Insights and guides on running a modern Indian school with AI: attendance, fees, parent communication, and moving beyond registers and spreadsheets.',
     url: `${CANONICAL_DOMAIN}/blog`,
     publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
   };

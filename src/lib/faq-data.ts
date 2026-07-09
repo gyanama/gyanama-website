@@ -8,7 +8,7 @@ export const faqData: FAQItem[] = [
   {
     question: 'Is Gyanama just another school ERP?',
     answer:
-      'No. Traditional school software stores data — attendance, fees, marks — and waits for a staff member to open a dashboard and act. Gyanama is an AI operating system for schools: it understands what’s happening, flags what needs attention, and takes action automatically, like calling a parent when a student’s attendance drops.',
+      'No. Traditional school software stores data (attendance, fees, marks) and waits for a staff member to open a dashboard and act. Gyanama is an AI operating system for schools: it understands what’s happening, flags what needs attention, and takes action automatically, like calling a parent when a student’s attendance drops.',
     iconName: 'CheckCircle2',
   },
   {
@@ -38,7 +38,7 @@ export const faqData: FAQItem[] = [
   {
     question: 'How do we get started?',
     answer:
-      'Book a 20-minute demo. We’ll walk your team through the attendance calling, the student and school health scores, and AI assignment generation on real screens — then help you set up.',
+      'Book a 20-minute demo. We’ll walk your team through the attendance calling, the student and school health scores, and AI assignment generation on real screens. Then we help you set up.',
     iconName: 'Globe',
   },
 ];

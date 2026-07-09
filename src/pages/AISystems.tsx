@@ -12,37 +12,37 @@ const SYSTEMS = [
     icon: Phone,
     eyebrow: 'AI attendance calling',
     outcome: 'When attendance drops, no one has to notice first.',
-    body: 'Gyanama watches attendance patterns and, when a student starts slipping, automatically calls the parent — in your school’s voice and the parent’s language — then logs how the call went. No staff member has to spot the trend or pick up the phone.',
+    body: 'Gyanama watches attendance patterns and, when a student starts slipping, automatically calls the parent in your school’s voice and the parent’s language, then logs how the call went. No staff member has to spot the trend or pick up the phone.',
     points: ['Detects the pattern automatically', 'Calls parents in their language', 'Logs every outcome for follow-up'],
     img: '/product/absentee-calls.webp',
-    alt: 'Gyanama — a log of automated absentee calls to parents',
+    alt: 'Gyanama: a log of automated absentee calls to parents',
   },
   {
     icon: Activity,
     eyebrow: 'Student & school intelligence',
-    outcome: 'Know which students need attention — before it’s obvious.',
+    outcome: 'Know which students need attention. Before it’s obvious.',
     body: 'The Brain turns academics, attendance and engagement into a live health score for every student, every class, and the whole school. Instead of reading ten reports, management sees who and what needs attention today.',
     points: ['Health scores for student, class & school', 'Surfaces at-risk students early', 'One live picture, not scattered reports'],
     img: '/product/health-score.webp',
-    alt: 'Gyanama — an AI health score for a student',
+    alt: 'Gyanama: an AI health score for a student',
   },
   {
     icon: PenTool,
     eyebrow: 'AI assignment generation',
     outcome: 'Teachers turn syllabus and books into assignments in minutes.',
-    body: 'Point Gyanama at the syllabus or a book, and it generates aligned assignments and quizzes ready to assign — replacing an evening of manual work with a few minutes.',
+    body: 'Point Gyanama at the syllabus or a book, and it generates aligned assignments and quizzes ready to assign. It replaces an evening of manual work with a few minutes.',
     points: ['Syllabus- and book-aligned', 'Assignments and quizzes', 'Ready to assign in minutes'],
     img: '/product/assign-homework.webp',
-    alt: 'Gyanama — a teacher assigning AI-generated homework',
+    alt: 'Gyanama: a teacher assigning AI-generated homework',
   },
   {
     icon: IndianRupee,
     eyebrow: 'Automated fee reminders',
     outcome: 'Fees follow up on themselves.',
-    body: 'Gyanama runs the reminder calls and tracks who has paid — so your staff stop chasing pending fees one call at a time.',
+    body: 'Gyanama runs the reminder calls and tracks who has paid. Your staff stop chasing pending fees one call at a time.',
     points: ['Automated reminder calls', 'Tracks who has paid', 'Frees staff from chasing'],
     img: '/product/fee-payment.webp',
-    alt: 'Gyanama — a fee payment and status screen',
+    alt: 'Gyanama: a fee payment and status screen',
   },
 ];
 
@@ -63,7 +63,7 @@ const AISystems = () => {
           </h1>
           <p className="text-subtitle max-w-2xl mx-auto">
             Most school software stores information and waits. Gyanama’s AI reads what’s happening,
-            decides what needs attention, and takes action — calling parents, scoring students,
+            decides what needs attention, and takes action: calling parents, scoring students,
             generating assignments. Here’s how each part works.
           </p>
         </div>

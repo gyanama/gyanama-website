@@ -56,7 +56,7 @@ export default function PostsList() {
     try {
       await togglePublish.mutateAsync({ id: post.id, publish });
       if (publish) {
-        toast.success('Published — site will rebuild in ~1–2 min', {
+        toast.success('Published. Site will rebuild in ~1-2 min', {
           description: 'The post becomes a static, SEO-indexed page after the rebuild.',
         });
         triggerRebuild().then((r) => {

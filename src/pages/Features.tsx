@@ -11,10 +11,10 @@ const BLOCKS = [
   {
     icon: Phone,
     title: 'Attendance that acts',
-    lead: 'Mark attendance in seconds — then let Gyanama do what a register never could.',
+    lead: 'Mark attendance in seconds. Then let Gyanama do what a register never could.',
     items: ['Fast daily attendance & registers', 'Auto AI calls to parents when attendance drops', 'Absentee-call logs & follow-up', 'Leave & substitute management'],
     img: '/product/mark-attendance.webp',
-    alt: 'Gyanama — marking class attendance',
+    alt: 'Gyanama: marking class attendance',
   },
   {
     icon: IndianRupee,
@@ -22,15 +22,15 @@ const BLOCKS = [
     lead: 'Online collection with automated follow-up, so staff stop chasing payments.',
     items: ['Online payments (UPI, cards, cash)', 'Fee structures, discounts & invoices', 'Automated fee-reminder calls', 'Collection dashboard'],
     img: '/product/fee-payment.webp',
-    alt: 'Gyanama — fee payment screen',
+    alt: 'Gyanama: fee payment screen',
   },
   {
     icon: PenTool,
     title: 'Academics, minus the busywork',
-    lead: 'From syllabus to report card — with AI doing the heavy lifting.',
+    lead: 'From syllabus to report card. With AI doing the heavy lifting.',
     items: ['AI assignment & quiz generation', 'Homework, exams & marks', 'PDF report cards', 'Timetable generation'],
     img: '/product/assign-homework.webp',
-    alt: 'Gyanama — assigning homework',
+    alt: 'Gyanama: assigning homework',
   },
   {
     icon: Activity,
@@ -38,23 +38,23 @@ const BLOCKS = [
     lead: 'A live health score for every student, class and the whole school.',
     items: ['Student, class & school health scores', 'At-risk & weak-spot detection', 'Weekly insights for management', 'Performance analytics'],
     img: '/product/health-score.webp',
-    alt: 'Gyanama — student health score',
+    alt: 'Gyanama: student health score',
   },
   {
     icon: MessageSquare,
     title: 'Everyone on the same page',
     lead: 'Management, teachers, parents and students, connected in one place.',
-    items: ['Real-time chat & notifications', 'Announcements & forms', 'Parent–teacher meetings (PTM)', 'Anonymous bully reporting'],
+    items: ['Real-time chat & notifications', 'Announcements & forms', 'Parent-teacher meetings (PTM)', 'Anonymous bully reporting'],
     img: '/product/ptm.webp',
-    alt: 'Gyanama — parent-teacher meeting scheduling',
+    alt: 'Gyanama: parent-teacher meeting scheduling',
   },
   {
     icon: Settings,
     title: 'The whole school, handled',
-    lead: 'The everyday operations a school runs on — in one operating layer.',
+    lead: 'The everyday operations a school runs on. In one operating layer.',
     items: ['Calendar & events', 'Gate passes & transfer certificates', 'Role-based access (principal, teacher, parent, student)', 'Web, Android & iOS apps'],
     img: '/product/principal-dashboard.webp',
-    alt: 'Gyanama — principal dashboard',
+    alt: 'Gyanama: principal dashboard',
   },
 ];
 
@@ -68,12 +68,12 @@ const Features = () => {
       <section className="gradient-hero py-20 md:py-28">
         <div className="container mx-auto px-6 text-center max-w-3xl">
           <h1 className="text-display mb-5">
-            Everything a school runs on —{' '}
-            <span className="text-gradient-primary">and an AI that acts on it.</span>
+            Everything a school runs on.{' '}
+            <span className="text-gradient-primary">And an AI that acts on it.</span>
           </h1>
           <p className="text-subtitle max-w-2xl mx-auto">
             Gyanama covers the full operations of a school. But unlike a school management system that
-            just stores the data, Gyanama acts on it — calling parents, flagging students, collecting
+            just stores the data, Gyanama acts on it: calling parents, flagging students, collecting
             fees. Here’s what’s inside.
           </p>
         </div>

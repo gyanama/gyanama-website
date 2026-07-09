@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const SHOTS = [
-  { src: '/product/brain.webp', alt: 'Gyanama app — the Brain view surfacing school insights' },
-  { src: '/product/performance.webp', alt: 'Gyanama app — class and school performance intelligence' },
-  { src: '/product/score-cards.webp', alt: 'Gyanama app — student score cards' },
+  { src: '/product/brain.webp', alt: 'Gyanama app: the Brain view surfacing school insights' },
+  { src: '/product/performance.webp', alt: 'Gyanama app: class and school performance intelligence' },
+  { src: '/product/score-cards.webp', alt: 'Gyanama app: student score cards' },
 ];
 
 export function IntelligenceSection() {
@@ -14,11 +14,11 @@ export function IntelligenceSection() {
         <div className="max-w-2xl mx-auto text-center mb-14">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">The intelligence</span>
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mt-3 mb-4">
-            A live picture of your school’s health — student, class, and school-wide.
+            A live picture of your school’s health: student, class, and school-wide.
           </h2>
           <p className="text-muted-foreground text-lg">
             Gyanama continuously scores academics, attendance and engagement into a health signal
-            for every student, every class, and the school as a whole — so management sees what
+            for every student, every class, and the school as a whole. So management sees what
             deserves attention without reading ten separate reports.
           </p>
         </div>

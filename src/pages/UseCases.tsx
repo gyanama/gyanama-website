@@ -15,25 +15,25 @@ const ROLES = [
     body: 'Instead of opening ten reports, you open Gyanama and it has already surfaced the classes slipping, the fees pending, and the students to worry about. You spend your day acting, not hunting for the problem.',
     scenarios: ['See the school’s health at a glance', 'Know which fees and students need action today', 'Let attendance calls and reminders run themselves'],
     img: '/product/principal-dashboard.webp',
-    alt: 'Gyanama — principal dashboard',
+    alt: 'Gyanama: principal dashboard',
   },
   {
     icon: GraduationCap,
     who: 'Teachers',
     headline: 'Get your evenings back.',
-    body: 'Mark attendance in seconds. Turn your syllabus into assignments in minutes. And when a student starts slipping, Gyanama flags them for you — instead of you finding out at exam time.',
+    body: 'Mark attendance in seconds. Turn your syllabus into assignments in minutes. And when a student starts slipping, Gyanama flags them for you. Instead of you finding out at exam time.',
     scenarios: ['Attendance in seconds, not a register', 'AI-generated assignments & quizzes', 'Struggling students surfaced early'],
     img: '/product/mark-attendance.webp',
-    alt: 'Gyanama — marking attendance',
+    alt: 'Gyanama: marking attendance',
   },
   {
     icon: Users,
     who: 'Parents',
     headline: 'Hear from the school before you have to ask.',
-    body: 'When your child’s attendance drops, you get a call — automatically. Fees, updates and meetings come to you. You stay connected without chasing the school office.',
-    scenarios: ['Automatic calls when attendance drops', 'Fee reminders and updates', 'Parent–teacher meetings, organised'],
+    body: 'When your child’s attendance drops, you get a call. Automatically. Fees, updates and meetings come to you. You stay connected without chasing the school office.',
+    scenarios: ['Automatic calls when attendance drops', 'Fee reminders and updates', 'Parent-teacher meetings, organised'],
     img: '/product/ptm.webp',
-    alt: 'Gyanama — parent-teacher meeting scheduling',
+    alt: 'Gyanama: parent-teacher meeting scheduling',
   },
 ];
 
@@ -51,7 +51,7 @@ const UseCases = () => {
             <span className="text-gradient-primary">Every role, lighter.</span>
           </h1>
           <p className="text-subtitle max-w-2xl mx-auto">
-            Gyanama doesn’t just digitise your school — it takes work off everyone’s plate. Here’s
+            Gyanama doesn’t just digitise your school. It takes work off everyone’s plate. Here’s
             what a normal week looks like for the people who run it.
           </p>
         </div>

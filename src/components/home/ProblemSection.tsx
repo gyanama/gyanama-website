@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ClipboardCheck, IndianRupee, GraduationCap, ArrowRight } from 'lucide-react';
 
 const ROWS = [
-  { icon: ClipboardCheck, stored: 'Attendance is marked', gap: 'but no one calls the parent until a teacher notices the pattern — days later.' },
+  { icon: ClipboardCheck, stored: 'Attendance is marked', gap: 'but no one calls the parent until a teacher notices the pattern. Days later.' },
   { icon: IndianRupee, stored: 'Fees are recorded', gap: 'but staff still chase every pending payment by hand, one call at a time.' },
   { icon: GraduationCap, stored: 'Marks are entered', gap: 'but the student who’s slipping is often found too late to help.' },
 ];
@@ -17,10 +17,10 @@ export function ProblemSection() {
             Your software records everything. Then it waits.
           </h2>
           <p className="text-muted-foreground text-lg">
-            Your school already captures the data — who’s absent, who hasn’t paid, who’s falling
+            Your school already captures the data: who’s absent, who hasn’t paid, who’s falling
             behind. But traditional school software is passive. It stores the information and waits
             for a human to notice, interpret, and act. The data is there. Acting on it is still
-            entirely manual — and things slip through.
+            entirely manual. Things slip through.
           </p>
         </div>
 

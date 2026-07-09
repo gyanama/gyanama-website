@@ -41,7 +41,7 @@ export function RichTextArea({ value, onChange, rows = 3, placeholder, className
     const end = el.selectionEnd;
     const selected = value.slice(start, end) || 'link text';
     const urlInput = window.prompt(
-      'Link URL — use a full https:// URL for external links, or /blog/other-post for internal links:',
+      'Link URL: use a full https:// URL for external links, or /blog/other-post for internal links:',
       'https://',
     );
     if (!urlInput) return;

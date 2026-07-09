@@ -96,7 +96,7 @@ export default function Blog() {
               The GYANAMA <span className="text-gradient-primary">Blog</span>
             </h1>
             <p className="text-subtitle">
-              Insights and guides on running a modern Indian school with AI — attendance,
+              Insights and guides on running a modern Indian school with AI: attendance,
               fees, parent communication, and moving beyond registers and spreadsheets.
             </p>
           </motion.div>
@@ -117,7 +117,7 @@ export default function Blog() {
 
           {!isLoading && !isError && posts.length === 0 && (
             <p className="text-center text-muted-foreground py-20">
-              No posts yet — check back soon.
+              No posts yet. Check back soon.
             </p>
           )}
 

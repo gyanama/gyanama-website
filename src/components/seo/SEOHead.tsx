@@ -27,7 +27,7 @@ export function SEOHead({
   const config = SEO_CONFIG[path];
 
   const pageTitle = title ?? config?.title ?? 'GYANAMA';
-  const pageDesc = description ?? config?.description ?? 'Gyanama is the AI that runs your school — beyond a school management system.';
+  const pageDesc = description ?? config?.description ?? 'Gyanama is the AI that runs your school. Beyond a school management system.';
   const pageCanonical = canonical ?? config?.canonical ?? path;
   const pageOgImage = ogImage ?? '/og-image.png';
   const fullTitle = `${pageTitle} | GYANAMA`;
@@ -61,7 +61,7 @@ export function SEOHead({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={pageDesc} />
       <meta name="twitter:image" content={fullOgImage} />
-      <meta name="twitter:image:alt" content={`${pageTitle} - GYANAMA`} />
+      <meta name="twitter:image:alt" content={`${pageTitle}: GYANAMA`} />
 
       {children}
     </Helmet>

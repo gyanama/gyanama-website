@@ -19,7 +19,7 @@ const FAQS = [
   {
     question: 'Is Gyanama a school management system?',
     answer:
-      'Gyanama does everything a school management system does — attendance, fees, academics, communication — but it goes further. It is an AI operating system for schools: instead of only storing data and waiting, it understands what is happening, flags what needs attention, and takes action automatically.',
+      'Gyanama does everything a school management system does: attendance, fees, academics, communication. But it goes further. It is an AI operating system for schools: instead of only storing data and waiting, it understands what is happening, flags what needs attention, and takes action automatically.',
   },
   {
     question: 'What is the difference between a school ERP and Gyanama?',
@@ -29,7 +29,7 @@ const FAQS = [
   {
     question: 'Can Gyanama replace our current school software?',
     answer:
-      'Yes. Gyanama covers the full operations of a school — attendance, fees, exams, timetables, communication and more — on web, Android and iOS, with an AI layer that acts on the data instead of just storing it.',
+      'Yes. Gyanama covers the full operations of a school (attendance, fees, exams, timetables, communication and more) on web, Android and iOS, with an AI layer that acts on the data instead of just storing it.',
   },
 ];
 
@@ -51,7 +51,7 @@ const Vs = () => {
             <span className="text-gradient-primary">Here’s what to look for instead.</span>
           </h1>
           <p className="text-subtitle max-w-2xl mx-auto">
-            Most school management systems and ERPs are systems of record — they store your data and
+            Most school management systems and ERPs are systems of record. They store your data and
             wait. Gyanama does the same job, then acts on it. Same attendance, fees and marks; a
             completely different result.
           </p>
@@ -86,7 +86,7 @@ const Vs = () => {
             ))}
           </div>
           <p className="text-center text-muted-foreground mt-6">
-            We don’t think traditional school software is bad — it just stops at storing the data.
+            We don’t think traditional school software is bad. It just stops at storing the data.
             Gyanama is built for what happens next.
           </p>
         </div>

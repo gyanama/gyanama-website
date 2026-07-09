@@ -5,8 +5,8 @@ import { ArrowRight, PhoneCall, Activity, Sparkles } from 'lucide-react';
 import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const PHONES = [
-  { src: '/product/dashboard.webp', alt: 'Gyanama app — a teacher’s dashboard showing today’s classes, quick actions and alerts' },
-  { src: '/product/health-score.webp', alt: 'Gyanama app — an AI health score for a student' },
+  { src: '/product/dashboard.webp', alt: 'Gyanama app: a teacher’s dashboard showing today’s classes, quick actions and alerts' },
+  { src: '/product/health-score.webp', alt: 'Gyanama app: an AI health score for a student' },
 ];
 
 export function HeroSection() {
@@ -40,7 +40,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-subtitle max-w-2xl mx-auto"
           >
-            Your school already produces the data — attendance, fees, academics. Gyanama is the
+            Your school already produces the data: attendance, fees, academics. Gyanama is the
             layer that understands what’s happening, flags what needs attention, and takes action.
             It doesn’t just store your data. It acts on it.
           </motion.p>
@@ -88,7 +88,7 @@ export function HeroSection() {
             <PhoneFrame {...PHONES[0]} width={240} eager />
           </div>
           <div className="hidden md:block translate-y-6 rotate-3">
-            <PhoneFrame src="/product/mark-attendance.webp" alt="Gyanama app — marking class attendance" width={240} eager />
+            <PhoneFrame src="/product/mark-attendance.webp" alt="Gyanama app: marking class attendance" width={240} eager />
           </div>
         </motion.div>
       </div>

@@ -4,31 +4,31 @@ import { PhoneFrame } from '@/components/ui/PhoneFrame';
 const SCENARIOS = [
   {
     outcome: 'When a student’s attendance drops, no one has to notice first.',
-    workflow: 'Gyanama spots the pattern and automatically calls the parent — in your school’s voice, in the parent’s language — then logs the outcome.',
+    workflow: 'Gyanama spots the pattern and automatically calls the parent in your school’s voice and the parent’s language, then logs the outcome.',
     tag: 'AI attendance calling',
     img: '/product/absentee-calls.webp',
-    alt: 'Gyanama app — a log of automated absentee calls made to parents',
+    alt: 'Gyanama app: a log of automated absentee calls made to parents',
   },
   {
     outcome: 'Know which students need attention before it’s obvious.',
-    workflow: 'Every student, class and the whole school gets a live health score from academics, attendance and engagement — so the ones slipping surface early.',
+    workflow: 'Every student, class and the whole school gets a live health score from academics, attendance and engagement. The ones slipping surface early.',
     tag: 'Student & school intelligence',
     img: '/product/health-score.webp',
-    alt: 'Gyanama app — an AI health score for an individual student',
+    alt: 'Gyanama app: an AI health score for an individual student',
   },
   {
     outcome: 'Teachers turn their syllabus and books into assignments in minutes.',
-    workflow: 'Point Gyanama at the syllabus; it generates aligned assignments and quizzes, ready to assign — instead of an evening of manual work.',
+    workflow: 'Point Gyanama at the syllabus; it generates aligned assignments and quizzes, ready to assign. It replaces an evening of manual work.',
     tag: 'AI assignment generation',
     img: '/product/assign-homework.webp',
-    alt: 'Gyanama app — a teacher assigning AI-generated homework',
+    alt: 'Gyanama app: a teacher assigning AI-generated homework',
   },
   {
     outcome: 'Fees follow up on themselves.',
     workflow: 'Gyanama runs the reminder calls and tracks who has paid, so staff stop chasing payments one call at a time.',
     tag: 'Automated fee reminders',
     img: '/product/fee-payment.webp',
-    alt: 'Gyanama app — a fee payment and status screen',
+    alt: 'Gyanama app: a fee payment and status screen',
   },
 ];
 
@@ -39,7 +39,7 @@ export function ScenariosSection() {
         <div className="max-w-2xl mx-auto text-center mb-16">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">In practice</span>
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mt-3">
-            What Gyanama notices — and does — in a normal school week.
+            What Gyanama notices and does in a normal school week.
           </h2>
         </div>
 

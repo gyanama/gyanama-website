@@ -9,7 +9,7 @@ const EFFECTIVE_DATE = 'June 12, 2026';
 
 const SECTIONS: Array<{ id: string; label: string }> = [
   { id: 'who-we-are', label: '1. Who We Are' },
-  { id: 'at-a-glance', label: '2. At a Glance — Data Safety Summary' },
+  { id: 'at-a-glance', label: '2. At a Glance: Data Safety Summary' },
   { id: 'information-we-collect', label: '3. Information We Collect' },
   { id: 'how-we-use', label: '4. How We Use Information' },
   { id: 'ai-features', label: '5. AI Features' },

@@ -36,7 +36,7 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img
                 src="/gyanama-logo-256.png"
-                alt="GYANAMA — AI school platform"
+                alt="GYANAMA: AI school platform"
                 width={56}
                 height={56}
                 loading="lazy"
@@ -47,7 +47,7 @@ export function Footer() {
               <span className="text-2xl font-semibold tracking-tight">GYANAMA</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-xs leading-relaxed mb-6">
-              The AI operating system for schools. Gyanama doesn't just store your school's data — it understands what's happening and takes action.
+              The AI operating system for schools. Gyanama doesn't just store your school's data. It understands what's happening and takes action.
             </p>
 
             {/* Address */}

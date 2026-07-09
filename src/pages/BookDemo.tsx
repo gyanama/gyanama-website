@@ -358,7 +358,7 @@ const BookDemo = () => {
             </h1>
             <p className="text-subtitle">
               {SITE_CONFIG.isCalConfigured
-                ? 'Pick a time — a focused 20-minute demo on real screens: the attendance calling, the health scores, and AI assignment generation.'
+                ? 'Pick a time. A focused 20-minute demo on real screens: the attendance calling, the health scores, and AI assignment generation.'
                 : 'Book a focused 20-minute demo on real screens: the attendance calling, the student and school health scores, and AI assignment generation.'}
             </p>
           </AnimatedSection>

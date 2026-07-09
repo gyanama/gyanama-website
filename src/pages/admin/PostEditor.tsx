@@ -161,7 +161,7 @@ export default function PostEditor() {
       }
       localStorage.removeItem(DRAFT_KEY); // saved successfully — drop the draft
       if (publish) {
-        toast.success('Published — site will rebuild in ~1–2 min');
+        toast.success('Published. Site will rebuild in ~1-2 min');
         triggerRebuild().then((r) => {
           if (!r.ok) toast.error(`Couldn't trigger rebuild: ${r.error}`);
         });
