@@ -7,12 +7,29 @@ interface JsonLdProps {
 }
 
 export function JsonLd({ data }: JsonLdProps) {
+  // XSS-safe: escape `<` so a stray </script> in data can't break out of the tag.
+  const json = JSON.stringify(data).replace(/</g, '\\u003c');
   return (
     <Helmet>
-      <script type="application/ld+json">{JSON.stringify(data)}</script>
+      <script type="application/ld+json">{json}</script>
     </Helmet>
   );
 }
+
+const FOUNDERS = [
+  {
+    '@type': 'Person',
+    name: 'Yash Bhardwaj',
+    jobTitle: 'Co-founder, Director & CEO',
+    worksFor: { '@id': `${CANONICAL_DOMAIN}/#organization` },
+  },
+  {
+    '@type': 'Person',
+    name: 'Rachit Mittal',
+    jobTitle: 'Co-founder, Director & CTO',
+    worksFor: { '@id': `${CANONICAL_DOMAIN}/#organization` },
+  },
+];
 
 export function OrganizationSchema() {
   const data = {
@@ -25,7 +42,11 @@ export function OrganizationSchema() {
       '@type': 'ImageObject',
       url: `${CANONICAL_DOMAIN}/gyanama-logo.png`,
     },
-    description: 'AI-powered school management system for Indian K-12 schools',
+    description:
+      'Gyanama is the AI platform that runs Indian K-12 schools — it does not just record attendance, fees and marks, it acts on them: calling parents, flagging at-risk students, and collecting fees.',
+    founder: FOUNDERS,
+    foundingDate: '2025',
+    areaServed: 'IN',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: SITE_CONFIG.phoneRaw,
@@ -33,7 +54,7 @@ export function OrganizationSchema() {
       email: SITE_CONFIG.email,
       availableLanguage: ['English', 'Hindi'],
     },
-    sameAs: [SITE_CONFIG.linkedIn],
+    sameAs: [SITE_CONFIG.linkedIn, SITE_CONFIG.instagram],
   };
   return <JsonLd data={data} />;
 }
@@ -45,7 +66,8 @@ export function WebSiteSchema() {
     '@id': `${CANONICAL_DOMAIN}/#website`,
     name: 'GYANAMA',
     url: CANONICAL_DOMAIN,
-    description: 'AI-powered school management platform for modern education',
+    description:
+      'The AI platform that runs Indian schools — beyond a school management system.',
     inLanguage: 'en-IN',
     publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
   };
@@ -59,17 +81,20 @@ export function SoftwareApplicationSchema() {
     '@id': `${CANONICAL_DOMAIN}/#software`,
     name: 'GYANAMA',
     applicationCategory: 'EducationalApplication',
-    applicationSubCategory: 'School Management System',
+    applicationSubCategory: 'AI School Operations Platform',
     operatingSystem: 'Web, Android, iOS',
     description:
-      'AI-powered school management platform covering attendance, fees, timetable, parent communication, and academic analytics for Indian K-12 schools',
+      'Gyanama is the AI platform for Indian K-12 schools. Beyond a school management system, it acts on school data: automated attendance calls to parents, an AI Brain that flags at-risk students, AI quiz & assignment generation, timetable generation, online fee collection, and daily health scores.',
     featureList: [
-      'AI-powered attendance tracking',
-      'Automated fee management',
-      'Parent communication portal',
-      'Smart timetable generation',
-      'Student performance analytics',
-      'Mobile apps for all roles',
+      'Automated AI attendance calls to parents',
+      'AI Brain — at-risk student and weak-spot detection',
+      'AI quiz & assignment generation from books',
+      'AI timetable generation',
+      'Online fee collection (UPI, cards, cash) with invoices',
+      'Daily school, class and student health scores',
+      'Real-time parent–teacher chat and notifications',
+      'Exams, marks and PDF report cards',
+      'Mobile apps for principals, teachers, parents and students',
     ],
     offers: {
       '@type': 'Offer',
@@ -143,7 +168,7 @@ export function BlogListingSchema() {
     '@id': `${CANONICAL_DOMAIN}/blog#blog`,
     name: 'GYANAMA Blog',
     description:
-      'Insights, guides, and updates on AI-powered school management for Indian K-12 schools.',
+      'Insights and guides on running a modern Indian school with AI — attendance, fees, parent communication, and moving beyond registers and spreadsheets.',
     url: `${CANONICAL_DOMAIN}/blog`,
     publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
   };

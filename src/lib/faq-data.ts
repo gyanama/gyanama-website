@@ -6,39 +6,39 @@ export interface FAQItem {
 
 export const faqData: FAQItem[] = [
   {
-    question: 'Is this CBSE/ICSE compatible?',
+    question: 'Is Gyanama just another school ERP?',
     answer:
-      'Yes, 100%. Our platform is designed to adapt to all major boards including CBSE, ICSE, IB, and State Boards with full compliance.',
-    iconName: 'BookOpen',
-  },
-  {
-    question: 'Is training required to use the platform?',
-    answer:
-      "No, not at all. configuring GYANAMA is very simple. We've designed it to be intuitive - if you can use WhatsApp, you can use our platform.",
+      'No. Traditional school software stores data — attendance, fees, marks — and waits for a staff member to open a dashboard and act. Gyanama is an AI operating system for schools: it understands what’s happening, flags what needs attention, and takes action automatically, like calling a parent when a student’s attendance drops.',
     iconName: 'CheckCircle2',
   },
   {
-    question: 'Does it work on mobile devices?',
+    question: 'How does the AI attendance calling work?',
     answer:
-      '100% mobile compatible. We have dedicated, native apps for Teachers, Parents, and Admins covering iOS and Android devices seamlessly.',
+      'When a student’s attendance drops, Gyanama detects the pattern and automatically places a call to the parent in your school’s voice and the parent’s language, then logs the outcome. No staff member has to notice the problem or make the call first.',
+    iconName: 'Phone',
+  },
+  {
+    question: 'Which boards does Gyanama support?',
+    answer:
+      'Gyanama works across CBSE, ICSE, IB and State Boards. It adapts to your school’s structure, subjects and grading rather than forcing a fixed template.',
+    iconName: 'BookOpen',
+  },
+  {
+    question: 'Do we need training to use it?',
+    answer:
+      'No heavy training. Gyanama is built to be as simple as the apps your staff already use, with dedicated apps for principals, teachers, parents and students on web, Android and iOS.',
     iconName: 'Smartphone',
   },
   {
-    question: 'How safe is our data?',
+    question: 'Is our student data safe?',
     answer:
-      'Data safety is our top most priority. We employ banking-grade encryption and strict access controls. Your data belongs to you, and we ensure it stays that way.',
+      'Yes. Gyanama runs on secure infrastructure with strict access controls and is designed around India’s DPDP Act, 2023. Your school’s data belongs to your school.',
     iconName: 'Database',
   },
   {
-    question: 'Do you provide language support?',
+    question: 'How do we get started?',
     answer:
-      'Yes. GYANAMA is available in multiple regional languages to ensure every staff member and parent feels comfortable using the system.',
+      'Book a 20-minute demo. We’ll walk your team through the attendance calling, the student and school health scores, and AI assignment generation on real screens — then help you set up.',
     iconName: 'Globe',
-  },
-  {
-    question: 'Is there customer support available?',
-    answer:
-      'Absolutely. We provide dedicated account managers and 24/7 support to help you whenever you need it.',
-    iconName: 'Phone',
   },
 ];

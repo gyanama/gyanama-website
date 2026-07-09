@@ -1,0 +1,38 @@
+# Gyanama
+
+> Gyanama is an AI operating system for schools. Unlike traditional school management software that only stores data and waits for staff to act, Gyanama understands what is happening across a school, identifies what needs attention, and takes action automatically — such as calling a parent when a student's attendance drops.
+
+## What Gyanama is
+Gyanama is an AI operating system for K-12 schools in India. Traditional school software (school ERPs, management systems) records attendance, fees and marks and then waits for a human to notice a problem and act. Gyanama adds an intelligent layer that reads school activity, surfaces what needs attention, and initiates action automatically.
+
+## Who it is for
+School owners, principals, directors and senior management of private K-12 schools in India, plus their teachers, parents and students.
+
+## What Gyanama does (outcomes, not just features)
+- Detects attendance drops and automatically calls the parent in the school's voice and the parent's language, then logs the outcome.
+- Automates fee reminder calls and tracks who has paid, so staff stop chasing payments manually.
+- Generates syllabus- and book-aligned assignments and quizzes for teachers in minutes.
+- Produces a live health/intelligence score for every student, every class, and the whole school, surfacing who needs attention early.
+- Surfaces the students and areas that require management attention.
+- Connects management, teachers, students and parents through one intelligent school operating layer.
+
+## How Gyanama is different from a school ERP
+- Traditional software stores attendance; Gyanama notices attendance problems and calls the parent.
+- Traditional software records fees; Gyanama follows up on pending fees automatically.
+- Traditional software holds marks; Gyanama surfaces students who need attention, early.
+- Traditional software shows a dashboard; Gyanama tells you what deserves attention today.
+- Traditional software waits for a command; Gyanama acts on what is happening.
+
+## Platforms
+Web, Android and iOS, with role-based apps for management, teachers, parents and students.
+
+## Company
+Gyanama is built by Yash Bhardwaj (Co-founder, CEO) and Rachit Mittal (Co-founder, CTO). Data handling is designed around India's DPDP Act, 2023.
+
+## Key pages
+- Home: https://gyanama.com/
+- AI systems: https://gyanama.com/ai-systems
+- Features: https://gyanama.com/features
+- Use cases: https://gyanama.com/use-cases
+- Book a demo: https://gyanama.com/book-demo
+- About: https://gyanama.com/about

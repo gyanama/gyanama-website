@@ -12,6 +12,39 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# AI answer engines (GEO) — allow so Gyanama can be cited by AI search
+User-agent: GPTBot
+Allow: /
+Disallow: /adminpanel
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /adminpanel
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /adminpanel
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /adminpanel
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /adminpanel
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /adminpanel
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /adminpanel
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /adminpanel
+
 User-agent: *
 Allow: /
 Disallow: /adminpanel

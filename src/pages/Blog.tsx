@@ -96,8 +96,8 @@ export default function Blog() {
               The GYANAMA <span className="text-gradient-primary">Blog</span>
             </h1>
             <p className="text-subtitle">
-              Insights, guides, and updates on AI-powered school management for modern
-              Indian schools.
+              Insights and guides on running a modern Indian school with AI — attendance,
+              fees, parent communication, and moving beyond registers and spreadsheets.
             </p>
           </motion.div>
 

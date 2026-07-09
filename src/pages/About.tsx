@@ -2,33 +2,14 @@ import { motion } from 'framer-motion';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { GlassCard } from '@/components/ui/GlassCard';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Heart, Target, Lightbulb, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-const values = [
-  {
-    icon: Heart,
-    title: 'Student First',
-    description: 'Every feature exists because it helps a child learn better, stay safer, or thrive more fully.',
-  },
-  {
-    icon: Target,
-    title: 'Clarity Over Complexity',
-    description: 'We believe powerful software should feel simple. If it\'s confusing, we haven\'t finished building it.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'AI With Purpose',
-    description: 'We don\'t add AI for marketing. Every AI feature solves a real problem that humans alone can\'t solve at scale.',
-  },
-  {
-    icon: Users,
-    title: 'Partnership, Not Sales',
-    description: 'We succeed when your school succeeds. That\'s why we measure our impact by outcomes, not invoices.',
-  },
+const BELIEFS = [
+  { title: 'Software should act, not just store', body: 'A school already has the data. The job worth doing is acting on it — that conviction is the whole product.' },
+  { title: 'AI with a purpose', body: 'No AI for marketing’s sake. Every AI feature does something a human can’t do at a school’s scale — like calling every absent child’s parent, every day.' },
+  { title: 'Built from real classrooms', body: 'We started from what we actually saw teachers and principals doing by hand — not from a feature list.' },
 ];
 
 const About = () => {
@@ -37,86 +18,82 @@ const About = () => {
       <SEOHead />
       <OrganizationSchema />
       <BreadcrumbSchema pageName="About" pagePath="/about" />
-      {/* Hero Section */}
-      <section className="section-padding gradient-hero relative overflow-hidden">
-        <div className="container-wide relative z-10">
-          <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <h1 className="text-display mb-6 bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
-              Because every child's day matters.
-            </h1>
-            <p className="text-subtitle">
-              GYANAMA exists to give schools the intelligent infrastructure they need to focus on what matters most: education.
-            </p>
-          </AnimatedSection>
+
+      <section className="gradient-hero py-20 md:py-28">
+        <div className="container mx-auto px-6 text-center max-w-3xl">
+          <h1 className="text-display mb-5">
+            We watched teachers lose their evenings.{' '}
+            <span className="text-gradient-primary">So we built Gyanama.</span>
+          </h1>
+          <p className="text-subtitle max-w-2xl mx-auto">
+            Gyanama is an AI operating system for schools — built by two founders who saw, up close,
+            how much of a school runs on registers, spreadsheets, and manual phone calls.
+          </p>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="section-padding bg-white">
-        <div className="container-wide">
-          <div className="max-w-4xl mx-auto text-center">
-            <AnimatedSection>
-              <h2 className="text-headline mb-6 bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">Our Mission</h2>
-              <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-                Schools today are drowning in administration. Principals spend more time on paperwork than on pedagogy. Teachers are exhausted by tasks that have nothing to do with teaching. And parents feel disconnected from their children's education.
-              </p>
-              <p className="text-lg text-foreground/80 leading-relaxed">
-                We built GYANAMA to change that. By bringing intelligent automation to every corner of school operations, we free educators to do what they do best: educate.
-              </p>
-            </AnimatedSection>
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-6 max-w-2xl">
+          <div className="prose-lg space-y-5 text-lg text-foreground/85 leading-relaxed">
+            <p>
+              It started with a teacher we knew — a friend’s mother. Every evening she’d sit with a
+              paper register, squinting to tally attendance, then hand-build the next day’s
+              assignments, then call the parents of the children who’d been absent for too long. One
+              by one.
+            </p>
+            <p>
+              We saw the same thing in a family member’s school: a principal running the entire place
+              out of Excel — a separate sheet for student details, marks, exams, fees. The data was
+              all there. But acting on it was completely manual, and things slipped through.
+            </p>
+            <p>
+              We’re young — we were still in college when we started. Maybe that’s why the whole thing
+              looked so obviously broken to us. The school already knew who was slipping and who
+              hadn’t paid. The software just sat on it and waited for a human to notice.
+            </p>
+            <p className="font-medium text-foreground">
+              So we built the thing that doesn’t wait. Gyanama understands what’s happening across a
+              school, flags what needs attention, and takes action — so the people running the school
+              can get back to running the school.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="section-padding gradient-soft">
-        <div className="container-wide">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-headline mb-4 bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">What we believe</h2>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {values.map((value, index) => (
-              <AnimatedSection key={value.title} delay={index * 0.1}>
-                <GlassCard hover className="p-8 h-full">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
-                    <value.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">{value.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                </GlassCard>
-              </AnimatedSection>
+      <section className="py-20 gradient-soft">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <h2 className="text-3xl font-semibold tracking-tight text-center mb-10">What we believe</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {BELIEFS.map((b, i) => (
+              <motion.div
+                key={b.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="glass-card rounded-2xl p-6"
+              >
+                <h3 className="text-lg font-semibold mb-2">{b.title}</h3>
+                <p className="text-muted-foreground">{b.body}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section className="section-padding bg-white">
-        <AnimatedSection className="container-narrow text-center">
-          <h2 className="text-headline mb-8 bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">Our Vision</h2>
-          <p className="text-xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
-            We envision a world where every school — regardless of size, budget, or location — has access to the same intelligent infrastructure as the world's best institutions. Where principals lead with clarity, teachers teach with joy, and every parent feels connected to their child's educational journey.
-          </p>
-        </AnimatedSection>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding gradient-hero">
-        <AnimatedSection className="container-narrow text-center">
-          <h2 className="text-headline mb-6">
-            Let's build the future of education together.
+      <section className="py-20 gradient-hero">
+        <div className="container mx-auto px-6 text-center max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">
+            Come see what we built.
           </h2>
-          <p className="text-subtitle mb-10">
-            Book a demo and see how GYANAMA can transform your school.
-          </p>
+          <p className="text-subtitle mb-8">Book a demo and we’ll show you Gyanama on real screens.</p>
           <Link to="/book-demo">
-            <Button variant="hero" size="xl" className="group">
+            <Button variant="hero" size="lg" className="group">
               Book a Demo
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
-        </AnimatedSection>
+        </div>
       </section>
     </PageLayout>
   );

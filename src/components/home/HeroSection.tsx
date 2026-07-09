@@ -1,389 +1,106 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, BookOpen, GraduationCap, School, Pencil, Calculator, Globe, Lightbulb, Users } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { ArrowRight, PhoneCall, Activity, Sparkles } from 'lucide-react';
 
-export function HeroSection() {
-  const isMobile = useIsMobile();
+const PHONES = [
+  { src: '/product/dashboard.webp', alt: 'Gyanama app — a teacher’s dashboard showing today’s classes, quick actions and alerts', className: 'z-20' },
+  { src: '/product/health-score.webp', alt: 'Gyanama app — an AI health score for a student', className: 'z-10' },
+];
+
+function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   return (
-    <>
-      <section className="relative min-h-[90vh] flex items-center gradient-hero overflow-hidden">
-        {/* Enhanced Glassmorphic Background Elements.
-            Skipped entirely on phones — ~14 blurred, infinitely-animating
-            panels here are the heaviest part of the page and tank mobile FPS.
-            The gradient-hero background alone keeps the section looking clean. */}
-        {!isMobile && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Large Glassmorphic Panels */}
-          <motion.div
-            className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full"
-            style={{
-              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(147, 51, 234, 0.1) 100%)',
-              backdropFilter: 'blur(40px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-            }}
-            animate={{
-              y: [0, -30, 0],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          <motion.div
-            className="absolute -bottom-32 -left-32 w-[600px] h-[600px] rounded-full"
-            style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.08) 100%)',
-              backdropFilter: 'blur(60px)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-            }}
-            animate={{
-              y: [0, 25, 0],
-              rotate: [0, -3, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-
-          {/* Floating Glass Cards */}
-          <motion.div
-            className="absolute top-[15%] left-[8%] w-32 h-32 rounded-3xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.25)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.4)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-            }}
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          <motion.div
-            className="absolute bottom-[20%] right-[12%] w-24 h-24 rounded-2xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              backdropFilter: 'blur(15px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            }}
-            animate={{
-              y: [0, 15, 0],
-              rotate: [0, -8, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-          />
-
-          {/* Floating Educational Elements */}
-          <motion.div
-            className="absolute top-[25%] right-[15%] p-4 rounded-2xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.35)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.5)',
-              boxShadow: '0 8px 32px rgba(59, 130, 246, 0.15)',
-            }}
-            animate={{
-              y: [0, -25, 0],
-              x: [0, 10, 0],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 9,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <BookOpen className="w-8 h-8 text-primary/70" />
-          </motion.div>
-
-          <motion.div
-            className="absolute top-[40%] left-[5%] p-4 rounded-2xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.3)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.45)',
-              boxShadow: '0 8px 32px rgba(147, 51, 234, 0.12)',
-            }}
-            animate={{
-              y: [0, 20, 0],
-              x: [0, -8, 0],
-              rotate: [0, -10, 0],
-            }}
-            transition={{
-              duration: 11,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.5,
-            }}
-          >
-            <GraduationCap className="w-8 h-8 text-secondary/70" />
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-[35%] left-[18%] p-3 rounded-xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.28)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.4)',
-              boxShadow: '0 6px 24px rgba(16, 185, 129, 0.1)',
-            }}
-            animate={{
-              y: [0, -15, 0],
-              rotate: [0, 8, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5,
-            }}
-          >
-            <School className="w-6 h-6 text-accent/70" />
-          </motion.div>
-
-          <motion.div
-            className="absolute top-[60%] right-[8%] p-3 rounded-xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.32)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.45)',
-              boxShadow: '0 6px 24px rgba(59, 130, 246, 0.12)',
-            }}
-            animate={{
-              y: [0, 18, 0],
-              x: [0, -5, 0],
-              rotate: [0, -6, 0],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2.5,
-            }}
-          >
-            <Pencil className="w-6 h-6 text-primary/60" />
-          </motion.div>
-
-          <motion.div
-            className="absolute top-[12%] left-[25%] p-3 rounded-xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.25)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
-              boxShadow: '0 6px 24px rgba(147, 51, 234, 0.1)',
-            }}
-            animate={{
-              y: [0, -12, 0],
-              rotate: [0, -5, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 3,
-            }}
-          >
-            <Calculator className="w-5 h-5 text-secondary/60" />
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-[25%] right-[25%] p-4 rounded-2xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.3)',
-              backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.4)',
-              boxShadow: '0 8px 32px rgba(16, 185, 129, 0.12)',
-            }}
-            animate={{
-              y: [0, 22, 0],
-              x: [0, 8, 0],
-              rotate: [0, 7, 0],
-            }}
-            transition={{
-              duration: 9,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-          >
-            <Globe className="w-7 h-7 text-accent/65" />
-          </motion.div>
-
-          <motion.div
-            className="absolute top-[70%] left-[12%] p-3 rounded-xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.28)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.38)',
-              boxShadow: '0 6px 24px rgba(59, 130, 246, 0.1)',
-            }}
-            animate={{
-              y: [0, -18, 0],
-              rotate: [0, 12, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          >
-            <Lightbulb className="w-5 h-5 text-primary/55" />
-          </motion.div>
-
-          <motion.div
-            className="absolute top-[50%] right-[30%] p-3 rounded-xl"
-            style={{
-              background: 'rgba(255, 255, 255, 0.22)',
-              backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              boxShadow: '0 6px 24px rgba(147, 51, 234, 0.08)',
-            }}
-            animate={{
-              y: [0, 14, 0],
-              x: [0, -6, 0],
-              rotate: [0, -8, 0],
-            }}
-            transition={{
-              duration: 11,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.8,
-            }}
-          >
-            <Users className="w-5 h-5 text-secondary/55" />
-          </motion.div>
-
-          {/* Floating orbs with enhanced glow */}
-          <motion.div
-            className="absolute top-20 right-[20%] w-72 h-72 rounded-full bg-primary/10 blur-3xl"
-            animate={{
-              y: [0, -30, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 left-[10%] w-96 h-96 rounded-full bg-secondary/10 blur-3xl"
-            animate={{
-              y: [0, 20, 0],
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 right-[5%] w-48 h-48 rounded-full bg-accent/10 blur-3xl"
-            animate={{
-              y: [0, -20, 0],
-              x: [0, 10, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-          />
-
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 grid-pattern opacity-30" />
-        </div>
-        )}
-
-        <div className="container-wide relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
-            >
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-sm font-medium text-muted-foreground">
-                AI-Powered School Management
-              </span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-display mb-6"
-            >
-              Everything Your School Needs.{' '}
-              <span className="text-gradient-primary">
-                One Powerful Platform.
-              </span>
-            </motion.h1>
-
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-subtitle max-w-2xl mx-auto mb-10"
-            >
-              An AI-powered system that runs your entire school from one clean dashboard — faster, simpler, smarter.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <Link to="/book-demo">
-                <Button variant="hero" size="lg" className="group">
-                  Book a Demo
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-
-            </motion.div>
-
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="mt-12 text-sm text-muted-foreground italic"
-            >
-            </motion.p>
-          </div>
-        </div>
-      </section>
-    </>
+    <div className="relative rounded-[2rem] border border-white/60 bg-white shadow-glass-lg p-1.5 w-[240px]">
+      <div className="rounded-[1.6rem] overflow-hidden bg-muted">
+        <img src={src} alt={alt} width={468} height={1012} loading="eager" className="w-full h-auto block" />
+      </div>
+    </div>
   );
 }
 
+export function HeroSection() {
+  return (
+    <section className="relative gradient-hero overflow-hidden">
+      <div className="container mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 rounded-full glass-card px-4 py-1.5 text-sm font-medium text-primary"
+          >
+            <Sparkles className="w-4 h-4" />
+            AI Operating System for Schools
+          </motion.span>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="text-display mt-6 mb-5"
+          >
+            Give your school a{' '}
+            <span className="text-gradient-primary">brain.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-subtitle max-w-2xl mx-auto"
+          >
+            Your school already produces the data — attendance, fees, academics. Gyanama is the
+            layer that understands what’s happening, flags what needs attention, and takes action.
+            It doesn’t just store your data. It acts on it.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
+            <Link to="/book-demo">
+              <Button variant="hero" size="lg" className="group">
+                Book a Demo
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+            <a href="#problem">
+              <Button variant="outline" size="lg">See how it works</Button>
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground"
+          >
+            <span className="inline-flex items-center gap-1.5"><PhoneCall className="w-4 h-4 text-primary" /> Auto parent calls</span>
+            <span className="inline-flex items-center gap-1.5"><Activity className="w-4 h-4 text-accent" /> Student health scores</span>
+            <span className="inline-flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-secondary" /> Assignments in minutes</span>
+          </motion.div>
+        </div>
+
+        {/* Real product UI — the app's actual screens */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-16 flex items-end justify-center gap-4 md:gap-6"
+        >
+          <div className="hidden sm:block translate-y-6 -rotate-3">
+            <PhoneFrame {...PHONES[1]} />
+          </div>
+          <div className="relative">
+            <PhoneFrame {...PHONES[0]} />
+          </div>
+          <div className="hidden md:block translate-y-6 rotate-3">
+            <PhoneFrame src="/product/mark-attendance.webp" alt="Gyanama app — marking class attendance" />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

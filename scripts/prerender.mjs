@@ -27,6 +27,7 @@ const STATIC_ROUTES = [
   { path: '/ai-systems', changefreq: 'monthly', priority: '0.8' },
   { path: '/features', changefreq: 'monthly', priority: '0.8' },
   { path: '/use-cases', changefreq: 'monthly', priority: '0.7' },
+  { path: '/vs-school-management-software', changefreq: 'monthly', priority: '0.8' },
   { path: '/about', changefreq: 'monthly', priority: '0.6' },
   { path: '/contact-us', changefreq: 'monthly', priority: '0.7' },
   { path: '/book-demo', changefreq: 'monthly', priority: '0.9' },

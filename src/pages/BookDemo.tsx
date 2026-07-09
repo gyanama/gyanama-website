@@ -47,9 +47,9 @@ function isValidPhone(phone: string): boolean {
 }
 
 const benefits = [
-  'See all four AI systems in action',
-  'Personalized demo for your school\'s needs',
-  'Q&A with our education specialists',
+  'See the AI act on real school data',
+  'Tailored to how your school actually runs',
+  'Straight answers from the founders',
   'No commitment required',
 ];
 
@@ -353,12 +353,13 @@ const BookDemo = () => {
         <div className="container-wide relative z-10">
           <AnimatedSection className="max-w-3xl mx-auto text-center">
             <h1 className="text-display mb-6">
-              See GYANAMA in action.
+              See what Gyanama would{' '}
+              <span className="text-gradient-primary">notice in your school.</span>
             </h1>
             <p className="text-subtitle">
               {SITE_CONFIG.isCalConfigured
-                ? 'Pick a time that works for you — schedule your personalized 15-minute demo instantly.'
-                : 'Book a personalized 15-minute demo and discover how AI can transform your school.'}
+                ? 'Pick a time — a focused 20-minute demo on real screens: the attendance calling, the health scores, and AI assignment generation.'
+                : 'Book a focused 20-minute demo on real screens: the attendance calling, the student and school health scores, and AI assignment generation.'}
             </p>
           </AnimatedSection>
         </div>

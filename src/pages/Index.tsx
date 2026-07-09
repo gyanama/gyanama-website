@@ -3,17 +3,15 @@ import { SEOHead } from '@/components/seo/SEOHead';
 import { OrganizationSchema, WebSiteSchema, SoftwareApplicationSchema, FAQPageSchema } from '@/components/seo/JsonLd';
 import { faqData } from '@/lib/faq-data';
 import { HeroSection } from '@/components/home/HeroSection';
-import { RoleSection } from '@/components/home/RoleSection';
-import { DashboardSection } from '@/components/home/DashboardSection';
 import { ProblemSection } from '@/components/home/ProblemSection';
-import { AISystemsOverview } from '@/components/home/AISystemsOverview';
-import { CapabilitiesSection } from '@/components/home/CapabilitiesSection';
-import { WhySection } from '@/components/home/WhySection';
-import { SecuritySection } from '@/components/home/SecuritySection';
-import { PricingSection } from '@/components/home/PricingSection';
+import { ShiftSection } from '@/components/home/ShiftSection';
+import { DifferentiationSection } from '@/components/home/DifferentiationSection';
+import { ScenariosSection } from '@/components/home/ScenariosSection';
+import { IntelligenceSection } from '@/components/home/IntelligenceSection';
+import { RoleSection } from '@/components/home/RoleSection';
+import { TrustSection } from '@/components/home/TrustSection';
 import { FAQSection } from '@/components/home/FAQSection';
 import { CTASection } from '@/components/home/CTASection';
-import { MobileAppSection } from '@/components/home/MobileAppSection';
 
 const Index = () => {
   return (
@@ -23,17 +21,26 @@ const Index = () => {
       <WebSiteSchema />
       <SoftwareApplicationSchema />
       <FAQPageSchema faqs={faqData} />
+
+      {/* 1 What is Gyanama + 5-sec */}
       <HeroSection />
-      <RoleSection />
-      <MobileAppSection />
-      <DashboardSection />
+      {/* 3 Do you understand my problems — the passive-software problem */}
       <ProblemSection />
-      <AISystemsOverview />
-      <CapabilitiesSection />
-      <WhySection />
-      <SecuritySection />
-      <PricingSection />
+      {/* 2 Why care — the shift to an operating layer */}
+      <ShiftSection />
+      {/* 4 How is this different — passive vs Gyanama */}
+      <DifferentiationSection />
+      {/* 5 + 6 What it does + how the AI works — outcome scenarios */}
+      <ScenariosSection />
+      {/* 7 Can I see it — the intelligence layer, real screens */}
+      <IntelligenceSection />
+      {/* Who it's for */}
+      <RoleSection />
+      {/* Trust at pre-customer stage */}
+      <TrustSection />
+      {/* Objections + GEO */}
       <FAQSection />
+      {/* 8 Why book a demo */}
       <CTASection />
     </PageLayout>
   );

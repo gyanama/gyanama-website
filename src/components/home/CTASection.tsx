@@ -51,7 +51,7 @@ export function CTASection() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               viewport={{ once: false }}
             >
-              Ready to transform
+              See what Gyanama would
             </motion.h2>
             <motion.h2
               className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-cyan-200"
@@ -60,7 +60,7 @@ export function CTASection() {
               transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
               viewport={{ once: false }}
             >
-              your school?
+              notice in your school.
             </motion.h2>
           </div>
 
@@ -72,7 +72,8 @@ export function CTASection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: false }}
           >
-            Stay ahead digitally. You can't afford to lose this opportunity to modernize your institution.
+            Book a 20-minute demo. We’ll show the attendance calling, the health scores, and
+            assignment generation — on real screens, with your school in mind.
           </motion.p>
 
           {/* CTA Button - Zoom In */}
@@ -95,7 +96,7 @@ export function CTASection() {
             transition={{ delay: 0.8 }}
             viewport={{ once: false }}
           >
-            <Sparkles size={14} /> Join forward-thinking principals today
+            <Sparkles size={14} /> A 20-minute call · real product, real screens
           </motion.p>
         </div>
       </div>

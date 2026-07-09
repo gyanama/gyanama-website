@@ -26,7 +26,7 @@ export function SEOHead({
   const config = SEO_CONFIG[path];
 
   const pageTitle = title ?? config?.title ?? 'GYANAMA';
-  const pageDesc = description ?? config?.description ?? 'GYANAMA - AI-Powered School Management System for modern education';
+  const pageDesc = description ?? config?.description ?? 'Gyanama is the AI that runs your school — beyond a school management system.';
   const pageCanonical = canonical ?? config?.canonical ?? path;
   const pageOgImage = ogImage ?? '/og-image.png';
   const fullTitle = `${pageTitle} | GYANAMA`;

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, MessageCircle, MapPin } from 'lucide-react';
+import { Linkedin, MessageCircle, MapPin, Instagram } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
 const footerLinks = {
@@ -7,6 +7,7 @@ const footerLinks = {
     { name: 'AI Systems', href: '/ai-systems' },
     { name: 'Features', href: '/features' },
     { name: 'Use Cases', href: '/use-cases' },
+    { name: 'Gyanama vs a school ERP', href: '/vs-school-management-software' },
   ],
   company: [
     { name: 'About', href: '/about' },
@@ -26,7 +27,7 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-3 mb-4">
               <img
                 src="/gyanama-logo-256.png"
-                alt="GYANAMA - AI School Management System"
+                alt="GYANAMA — AI school platform"
                 width={56}
                 height={56}
                 loading="lazy"
@@ -37,7 +38,7 @@ export function Footer() {
               <span className="text-2xl font-semibold tracking-tight">GYANAMA</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-xs leading-relaxed mb-6">
-              Because every child's day matters. An AI-powered system that runs your entire school from one clean dashboard.
+              The AI operating system for schools. Gyanama doesn't just store your school's data — it understands what's happening and takes action.
             </p>
 
             {/* Address */}
@@ -67,6 +68,15 @@ export function Footer() {
                 className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600 hover:bg-green-100 transition-colors"
               >
                 <MessageCircle size={18} />
+              </a>
+              <a
+                href={SITE_CONFIG.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Instagram"
+                className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center text-pink-600 hover:bg-pink-100 transition-colors"
+              >
+                <Instagram size={18} />
               </a>
             </div>
           </div>

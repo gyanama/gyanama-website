@@ -8,65 +8,75 @@ export interface SEOData {
   noindex?: boolean;
 }
 
+// Positioning (locked): Gyanama is AI-first — "your school's brain", not a generic
+// "school ERP / management system". Titles lead AI-first; descriptions capture the
+// high-intent "school management software / ERP" searches via DIFFERENTIATION framing
+// ("beyond a school management system"), never by self-identifying as one.
 export const SEO_CONFIG: Record<string, SEOData> = {
   '/': {
-    title: 'AI-Powered School Management System',
+    title: 'AI School Platform for Indian Schools',
     description:
-      'GYANAMA is an AI-powered school management platform for Indian K-12 schools. Automate attendance, fees, timetables, and parent communication from one dashboard.',
+      'Gyanama is an AI operating system for schools. Beyond a school management system, it understands what’s happening — auto-calling absent students’ parents, flagging at-risk kids, and automating fee reminders.',
     canonical: '/',
   },
   '/ai-systems': {
-    title: 'AI Systems for Schools — Smart Automation',
+    title: 'AI Systems for Schools — Attendance, Brain, Quiz',
     description:
-      'Explore GYANAMA AI systems: automated attendance calling, AI Brain Agent for student insights, AI quiz generation, and school health scoring for Indian schools.',
+      'Gyanama’s AI for schools: automated attendance calls to parents, an AI Brain that flags at-risk students, AI quiz & assignment generation, and daily school health scores.',
     canonical: '/ai-systems',
   },
   '/features': {
-    title: 'Features — School ERP, Attendance & Fee Management',
+    title: 'School Software Features — Attendance, Fees, AI',
     description:
-      'GYANAMA offers 50+ features: attendance automation, fee collection, timetable management, parent communication app, academic analytics, and more for CBSE/ICSE schools.',
+      'Attendance automation, online fee collection (UPI/cards), AI timetables, a parent app, exams & report cards — the school software that acts on your data, not just stores it.',
     canonical: '/features',
   },
   '/use-cases': {
-    title: 'Use Cases — How Schools Use GYANAMA',
+    title: 'How Schools Use Gyanama — Principals & Teachers',
     description:
-      'See how principals, teachers, and parents use GYANAMA to simplify school operations, improve parent trust, and boost academic outcomes across Indian schools.',
+      'How principals and teachers use Gyanama to retire registers and Excel: automated attendance follow-up, fee reminders, and AI that flags the students who need attention.',
     canonical: '/use-cases',
   },
   '/about': {
-    title: 'About GYANAMA — Our Mission for Indian Education',
+    title: 'About Gyanama — Built by Founders Who Saw It',
     description:
-      'Learn about the team behind GYANAMA — building AI-first school management software to transform how Indian K-12 schools operate and communicate with parents.',
+      'Gyanama is built by Yash Bhardwaj and Rachit Mittal to give Indian schools an AI brain — after watching teachers drown in paper registers, fee chasing, and Excel sheets.',
     canonical: '/about',
   },
   '/contact-us': {
-    title: 'Contact GYANAMA — Get in Touch',
+    title: 'Contact Gyanama — Talk to the Team',
     description:
-      'Have questions about GYANAMA school management system? Contact our team via email, WhatsApp, or LinkedIn. We respond within 24 hours.',
+      'Questions about bringing Gyanama’s AI to your school? Reach the team by email, WhatsApp, or LinkedIn — we reply within 24 hours.',
     canonical: '/contact-us',
   },
   '/book-demo': {
-    title: 'Book a Free Demo — GYANAMA School Management',
+    title: 'Book a Free Gyanama Demo',
     description:
-      'Book a free demo of GYANAMA and see how AI-powered school management can save your staff hours every week. Setup takes less than a day.',
+      'Book a free demo and see Gyanama’s AI run a real school — automated attendance calls, online fee collection, and at-risk student alerts, live in one call.',
     canonical: '/book-demo',
   },
   '/blog': {
-    title: 'Blog — School Management Insights & Updates',
+    title: 'Gyanama Blog — Running Smarter Schools',
     description:
-      'Insights, guides, and updates from GYANAMA on AI-powered school management, attendance, fees, and running modern Indian K-12 schools.',
+      'Guides and insights on running a modern Indian school with AI — attendance, fees, parent communication, and moving beyond registers and spreadsheets.',
     canonical: '/blog',
+  },
+  '/vs-school-management-software': {
+    title: 'Gyanama vs a School Management System',
+    description:
+      'Looking for a school management system or ERP? See how Gyanama differs — it doesn’t just record attendance, fees and marks, it acts on them: calls parents, flags risks, collects fees.',
+    canonical: '/vs-school-management-software',
   },
   '/privacy-policy': {
     title: 'Privacy Policy',
     description:
-      'GYANAMA privacy policy — how we collect, use, and protect your data. Committed to safeguarding student and school information.',
+      'Gyanama privacy policy — how we collect, use, and protect your data. Committed to safeguarding every student and school record.',
     canonical: '/privacy-policy',
   },
   '/terms-of-service': {
     title: 'Terms of Service',
     description:
-      'GYANAMA terms of service — the agreement governing use of our AI-powered school management platform.',
+      'Gyanama terms of service — the agreement governing use of our AI school platform.',
     canonical: '/terms-of-service',
   },
 };

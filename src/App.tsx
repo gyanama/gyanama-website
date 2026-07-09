@@ -26,6 +26,7 @@ const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BookDemo = lazy(() => import("./pages/BookDemo"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const VsSchoolManagementSoftware = lazy(() => import("./pages/VsSchoolManagementSoftware"));
 // Admin panel is a self-contained app (auth + nested routes). Lazy-loaded so
 // none of its code (or Supabase auth) ships in the public bundle.
 const AdminApp = lazy(() => import("./pages/admin/AdminApp"));
@@ -99,6 +100,7 @@ const App = () => {
                     <Route path="/book-demo" element={<BookDemo />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:slug" element={<BlogPost />} />
+                    <Route path="/vs-school-management-software" element={<VsSchoolManagementSoftware />} />
                     {/* Admin panel — noindex, never prerendered, excluded from sitemap */}
                     <Route path="/adminpanel/*" element={<AdminApp />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />

@@ -33,7 +33,7 @@ const ContactUs = () => {
                                 Get in <span className="text-blue-600">Touch</span>
                             </h1>
                             <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                                We're here to help you transform your school. Reach out to us directly or book a demo to see GYANAMA in action.
+                                Questions about bringing an AI operating system to your school? Reach the founders directly, or book a demo to see Gyanama on real screens.
                             </p>
                         </motion.div>
 
