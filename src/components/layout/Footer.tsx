@@ -17,6 +17,15 @@ const footerLinks = {
     { name: 'Features', href: '/features' },
     { name: 'Use Cases', href: '/use-cases' },
     { name: 'Gyanama vs a school ERP', href: '/vs-school-management-software' },
+    { name: 'School ERP: the honest guide', href: '/school-erp' },
+  ],
+  solutions: [
+    { name: 'AI for schools', href: '/ai-for-schools' },
+    { name: 'Voice agent for schools', href: '/voice-agent-for-schools' },
+    { name: 'Fee management system', href: '/fee-management-system' },
+    { name: 'At-risk student detection', href: '/at-risk-student-detection' },
+    { name: 'AI timetable generator', href: '/ai-timetable-generator' },
+    { name: 'AI assignment generator', href: '/ai-assignment-generator' },
   ],
   company: [
     { name: 'About', href: '/about' },
@@ -30,7 +39,7 @@ export function Footer() {
   return (
     <footer aria-label="Footer navigation" className="border-t border-border/50 bg-white/50 backdrop-blur-sm">
       <div className="container-wide py-16 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
           {/* Brand */}
           <div className="col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4">
@@ -128,6 +137,23 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-4">Product</h4>
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solutions Links */}
+          <div>
+            <h4 className="font-semibold text-sm mb-4">Solutions</h4>
+            <ul className="space-y-3">
+              {footerLinks.solutions.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}

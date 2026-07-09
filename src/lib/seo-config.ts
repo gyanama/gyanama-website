@@ -67,6 +67,48 @@ export const SEO_CONFIG: Record<string, SEOData> = {
       'Looking for a school management system or ERP? See how Gyanama differs. It doesn’t just record attendance, fees and marks, it acts on them: calls parents, flags risks, collects fees.',
     canonical: '/vs-school-management-software',
   },
+  '/school-erp': {
+    title: 'School ERP: What It Gets You & What It Misses',
+    description:
+      'The honest guide to school ERP software in India: what a system of record does well, the follow-up work it leaves behind, and what to look for in 2026 before you decide.',
+    canonical: '/school-erp',
+  },
+  '/fee-management-system': {
+    title: 'Fee Management System That Does the Chasing',
+    description:
+      'School fee management with UPI & card collection, instant receipts, a live collection dashboard, and automated voice reminder calls to parents with pending fees.',
+    canonical: '/fee-management-system',
+  },
+  '/voice-agent-for-schools': {
+    title: 'Voice Agent for Schools: AI Calls to Parents',
+    description:
+      'Gyanama’s AI voice agent calls parents about absences and pending fees from your school’s live data, then logs every outcome. No lists to upload, no scripts to write.',
+    canonical: '/voice-agent-for-schools',
+  },
+  '/ai-for-schools': {
+    title: 'AI for Schools: Automation That Actually Acts',
+    description:
+      'What AI automation looks like in a real Indian school: attendance calls to parents, at-risk student detection, assignment & timetable generation, daily health scores.',
+    canonical: '/ai-for-schools',
+  },
+  '/at-risk-student-detection': {
+    title: 'At-Risk Student Detection: Flag Kids Early',
+    description:
+      'Gyanama’s Brain reads attendance and marks together to flag students slipping behind, weeks before the report card, with the evidence attached for teachers.',
+    canonical: '/at-risk-student-detection',
+  },
+  '/ai-timetable-generator': {
+    title: 'AI Timetable Generator for Schools',
+    description:
+      'Generate a clash-free school timetable in minutes: teacher availability, subject loads and overlap rules solved automatically, editable by hand, published to apps.',
+    canonical: '/ai-timetable-generator',
+  },
+  '/ai-assignment-generator': {
+    title: 'AI Assignment Generator from Your Own Books',
+    description:
+      'Generate syllabus-aligned assignments and quizzes from the textbooks your school teaches: questions, instructions and marking scheme as a ready PDF, in minutes.',
+    canonical: '/ai-assignment-generator',
+  },
   '/privacy-policy': {
     title: 'Privacy Policy',
     description:

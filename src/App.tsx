@@ -27,6 +27,13 @@ const BookDemo = lazy(() => import("./pages/BookDemo"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const VsSchoolManagementSoftware = lazy(() => import("./pages/VsSchoolManagementSoftware"));
+const SchoolErp = lazy(() => import("./pages/SchoolErp"));
+const FeeManagementSystem = lazy(() => import("./pages/FeeManagementSystem"));
+const VoiceAgentForSchools = lazy(() => import("./pages/VoiceAgentForSchools"));
+const AiForSchools = lazy(() => import("./pages/AiForSchools"));
+const AtRiskStudentDetection = lazy(() => import("./pages/AtRiskStudentDetection"));
+const AiTimetableGenerator = lazy(() => import("./pages/AiTimetableGenerator"));
+const AiAssignmentGenerator = lazy(() => import("./pages/AiAssignmentGenerator"));
 // Admin panel is a self-contained app (auth + nested routes). Lazy-loaded so
 // none of its code (or Supabase auth) ships in the public bundle.
 const AdminApp = lazy(() => import("./pages/admin/AdminApp"));
@@ -101,6 +108,13 @@ const App = () => {
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:slug" element={<BlogPost />} />
                     <Route path="/vs-school-management-software" element={<VsSchoolManagementSoftware />} />
+                    <Route path="/school-erp" element={<SchoolErp />} />
+                    <Route path="/fee-management-system" element={<FeeManagementSystem />} />
+                    <Route path="/voice-agent-for-schools" element={<VoiceAgentForSchools />} />
+                    <Route path="/ai-for-schools" element={<AiForSchools />} />
+                    <Route path="/at-risk-student-detection" element={<AtRiskStudentDetection />} />
+                    <Route path="/ai-timetable-generator" element={<AiTimetableGenerator />} />
+                    <Route path="/ai-assignment-generator" element={<AiAssignmentGenerator />} />
                     {/* Admin panel — noindex, never prerendered, excluded from sitemap */}
                     <Route path="/adminpanel/*" element={<AdminApp />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
