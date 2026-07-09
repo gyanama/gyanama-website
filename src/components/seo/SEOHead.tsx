@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { CANONICAL_DOMAIN, SEO_CONFIG } from '@/lib/seo-config';
+import { SITE_CONFIG } from '@/lib/constants';
 import { useLocation } from 'react-router-dom';
 
 interface SEOHeadProps {
@@ -55,6 +56,8 @@ export function SEOHead({
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={SITE_CONFIG.twitterHandle} />
+      <meta name="twitter:creator" content={SITE_CONFIG.twitterHandle} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={pageDesc} />
       <meta name="twitter:image" content={fullOgImage} />

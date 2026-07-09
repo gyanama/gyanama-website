@@ -2,21 +2,12 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, PhoneCall, Activity, Sparkles } from 'lucide-react';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const PHONES = [
-  { src: '/product/dashboard.webp', alt: 'Gyanama app — a teacher’s dashboard showing today’s classes, quick actions and alerts', className: 'z-20' },
-  { src: '/product/health-score.webp', alt: 'Gyanama app — an AI health score for a student', className: 'z-10' },
+  { src: '/product/dashboard.webp', alt: 'Gyanama app — a teacher’s dashboard showing today’s classes, quick actions and alerts' },
+  { src: '/product/health-score.webp', alt: 'Gyanama app — an AI health score for a student' },
 ];
-
-function PhoneFrame({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="relative rounded-[2rem] border border-white/60 bg-white shadow-glass-lg p-1.5 w-[240px]">
-      <div className="rounded-[1.6rem] overflow-hidden bg-muted">
-        <img src={src} alt={alt} width={468} height={1012} loading="eager" className="w-full h-auto block" />
-      </div>
-    </div>
-  );
-}
 
 export function HeroSection() {
   return (
@@ -91,13 +82,13 @@ export function HeroSection() {
           className="mt-16 flex items-end justify-center gap-4 md:gap-6"
         >
           <div className="hidden sm:block translate-y-6 -rotate-3">
-            <PhoneFrame {...PHONES[1]} />
+            <PhoneFrame {...PHONES[1]} width={240} eager />
           </div>
           <div className="relative">
-            <PhoneFrame {...PHONES[0]} />
+            <PhoneFrame {...PHONES[0]} width={240} eager />
           </div>
           <div className="hidden md:block translate-y-6 rotate-3">
-            <PhoneFrame src="/product/mark-attendance.webp" alt="Gyanama app — marking class attendance" />
+            <PhoneFrame src="/product/mark-attendance.webp" alt="Gyanama app — marking class attendance" width={240} eager />
           </div>
         </motion.div>
       </div>

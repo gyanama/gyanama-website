@@ -1,4 +1,5 @@
 import { PageLayout } from '@/components/layout/PageLayout';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { motion } from 'framer-motion';
@@ -104,11 +105,7 @@ const Features = () => {
                 </ul>
               </div>
               <div className="shrink-0">
-                <div className="rounded-[2rem] border border-white/60 bg-white shadow-glass-lg p-1.5 w-[220px]">
-                  <div className="rounded-[1.6rem] overflow-hidden bg-muted">
-                    <img src={b.img} alt={b.alt} width={468} height={1012} loading="lazy" className="w-full h-auto block" />
-                  </div>
-                </div>
+                <PhoneFrame src={b.img} alt={b.alt} width={220} />
               </div>
             </motion.div>
           ))}

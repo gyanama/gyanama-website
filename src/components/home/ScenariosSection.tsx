@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const SCENARIOS = [
   {
@@ -60,11 +61,7 @@ export function ScenariosSection() {
                 <p className="text-muted-foreground text-lg">{s.workflow}</p>
               </div>
               <div className="shrink-0">
-                <div className="rounded-[2rem] border border-white/60 bg-white shadow-glass-lg p-1.5 w-[220px]">
-                  <div className="rounded-[1.6rem] overflow-hidden bg-muted">
-                    <img src={s.img} alt={s.alt} width={468} height={1012} loading="lazy" className="w-full h-auto block" />
-                  </div>
-                </div>
+                <PhoneFrame src={s.img} alt={s.alt} width={220} />
               </div>
             </motion.div>
           ))}

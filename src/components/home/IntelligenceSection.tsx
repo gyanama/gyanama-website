@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 
 const SHOTS = [
   { src: '/product/brain.webp', alt: 'Gyanama app — the Brain view surfacing school insights' },
@@ -30,11 +31,8 @@ export function IntelligenceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-[2rem] border border-white/60 bg-white shadow-glass-lg p-1.5 w-[210px]"
             >
-              <div className="rounded-[1.6rem] overflow-hidden bg-muted">
-                <img src={s.src} alt={s.alt} width={468} height={1012} loading="lazy" className="w-full h-auto block" />
-              </div>
+              <PhoneFrame src={s.src} alt={s.alt} width={210} />
             </motion.div>
           ))}
         </div>

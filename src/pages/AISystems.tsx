@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PhoneFrame } from '@/components/ui/PhoneFrame';
 import { SEOHead } from '@/components/seo/SEOHead';
 import { OrganizationSchema, BreadcrumbSchema } from '@/components/seo/JsonLd';
 import { PageLayout } from '@/components/layout/PageLayout';
@@ -94,11 +95,7 @@ const AISystems = () => {
                 </ul>
               </div>
               <div className="shrink-0">
-                <div className="rounded-[2rem] border border-white/60 bg-white shadow-glass-lg p-1.5 w-[230px]">
-                  <div className="rounded-[1.6rem] overflow-hidden bg-muted">
-                    <img src={s.img} alt={s.alt} width={468} height={1012} loading="lazy" className="w-full h-auto block" />
-                  </div>
-                </div>
+                <PhoneFrame src={s.img} alt={s.alt} width={230} />
               </div>
             </motion.div>
           ))}

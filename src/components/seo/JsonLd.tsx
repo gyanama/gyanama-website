@@ -54,7 +54,7 @@ export function OrganizationSchema() {
       email: SITE_CONFIG.email,
       availableLanguage: ['English', 'Hindi'],
     },
-    sameAs: [SITE_CONFIG.linkedIn, SITE_CONFIG.instagram],
+    sameAs: [SITE_CONFIG.linkedIn, SITE_CONFIG.instagram, SITE_CONFIG.twitter],
   };
   return <JsonLd data={data} />;
 }

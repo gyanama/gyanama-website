@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, MessageCircle, MapPin, Instagram } from 'lucide-react';
+import { Linkedin, MessageCircle, MapPin, Instagram, Twitter } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
 const footerLinks = {
@@ -77,6 +77,15 @@ export function Footer() {
                 className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center text-pink-600 hover:bg-pink-100 transition-colors"
               >
                 <Instagram size={18} />
+              </a>
+              <a
+                href={SITE_CONFIG.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on X"
+                className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800 hover:bg-slate-200 transition-colors"
+              >
+                <Twitter size={18} />
               </a>
             </div>
           </div>
