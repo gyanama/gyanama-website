@@ -223,9 +223,14 @@ async function renderRoute(launchOptions, port, route) {
   // 'networkidle' here because PageLayout's autoplay intro video can keep the
   // network busy and never settle — the selector is the reliable signal.
   const isBlogPost = route.startsWith('/blog/');
-  const readySelector = isBlogPost ? 'article[data-post], [data-blog-404]' : 'main';
+  const isBlogIndex = route === '/blog';
+  const readySelector = isBlogPost
+    ? 'article[data-post], [data-blog-404]'
+    : isBlogIndex
+      ? '[data-blog-list], [data-blog-empty], [data-blog-error]'
+      : 'main';
   // Give blog posts a touch longer for the data fetch + markdown render.
-  const settleMs = isBlogPost ? 2500 : 1500;
+  const settleMs = isBlogPost || isBlogIndex ? 2500 : 1500;
 
   // Launch a dedicated browser per route. Slower but resilient — a crash on
   // one route can't take down subsequent renders, which @sparticuz/chromium

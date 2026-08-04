@@ -110,20 +110,20 @@ export default function Blog() {
           )}
 
           {isError && (
-            <p className="text-center text-muted-foreground py-20">
+            <p className="text-center text-muted-foreground py-20" data-blog-error>
               We couldn't load posts right now. Please try again later.
             </p>
           )}
 
           {!isLoading && !isError && posts.length === 0 && (
-            <p className="text-center text-muted-foreground py-20">
+            <p className="text-center text-muted-foreground py-20" data-blog-empty>
               No posts yet. Check back soon.
             </p>
           )}
 
           {posts.length > 0 && (
             <>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" data-blog-list>
                 {posts.map((post) => (
                   <PostCard key={post.id} post={post} />
                 ))}
