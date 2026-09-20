@@ -81,7 +81,7 @@ export function Footer() {
               <a
                 href={SITE_CONFIG.instagram}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 aria-label="Follow us on Instagram"
                 className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center text-pink-600 hover:bg-pink-100 transition-colors"
               >
@@ -90,7 +90,7 @@ export function Footer() {
               <a
                 href={SITE_CONFIG.facebook}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 aria-label="Follow us on Facebook"
                 className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 hover:bg-blue-100 transition-colors"
               >
