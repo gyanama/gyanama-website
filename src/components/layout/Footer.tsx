@@ -99,7 +99,7 @@ export function Footer() {
               <a
                 href={SITE_CONFIG.twitter}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 aria-label="Follow us on X"
                 className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-900 hover:bg-neutral-200 transition-colors"
               >
