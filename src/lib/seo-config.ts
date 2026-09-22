@@ -22,7 +22,7 @@ export const SEO_CONFIG: Record<string, SEOData> = {
   '/ai-systems': {
     title: 'AI Systems for Schools: Attendance, Brain, Quiz',
     description:
-      'Gyanama’s AI for schools: automated attendance calls to parents, an AI Brain that flags at-risk students, AI quiz & assignment generation, and daily school health scores.',
+      'Gyanama AI for schools: automated attendance calls to parents, an AI Brain that flags at-risk students, AI quiz and assignment generation, and health scores.',
     canonical: '/ai-systems',
   },
   '/features': {
