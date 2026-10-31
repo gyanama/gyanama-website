@@ -1,26 +1,25 @@
-import { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+'use client';
+
+import { useEffect, type ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from './AuthProvider';
 
-/**
- * Guards admin routes. While the session resolves, shows a spinner. If there is
- * no session, or the user is not in the `admins` allowlist, redirects to login.
- * (RLS independently enforces this server-side — this is just UX.)
- */
 export function ProtectedRoute({ children }: { children: ReactNode }) {
   const { session, isAdmin, loading } = useAuth();
+  const router = useRouter();
+  const allowed = !!session && isAdmin;
 
-  if (loading) {
+  useEffect(() => {
+    if (!loading && !allowed) router.replace('/adminpanel/login');
+  }, [loading, allowed, router]);
+
+  if (loading || !allowed) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
       </div>
     );
-  }
-
-  if (!session || !isAdmin) {
-    return <Navigate to="/adminpanel/login" replace />;
   }
 
   return <>{children}</>;

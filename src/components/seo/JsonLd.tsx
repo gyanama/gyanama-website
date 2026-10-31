@@ -1,130 +1,160 @@
-import { Helmet } from 'react-helmet-async';
-import { CANONICAL_DOMAIN } from '@/lib/seo-config';
-import { SITE_CONFIG } from '@/lib/constants';
+import { SITE, SITE_URL } from '@/lib/site';
 
-interface JsonLdProps {
-  data: Record<string, unknown> | Record<string, unknown>[];
+type Json = Record<string, unknown>;
+
+export function JsonLd({ data }: { data: Json | Json[] }) {
+  const json = JSON.stringify(data).replace(/</g, '\\u003c');
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }
 
-export function JsonLd({ data }: JsonLdProps) {
-  // XSS-safe: escape `<` so a stray </script> in data can't break out of the tag.
-  const json = JSON.stringify(data).replace(/</g, '\\u003c');
+const ORG_ID = `${SITE_URL}/#organization`;
+
+export function OrganizationSchema() {
   return (
-    <Helmet>
-      <script type="application/ld+json">{json}</script>
-    </Helmet>
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        '@id': ORG_ID,
+        name: SITE.name,
+        legalName: SITE.legalName,
+        url: SITE_URL,
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/gyanama-logo.png` },
+        description:
+          'Gyanama is a school app for Indian K-12 schools. It runs attendance, fees, homework and exams, and its AI calls parents when attendance keeps slipping.',
+        address: { '@type': 'PostalAddress', ...SITE.address },
+        founder: SITE.founders.map((f) => ({ '@type': 'Person', name: f.name, jobTitle: f.jobTitle, worksFor: { '@id': ORG_ID } })),
+        foundingDate: '2025',
+        areaServed: 'IN',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: SITE.phoneRaw,
+          contactType: 'sales',
+          email: SITE.email,
+          availableLanguage: ['English', 'Hindi'],
+        },
+        sameAs: [SITE.linkedIn, SITE.instagram, SITE.twitter, SITE.facebook],
+      }}
+    />
   );
 }
 
-const FOUNDERS = [
-  {
-    '@type': 'Person',
-    name: 'Yash Bhardwaj',
-    jobTitle: 'Co-founder, Director & CEO',
-    worksFor: { '@id': `${CANONICAL_DOMAIN}/#organization` },
-  },
-  {
-    '@type': 'Person',
-    name: 'Rachit Mittal',
-    jobTitle: 'Co-founder, Director & CTO',
-    worksFor: { '@id': `${CANONICAL_DOMAIN}/#organization` },
-  },
+export function WebSiteSchema() {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}/#website`,
+        name: SITE.name,
+        url: SITE_URL,
+        description: 'Gyanama, the school app for Indian K-12 schools.',
+        inLanguage: 'en-IN',
+        publisher: { '@id': ORG_ID },
+      }}
+    />
+  );
+}
+
+export const FEATURE_LIST = [
+  'AI calls to parents when attendance keeps slipping',
+  'Reminder calls for overdue fees',
+  'Nightly Student Progress Score with reasons',
+  'Projected final result for every student',
+  'Test papers and answer keys from the school textbook or NCERT',
+  'Clash-free timetable drafts',
+  'Attendance register with PDF and Excel export',
+  'Exams, marks and PDF report cards',
+  'Homework, doubts, PTM requests, leave and gate pass',
+  'Announcements and teacher to family chat',
 ];
 
-export function OrganizationSchema() {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${CANONICAL_DOMAIN}/#organization`,
-    name: 'GYANAMA',
-    url: CANONICAL_DOMAIN,
-    logo: {
-      '@type': 'ImageObject',
-      url: `${CANONICAL_DOMAIN}/gyanama-logo.png`,
-    },
-    description:
-      'Gyanama is the AI platform that runs Indian K-12 schools. It does not just record attendance, fees and marks, it acts on them: calling parents, flagging at-risk students, and collecting fees.',
-    founder: FOUNDERS,
-    foundingDate: '2025',
-    areaServed: 'IN',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: SITE_CONFIG.phoneRaw,
-      contactType: 'sales',
-      email: SITE_CONFIG.email,
-      availableLanguage: ['English', 'Hindi'],
-    },
-    sameAs: [SITE_CONFIG.linkedIn, SITE_CONFIG.instagram, SITE_CONFIG.twitter],
-  };
-  return <JsonLd data={data} />;
-}
-
-export function WebSiteSchema() {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${CANONICAL_DOMAIN}/#website`,
-    name: 'GYANAMA',
-    url: CANONICAL_DOMAIN,
-    description:
-      'The AI platform that runs Indian schools. Beyond a school management system.',
-    inLanguage: 'en-IN',
-    publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
-  };
-  return <JsonLd data={data} />;
-}
-
 export function SoftwareApplicationSchema() {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    '@id': `${CANONICAL_DOMAIN}/#software`,
-    name: 'GYANAMA',
-    applicationCategory: 'EducationalApplication',
-    applicationSubCategory: 'AI School Operations Platform',
-    operatingSystem: 'Web, Android, iOS',
-    description:
-      'Gyanama is the AI platform for Indian K-12 schools. Beyond a school management system, it acts on school data: automated attendance calls to parents, an AI Brain that flags at-risk students, AI quiz & assignment generation, timetable generation, online fee collection, and daily health scores.',
-    featureList: [
-      'Automated AI attendance calls to parents',
-      'AI Brain: at-risk student and weak-spot detection',
-      'AI quiz & assignment generation from books',
-      'AI timetable generation',
-      'Online fee collection (UPI, cards, cash) with invoices',
-      'Daily school, class and student health scores',
-      'Real-time parent-teacher chat and notifications',
-      'Exams, marks and PDF report cards',
-      'Mobile apps for principals, teachers, parents and students',
-    ],
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'INR',
-      availability: 'https://schema.org/InStock',
-      url: `${CANONICAL_DOMAIN}/book-demo`,
-    },
-    publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
-    audience: {
-      '@type': 'EducationalAudience',
-      educationalRole: ['school administrator', 'teacher', 'parent', 'student'],
-    },
-  };
-  return <JsonLd data={data} />;
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        '@id': `${SITE_URL}/#software`,
+        name: SITE.name,
+        applicationCategory: 'EducationalApplication',
+        operatingSystem: 'Web, Android, iOS',
+        description: 'A school app for Indian K-12 schools: attendance, fees, homework, exams and AI follow-up calls to parents.',
+        featureList: FEATURE_LIST,
+        publisher: { '@id': ORG_ID },
+        audience: { '@type': 'EducationalAudience', educationalRole: ['school administrator', 'teacher', 'parent', 'student'] },
+      }}
+    />
+  );
 }
 
-export function FAQPageSchema({ faqs }: { faqs: { question: string; answer: string }[] }) {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
-  return <JsonLd data={data} />;
+export function MobileApplicationSchema() {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'MobileApplication',
+        '@id': `${SITE_URL}/school-app#app`,
+        name: SITE.name,
+        applicationCategory: 'EducationalApplication',
+        operatingSystem: 'Android 7.0 or later, iOS 13 or later',
+        installUrl: [SITE.playStore, SITE.appStore],
+        downloadUrl: [SITE.playStore, SITE.appStore],
+        featureList: FEATURE_LIST,
+        publisher: { '@id': ORG_ID },
+      }}
+    />
+  );
+}
+
+export type Faq = { q: string; a: string };
+
+export function FAQPageSchema({ faqs }: { faqs: Faq[] }) {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      }}
+    />
+  );
+}
+
+export function BreadcrumbSchema({ items }: { items: { name: string; path: string }[] }) {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [{ name: 'Home', path: '/' }, ...items].map((it, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: it.name,
+          item: it.path === '/' ? SITE_URL : `${SITE_URL}${it.path}`,
+        })),
+      }}
+    />
+  );
+}
+
+export function WebPageSchema({ path, name, description, dateModified }: { path: string; name: string; description: string; dateModified: string }) {
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        '@id': `${SITE_URL}${path}#webpage`,
+        url: `${SITE_URL}${path}`,
+        name,
+        description,
+        inLanguage: 'en-IN',
+        dateModified,
+        isPartOf: { '@id': `${SITE_URL}/#website` },
+        publisher: { '@id': ORG_ID },
+      }}
+    />
+  );
 }
 
 export function ArticleSchema({
@@ -144,55 +174,38 @@ export function ArticleSchema({
   dateModified?: string | null;
   author?: string | null;
 }) {
-  const url = `${CANONICAL_DOMAIN}/blog/${slug}`;
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    headline: title,
-    description,
-    image: coverImage || `${CANONICAL_DOMAIN}/og-image.png`,
-    datePublished: datePublished || undefined,
-    dateModified: dateModified || datePublished || undefined,
-    author: { '@type': author ? 'Person' : 'Organization', name: author || 'GYANAMA' },
-    publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
-    url,
-  };
-  return <JsonLd data={data} />;
+  const url = `${SITE_URL}/blog/${slug}`;
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        headline: title,
+        description,
+        image: coverImage || `${SITE_URL}/og-image.png`,
+        datePublished: datePublished || undefined,
+        dateModified: dateModified || datePublished || undefined,
+        author: { '@type': author ? 'Person' : 'Organization', name: author || SITE.name },
+        publisher: { '@id': ORG_ID },
+        url,
+      }}
+    />
+  );
 }
 
 export function BlogListingSchema() {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'Blog',
-    '@id': `${CANONICAL_DOMAIN}/blog#blog`,
-    name: 'GYANAMA Blog',
-    description:
-      'Insights and guides on running a modern Indian school with AI: attendance, fees, parent communication, and moving beyond registers and spreadsheets.',
-    url: `${CANONICAL_DOMAIN}/blog`,
-    publisher: { '@id': `${CANONICAL_DOMAIN}/#organization` },
-  };
-  return <JsonLd data={data} />;
-}
-
-export function BreadcrumbSchema({ pageName, pagePath }: { pageName: string; pagePath: string }) {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: CANONICAL_DOMAIN,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: pageName,
-        item: `${CANONICAL_DOMAIN}${pagePath}`,
-      },
-    ],
-  };
-  return <JsonLd data={data} />;
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        '@id': `${SITE_URL}/blog#blog`,
+        name: 'GYANAMA Blog',
+        description: 'Guides for running an Indian school: attendance, fees, parent communication and moving off registers and spreadsheets.',
+        url: `${SITE_URL}/blog`,
+        publisher: { '@id': ORG_ID },
+      }}
+    />
+  );
 }

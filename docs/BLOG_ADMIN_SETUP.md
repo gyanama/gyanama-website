@@ -2,8 +2,8 @@
 
 This feature adds a public blog (`/blog`), an admin panel (`/adminpanel`) for writing
 Markdown posts, and first-party analytics (page views + session time) shown in the
-admin panel. Backend is **Supabase**; new posts become static HTML via the existing
-Playwright prerender, triggered by a **Vercel Deploy Hook** on publish.
+admin panel. Backend is **Supabase**. Posts are cached static pages in Next.js; publishing
+refreshes the cache through `/api/revalidate`, with no redeploy.
 
 The code is done. The steps below are the one-time manual setup you must do.
 
@@ -30,27 +30,21 @@ The code is done. The steps below are the one-time manual setup you must do.
 - **Storage → New bucket** → name `blog-images`, **Public bucket = ON**.
   (Write access is already restricted to admins by the policies in the migration.)
 
-## 4. Create the Vercel Deploy Hook
-- Vercel → Project → **Settings → Git → Deploy Hooks** → create one (e.g. name
-  "blog-publish", branch `main`). Copy the URL — it's `VERCEL_DEPLOY_HOOK_URL`.
-
-## 5. Set environment variables
+## 4. Set environment variables
 Add these in **Vercel → Settings → Environment Variables** (Production **and**
 Preview), and in your local `.env` for dev. See [`.env.example`](../.env.example).
 
 | Variable | Where | Value |
 |---|---|---|
-| `VITE_SUPABASE_URL` | client | `https://<ref>.supabase.co` |
-| `VITE_SUPABASE_ANON_KEY` | client | anon public key |
-| `SUPABASE_URL` | server | same project URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | server | **service_role** secret (never `VITE_`) |
-| `VERCEL_DEPLOY_HOOK_URL` | server | the deploy hook URL from step 4 |
+| `NEXT_PUBLIC_SUPABASE_URL` | client and server | `https://<ref>.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | client | anon public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | server | **service_role** secret (never `NEXT_PUBLIC_`) |
 
-> The `service_role` key bypasses RLS — keep it server-only. It's used by
-> `api/track.ts`, `api/trigger-rebuild.ts`, and `scripts/prerender.mjs`.
+> The `service_role` key bypasses RLS. Keep it server-only. It's used by
+> `src/app/api/track/route.ts` and `src/app/api/revalidate/route.ts`.
 
-## 6. Redeploy
-Trigger a deploy so the env vars take effect and the prerender can read posts.
+## 5. Redeploy
+Trigger a deploy so the env vars take effect.
 
 ---
 
@@ -62,25 +56,23 @@ Trigger a deploy so the env vars take effect and the prerender can read posts.
   editor with live preview + cover upload, and the analytics dashboard. Every admin
   page is `noindex` and `/adminpanel` is disallowed in `robots.txt` and never
   prerendered/sitemapped.
-- **Publish → SEO**: publishing stamps `published_at` and POSTs `/api/trigger-rebuild`,
-  which fires the deploy hook. The build re-runs `scripts/prerender.mjs`, which reads
-  published slugs from Supabase, prerenders `/blog/<slug>` to static HTML, and
-  regenerates `dist/sitemap.xml`. New posts go live as static pages in ~1–2 min.
+- **Publish → SEO**: publishing stamps `published_at` and POSTs `/api/revalidate` with the
+  admin's session token. The route checks the `admins` table, refreshes the `posts` cache
+  tag (blog list, post page and `sitemap.xml`) and submits the URL to IndexNow. The post
+  is live within seconds, with no redeploy.
 - **Analytics**: `AnalyticsTracker` (public site only) sends page views + heartbeats to
-  `api/track.ts` (service role; analytics tables are closed to anon). The dashboard
+  `/api/track` (service role; analytics tables are closed to anon). The dashboard
   reads aggregate views and charts them. Admin browsing and prerender are excluded.
 
 ## Verify end-to-end
 1. `npm run dev`, go to `/adminpanel`, log in, create + **Publish** a post.
 2. Visit `/blog` and `/blog/<slug>` — the post shows.
-3. `npm run build:seo` (with env set) → confirm `dist/blog/<slug>/index.html` exists and
-   `dist/sitemap.xml` contains the post but **not** `/adminpanel`.
+3. `npm run build && npm start` (with env set) → `/sitemap.xml` contains the post but
+   **not** `/adminpanel`.
 4. View-source `/adminpanel` → `noindex, nofollow`. `robots.txt` → `Disallow: /adminpanel`.
 5. Browse public pages → rows appear in `analytics_sessions` / `analytics_pageviews` and
    the dashboard charts populate. Browsing `/adminpanel` adds **no** rows.
 
 ## Local dev note
-Vercel serverless functions in `api/` don't run under plain `vite dev`. To exercise
-`/api/track` and `/api/trigger-rebuild` locally, use `vercel dev` instead. Without them,
-the blog and admin still work; only analytics ingestion and the publish-rebuild call are
-inert locally.
+`npm run dev` runs the pages and the API routes together, so analytics ingestion and the
+publish refresh work locally when the env vars are set.

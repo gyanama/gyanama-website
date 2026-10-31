@@ -1,11 +1,6 @@
 import type { ContentBlock, SplitSectionValue } from '@/lib/blog-types';
 import { RichText } from './RichText';
 
-/**
- * Renders block-based post content (paragraph / heading / image / list / quote /
- * split_section) to styled HTML for the public blog. Mirrors the block model in
- * the admin BlockEditor.
- */
 export function BlogContent({ blocks }: { blocks: ContentBlock[] }) {
   if (!Array.isArray(blocks) || blocks.length === 0) return null;
   return (
@@ -28,11 +23,7 @@ function Block({ block }: { block: ContentBlock }) {
 
     case 'heading': {
       const text = block.value as string;
-      // Use padding-top (not margin) for extra separation so it stacks with the
-      // container's space-y rhythm instead of conflicting with it. Sizes/weights
-      // form a clear H2 > H3 > H4 ladder.
       if (block.level === 'h4') {
-        // Smallest: uppercase label style so it never competes with H2/H3.
         return (
           <h4 className="text-sm md:text-base font-semibold uppercase tracking-wide pt-3 text-muted-foreground">
             {text}
@@ -40,8 +31,6 @@ function Block({ block }: { block: ContentBlock }) {
         );
       }
       if (block.level === 'h3') {
-        // Subheading: clearly smaller than H2, with a colored accent bar so it
-        // reads as belonging under the heading above it.
         return (
           <h3 className="flex items-center gap-2.5 text-lg md:text-xl font-semibold tracking-tight pt-5 text-foreground">
             <span className="inline-block w-1 h-5 rounded-full bg-primary shrink-0" aria-hidden="true" />

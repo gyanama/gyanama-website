@@ -1,0 +1,159 @@
+# Gyanama: full reference
+
+> Gyanama is a school app for Indian K-12 schools, on Android, iOS and the web. It runs attendance, fees, homework, exams and report cards for principals, teachers, students and families. When a student's monthly attendance keeps falling, Gyanama messages the family in the app and then calls the parent, and logs what the parent said for the class teacher.
+
+This file lists what Gyanama does today, feature by feature. A shorter summary is at https://gyanama.com/llms.txt
+
+## Overview
+- Product: Gyanama, a school app and web app for K-12 schools in India.
+- Boards: CBSE, ICSE and State Board. Gyanama does not support IB.
+- Classes: playgroup, pre-nursery, nursery, LKG and UKG through Class 12.
+- Platforms: Android 7.0 or later, iOS 13 or later, and a web app on each school's own address.
+- Roles: principal, coordinator, manager, teacher and student. Families sign in with the student's login.
+- Language: the app screens are in English. AI calls are in Hindi, Hinglish or English. The family AI chat in the app also handles Marathi and Tamil.
+- Company: ARCOS Technologies Private Limited, Noida, Uttar Pradesh, India.
+- Website: https://gyanama.com
+
+## Attendance
+Page: https://gyanama.com/student-attendance-management
+- The class teacher marks daily attendance in the app as Present, Absent, Leave or Half-day.
+- Approved leave changes the day to Leave on its own. A gate pass marks the student as Half-day.
+- The principal sees live attendance percentages for the school, each class and each section, with a flag on sections that have not been marked yet.
+- Attendance is one daily entry per student.
+- The monthly register for a section or class downloads as PDF or Excel, in A4 or A3. All sections can be downloaded together as one ZIP file.
+
+## AI attendance calls
+Page: https://gyanama.com/voice-agent-for-schools
+- Gyanama checks each student's monthly attendance every day.
+- Below 60%: the family gets an app message and up to 3 reminders, then a call.
+- Below 40%: the call goes out straight away.
+- Each school sets its own limits. 60% and 40% are the starting values, so a CBSE school can use 75%.
+- Approved leave, weekends and holidays are skipped when attendance is checked.
+- Calls run between 10 am and 6 pm and last up to 4 minutes.
+- By default a school makes up to 50 calls a day.
+- Calls start in Hindi or Hinglish and switch to English when the parent replies in English.
+- Numbers on the school's Do Not Call list are never called.
+- The call cannot be transferred to a person. When a parent asks for the teacher, a callback is logged for the class teacher.
+- Every call is logged against the student with the reason given, its category, how the parent responded, any follow-up needed, planned absences and whether leave was confirmed.
+- AI calls are not part of the Assist plan.
+
+## Fees
+Page: https://gyanama.com/fee-management-system
+- Fee management runs on the web app and is used by school staff.
+- The office sets up fee structures and terms, raises invoices, adds one-off charges, and gives flat or percentage discounts.
+- Staff record cash, cheque and UPI payments. Every payment gets a numbered PDF receipt.
+- The office prints bulk fee slips for a class and sees a dashboard of fees collected and due.
+- A school can connect its own Razorpay account.
+- Families can pay online in the app.
+- Fee reminder call: Gyanama calls the family 1 day after the due date, between 10 am and 6 pm, for up to 3 minutes, in Hindi, Hinglish or English.
+- The fee call only reminds. It never takes payments, quotes amounts or sends links.
+- AI fee reminder calls are not part of the Assist plan.
+
+## Exams and report cards
+Page: https://gyanama.com/report-card-generator
+- The school publishes an exam schedule with the date, time and maximum marks for each subject, and a schedule PDF.
+- Teachers upload marks. Every mark is graded on the A1, A2, B1, B2, C1, C2, D and E scale.
+- Report card PDFs are made for one student, a whole class, or every student in the school as a ZIP file.
+- Report cards come in term and session-cumulative versions, on the school's own template and logo.
+- The exam timetable prints from the web app.
+- Transfer certificates are numbered PDFs, with dates also written in words, made on the web app.
+
+## Homework and doubts
+Page: https://gyanama.com/homework-app
+- A teacher sets homework with a deadline and attachments.
+- Students submit files and a note from the app. Each upload takes up to 10 files of up to 50 MB each.
+- The teacher sees who submitted and who opened the homework.
+- Homework submissions are not graded in the app.
+- Students ask doubts by subject. Teachers reply with text and attachments.
+
+## Communication, PTMs and forms
+Page: https://gyanama.com/parent-teacher-communication
+- Announcements go to the whole school or to selected classes, with attachments and a push notification.
+- Teachers and students or families chat one to one in the Android and iOS app, with attachments and search.
+- PTM: a family requests a date and time, and the teacher accepts or declines the request.
+- Forms have 8 field types, go to selected classes, close on a deadline and show a summary of responses.
+- The school calendar is in the app.
+- Students request leave in the app. The class teacher approves or rejects it. Leave still pending at 1 am is rejected automatically.
+- A gate pass records the parent's name and the exit time.
+- Students can report bullying to the principal, who resolves the report.
+
+## Student Progress Score
+Page: https://gyanama.com/at-risk-student-detection
+- The app shows it as Health Score. The website calls it the Student Progress Score.
+- Gyanama computes it every night for every student and class.
+- Weights: attendance 35%, academics 30%, homework 20%, behaviour 15%.
+- Each score comes with the reasons behind it.
+- Bands: Good at 75 and above, Watch at 60 and above, At risk at 45 and above.
+- Gyanama also projects each student's final percentage and grade.
+- Teachers get a list of students at risk and a weekly digest.
+
+## Test papers
+Page: https://gyanama.com/ai-assignment-generator
+- The source is the school's own textbook PDF or a book from the NCERT library.
+- The teacher picks 1 to 5 chapters.
+- Question types: MCQ, true or false, fill in the blank, short answer and long answer.
+- The teacher sets the difficulty and Bloom's levels, in English or Hindi.
+- Gyanama produces a question paper PDF and an answer key.
+- The teacher can edit every question before the paper is used.
+
+## Timetable
+Page: https://gyanama.com/ai-timetable-generator
+- Class-wise timetables run from Monday to Saturday.
+- Gyanama detects teacher clashes.
+- Timetables import and export as Excel files.
+- The AI draft follows rules the school writes in plain text, up to 2000 characters. The school reviews the draft before saving.
+- The AI timetable draft is not part of the Assist plan.
+
+## AI assistant
+- Students, teachers and school admins can ask an AI assistant questions in the app and on the web. It answers from the school's own data.
+- The family AI chat in the app handles Hindi, English, Hinglish, Marathi and Tamil.
+
+## Apps and platforms
+Pages: https://gyanama.com/school-app and https://gyanama.com/school-web-app
+- Android app: Android 7.0 or later. https://play.google.com/store/apps/details?id=com.arcostechnologies.gyanama
+- iOS app: iOS 13 or later. https://apps.apple.com/in/app/gyanama/id6793635852
+- The app has push notifications, dark mode and guided tours, and saves files to the phone's Downloads.
+- Sign in uses the phone number and a one-time code. The code expires in 5 minutes and allows 3 tries.
+- Several accounts can be added on one phone, for example when two children study in the same school.
+- Each school has its own web address, such as yourschool.gyanama.in, with the school's name and logo.
+- Web-only work: fee management, attendance register exports, report cards, transfer certificates and exam timetable printing.
+- The Gyanama team imports a school's students, staff and classes from Excel sheets.
+
+## Roles
+Pages: https://gyanama.com/for-principals, https://gyanama.com/for-teachers and https://gyanama.com/for-parents
+- Principal: today's attendance for the school, absentee call logs, the Student Progress Score, exams, gate passes, forms and the calendar.
+- Coordinator and manager: their own access to school administration.
+- Teacher: attendance, homework, marks, doubts, PTM requests, leave approvals, test papers and the timetable.
+- Student: classes, homework submission, exam dates and results, doubts, leave and gate pass requests.
+- Family: uses the student's login in the same app and receives the school's AI calls.
+
+## Security
+Page: https://gyanama.com/security
+- Servers are in India.
+- The database is backed up 3 times a day.
+- Sign in uses a one-time code sent to the phone.
+- There are 5 roles, and each role sees only its own data.
+- Every request is logged in an audit log.
+- The web server uses security headers, CSRF protection and rate limits.
+- The school decides which numbers are never called.
+
+## Boards
+Pages: https://gyanama.com/boards and https://gyanama.com/cbse-school-software
+- Attendance, AI calls, fees, homework, exams, report cards and the Student Progress Score work the same way for CBSE, ICSE and State Board schools.
+- CBSE schools also get the A1 to E grade scale and the NCERT library for test papers.
+- ICSE and State Board schools make test papers from their own textbook PDFs.
+
+## Plans
+Page: https://gyanama.com/plans
+- Gyanama has three plans: Assist, Automate and Autonomy.
+- Assist is the school app: attendance, fees, homework, exams, report cards, communication and the timetable on Android, iOS and the web.
+- Automate adds the AI features: AI attendance calls, AI fee reminder calls, the Student Progress Score with a projected result, test papers, the AI assistant and the AI timetable draft. It includes 3,000 AI calls a year and a semi white-label app.
+- Autonomy adds a full white-label app (the school's own name, logo, colours, splash screen, App Store and Play Store listing, domain and email branding), 5,000 AI calls a year, a dedicated developer and AI engineer, priority infrastructure and an uptime guarantee backed by an SLA.
+- Talk to the Gyanama team for pricing: https://gyanama.com/contact-us
+
+## Company
+- Legal name: ARCOS Technologies Private Limited.
+- Registered office: 04, Block C, Sector 63, Noida 201309, Uttar Pradesh, India.
+- Founders: Yash Bhardwaj (Co-founder, Director and CEO) and Rachit Mittal (Co-founder, Director and CTO).
+- Phone: +91 93528 51376.
+- Book a demo: https://gyanama.com/book-demo

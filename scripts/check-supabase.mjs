@@ -7,25 +7,21 @@
  * ran), an admin is registered, the storage bucket exists, and the publishable
  * key can read published posts under RLS.
  */
-const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const anonKey = process.env.VITE_SUPABASE_ANON_KEY;
+const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 let failures = 0;
 const ok = (m) => console.log(`  \x1b[32mOK\x1b[0m   ${m}`);
-const warn = (m) => console.log(`  \x1b[33mWARN\x1b[0m ${m}`);
 const bad = (m) => {
   failures++;
   console.log(`  \x1b[31mFAIL\x1b[0m ${m}`);
 };
 
 console.log('\n[check] Environment variables');
-url ? ok(`SUPABASE_URL = ${url}`) : bad('SUPABASE_URL / VITE_SUPABASE_URL missing');
+url ? ok(`NEXT_PUBLIC_SUPABASE_URL = ${url}`) : bad('NEXT_PUBLIC_SUPABASE_URL missing');
 serviceKey ? ok('SUPABASE_SERVICE_ROLE_KEY present') : bad('SUPABASE_SERVICE_ROLE_KEY missing');
-anonKey ? ok('VITE_SUPABASE_ANON_KEY present') : bad('VITE_SUPABASE_ANON_KEY missing');
-process.env.VERCEL_DEPLOY_HOOK_URL
-  ? ok('VERCEL_DEPLOY_HOOK_URL present')
-  : warn('VERCEL_DEPLOY_HOOK_URL empty (publish-rebuild no-ops until set)');
+anonKey ? ok('NEXT_PUBLIC_SUPABASE_ANON_KEY present') : bad('NEXT_PUBLIC_SUPABASE_ANON_KEY missing');
 
 if (!url || !serviceKey || !anonKey) {
   console.log('\n[check] Missing required env — fix .env and rerun.\n');
