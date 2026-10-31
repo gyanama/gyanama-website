@@ -1,10 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'motion/react';
 import { PRODUCT_GROUPS } from '@/lib/nav';
 
 const TOP = [
@@ -57,30 +56,22 @@ export function Nav() {
                 <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
               </svg>
             </button>
-            <AnimatePresence>
-              {open && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.18 }}
-                  className="absolute left-0 top-full w-[44rem] pt-2"
-                >
-                  <div className="grid grid-cols-4 gap-2 rounded-3xl bg-white p-4 shadow-[0_30px_60px_-30px_rgba(39,24,126,0.45)] ring-1 ring-ink/5">
-                    {PRODUCT_GROUPS.map((g) => (
-                      <div key={g.title}>
-                        <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/45">{g.title}</div>
-                        {g.links.map((l) => (
-                          <Link key={l.href} href={l.href} className="block rounded-xl px-2 py-2 text-[13.5px] font-medium text-ink hover:bg-peri-wash/60">
-                            {l.label}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {open && (
+              <div className="rise absolute left-0 top-full w-[44rem] pt-2">
+                <div className="grid grid-cols-4 gap-2 rounded-3xl bg-white p-4 shadow-[0_30px_60px_-30px_rgba(39,24,126,0.45)] ring-1 ring-ink/5">
+                  {PRODUCT_GROUPS.map((g) => (
+                    <div key={g.title}>
+                      <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/45">{g.title}</div>
+                      {g.links.map((l) => (
+                        <Link key={l.href} href={l.href} className="block rounded-xl px-2 py-2 text-[13.5px] font-medium text-ink hover:bg-peri-wash/60">
+                          {l.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           {TOP.map((t) => (
             <Link key={t.href} href={t.href} className={link}>
@@ -99,35 +90,31 @@ export function Nav() {
           </button>
         </div>
       </div>
-      <AnimatePresence>
-        {mobile && (
-          <motion.nav
-            aria-label="Mobile"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="mx-auto mt-2 max-h-[75vh] max-w-[1200px] overflow-y-auto rounded-3xl bg-white p-3 shadow-[0_30px_60px_-30px_rgba(39,24,126,0.45)] ring-1 ring-ink/5 lg:hidden"
-          >
-            {PRODUCT_GROUPS.map((g) => (
-              <div key={g.title} className="pb-2">
-                <div className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/45">{g.title}</div>
-                {g.links.map((l) => (
-                  <Link key={l.href} href={l.href} className="block rounded-2xl px-3 py-2 text-[14px] font-medium text-ink hover:bg-peri-wash/60">
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
-            <div className="border-t border-ink/[0.06] pt-2">
-              {TOP.map((t) => (
-                <Link key={t.href} href={t.href} className="block rounded-2xl px-3 py-2 text-[14px] font-semibold text-ink hover:bg-peri-wash/60">
-                  {t.label}
+      {mobile && (
+        <nav
+          aria-label="Mobile"
+          style={{ '--rise-y': '-8px' } as CSSProperties}
+          className="rise mx-auto mt-2 max-h-[75vh] max-w-[1200px] overflow-y-auto rounded-3xl bg-white p-3 shadow-[0_30px_60px_-30px_rgba(39,24,126,0.45)] ring-1 ring-ink/5 lg:hidden"
+        >
+          {PRODUCT_GROUPS.map((g) => (
+            <div key={g.title} className="pb-2">
+              <div className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/45">{g.title}</div>
+              {g.links.map((l) => (
+                <Link key={l.href} href={l.href} className="block rounded-2xl px-3 py-2 text-[14px] font-medium text-ink hover:bg-peri-wash/60">
+                  {l.label}
                 </Link>
               ))}
             </div>
-          </motion.nav>
-        )}
-      </AnimatePresence>
+          ))}
+          <div className="border-t border-ink/[0.06] pt-2">
+            {TOP.map((t) => (
+              <Link key={t.href} href={t.href} className="block rounded-2xl px-3 py-2 text-[14px] font-semibold text-ink hover:bg-peri-wash/60">
+                {t.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

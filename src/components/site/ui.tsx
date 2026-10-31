@@ -49,14 +49,14 @@ export const TONES: Record<ToneKey, { bg: string; chip: string; ink: string }> =
 export function Crafted({ tone, className = '', children, style }: { tone: ToneKey; className?: string; children?: ReactNode; style?: CSSProperties }) {
   return (
     <div className={`relative isolate overflow-hidden ${className}`} style={{ backgroundImage: TONES[tone].bg, ...style }}>
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 opacity-[0.22] mix-blend-multiply" style={{ backgroundImage: GRAIN }} />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 opacity-[0.22]" style={{ backgroundImage: GRAIN }} />
       <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/70" />
       {children}
     </div>
   );
 }
 
-export const CARD = 'rounded-[1.15rem] bg-white/95 p-4 font-inter ring-1 ring-[#27187E]/[0.06] shadow-[0_28px_56px_-28px_rgba(39,24,126,0.42),0_2px_6px_-2px_rgba(39,24,126,0.08)] backdrop-blur';
+export const CARD = 'rounded-[1.15rem] bg-white p-4 font-inter ring-1 ring-[#27187E]/[0.06] shadow-[0_28px_56px_-28px_rgba(39,24,126,0.42),0_2px_6px_-2px_rgba(39,24,126,0.08)]';
 
 export function Device({ src, alt, width = 260, className = '' }: { src: string; alt: string; width?: number; className?: string }) {
   return (

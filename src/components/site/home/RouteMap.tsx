@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRef, useState, type ReactNode } from 'react';
-import { motion, useInView } from 'motion/react';
+import { useInView } from '@/components/site/useInView';
 import { Grain, RouteIcon as Icon, cssVars, mesh, type IconName } from '@/components/site/primitives';
 
 type Kind = 'step' | 'check' | 'act' | 'done' | 'wait';
@@ -85,12 +85,9 @@ function Lane({ stops, live, run, title }: { stops: Stop[]; live: boolean; run: 
         {live ? (
           <>
             <div className="absolute bg-ink/[0.06] max-md:bottom-5 max-md:left-[17px] max-md:top-5 max-md:w-[2px] md:left-[var(--inset)] md:right-[var(--inset)] md:top-[17px] md:h-[2px]" />
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={run ? { scale: 1 } : {}}
-              transition={{ duration: 0.42 * n, ease: [0.45, 0, 0.2, 1] }}
-              style={{ transformOrigin: '0 0' }}
-              className="absolute rounded-full max-md:bottom-5 max-md:left-[17px] max-md:top-5 max-md:w-[2px] max-md:bg-[linear-gradient(180deg,#27187E,#768BFE_75%,#15803D)] md:left-[var(--inset)] md:right-[var(--inset)] md:top-[17px] md:h-[2px] md:bg-[linear-gradient(90deg,#27187E,#768BFE_75%,#15803D)]"
+            <div
+              style={{ transformOrigin: '0 0', transitionDuration: `${0.42 * n}s` }}
+              className={`absolute rounded-full transition-transform ease-[cubic-bezier(0.45,0,0.2,1)] ${run ? 'scale-100' : 'scale-0'} max-md:bottom-5 max-md:left-[17px] max-md:top-5 max-md:w-[2px] max-md:bg-[linear-gradient(180deg,#27187E,#768BFE_75%,#15803D)] md:left-[var(--inset)] md:right-[var(--inset)] md:top-[17px] md:h-[2px] md:bg-[linear-gradient(90deg,#27187E,#768BFE_75%,#15803D)]`}
             />
           </>
         ) : (
@@ -99,12 +96,10 @@ function Lane({ stops, live, run, title }: { stops: Stop[]; live: boolean; run: 
         {stops.map((s, i) => {
           const dot = live ? LIVE_DOT[s.kind] : s.kind === 'wait' ? 'bg-watch-bg text-watch ring-1 ring-watch/30' : 'bg-[#F7F7FB] text-ink/50 ring-1 ring-ink/20';
           return (
-            <motion.div
+            <div
               key={s.label}
-              initial={{ opacity: 0, y: 8 }}
-              animate={run ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: live ? i * 0.42 : 0.05 * i }}
-              className="relative flex gap-4 pb-5 last:pb-0 md:flex-col md:items-center md:gap-3 md:px-1.5 md:pb-0 md:text-center"
+              style={{ transitionDelay: `${live ? i * 0.42 : 0.05 * i}s` }}
+              className={`relative flex gap-4 transition-[opacity,translate] duration-400 ${run ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'} pb-5 last:pb-0 md:flex-col md:items-center md:gap-3 md:px-1.5 md:pb-0 md:text-center`}
             >
               <span className={`relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full ${dot}`}>
                 <Icon name={s.icon} size={16} stroke={1.9} />
@@ -115,7 +110,7 @@ function Lane({ stops, live, run, title }: { stops: Stop[]; live: boolean; run: 
                 </div>
                 <div className={`mt-1 font-inter text-[14px] leading-snug ${live ? 'font-medium text-ink' : 'text-ink/65'}`}>{s.label}</div>
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>
@@ -157,7 +152,7 @@ export function RouteMap({ heading, routes = ROUTES }: { heading?: ReactNode; ro
             ))}
           </div>
         </div>
-        <div key={r.key} className="mt-10 grid gap-8 md:mt-14 md:gap-12">
+        <div key={r.key} className="rise mt-10 grid gap-8 md:mt-14 md:gap-12">
           <div className="rounded-2xl bg-white/40 p-5 ring-1 ring-ink/[0.05] md:p-7">
             <Lane
               stops={r.old}

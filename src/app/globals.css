@@ -70,8 +70,116 @@
   }
 }
 
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 18px));
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+  .reveal[data-shown] {
+    opacity: 1;
+    transform: none;
+  }
+  .rise {
+    animation: rise 0.35s cubic-bezier(0.22, 1, 0.36, 1) var(--rise-delay, 0s) both;
+  }
+  .bar-grow {
+    transform-origin: left;
+    animation: bar-grow var(--bar-duration, 6.5s) linear both;
+  }
+  .field-drift {
+    animation: field-drift 9s ease-in-out infinite alternate;
+  }
+  .field-ping {
+    animation: field-ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate(var(--rise-x, 0), var(--rise-y, 8px));
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes field-drift {
+  from {
+    transform: translate3d(-12px, 0, 0);
+  }
+  to {
+    transform: translate3d(12px, -6px, 0);
+  }
+}
+
+@keyframes field-ping {
+  from {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .parallax-a,
+  .parallax-b {
+    animation: linear both;
+    animation-timeline: view();
+  }
+  .parallax-a {
+    animation-name: parallax-a;
+  }
+  .parallax-b {
+    animation-name: parallax-b;
+  }
+}
+
+@keyframes parallax-a {
+  from {
+    translate: 0 36px;
+  }
+  to {
+    translate: 0 -36px;
+  }
+}
+
+@keyframes parallax-b {
+  from {
+    translate: 0 -20px;
+  }
+  to {
+    translate: 0 30px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .reveal,
+  .rise,
+  .bar-grow,
+  .field-drift,
+  .field-ping,
+  .parallax-a,
+  .parallax-b {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+    translate: none;
   }
 }

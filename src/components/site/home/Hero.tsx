@@ -1,13 +1,10 @@
 import Link from 'next/link';
 import { hero } from '@/content/home';
-import type { FieldTheme } from '@/components/site/StudentField';
-import { FieldLoader } from '@/components/site/FieldLoader';
+import { HeroField } from '@/components/site/HeroField';
 import { StoryProvider } from '@/components/site/story';
 import { CallCard, type CallSkin } from '@/components/site/CallCard';
 import { HERO_GLOW, Phone } from '@/components/site/primitives';
 import { Button, ICONS, Icon, StoreBadges } from '@/components/site/ui';
-
-const FIELD: FieldTheme = { base: '#768BFE', alert: '#C2410C', good: '#15803D', arc: '#27187E' };
 
 const SKIN: CallSkin = {
   card: 'w-full max-w-[22rem] rounded-[1.6rem] bg-white p-5 font-inter shadow-[0_30px_60px_-30px_rgba(39,24,126,0.45)]',
@@ -58,7 +55,7 @@ export function Hero() {
       </div>
       <div className="mx-auto mt-7 max-w-[1180px] md:mt-10">
         <div className="relative overflow-hidden rounded-[2rem] bg-white/70 ring-1 ring-white md:rounded-[2.5rem]">
-          <FieldLoader theme={FIELD} className="absolute inset-0 h-full w-full opacity-70" />
+          <HeroField className="absolute inset-0 h-full w-full opacity-70" />
           <div className="relative grid items-end gap-5 px-3 pb-5 pt-5 md:grid-cols-[1.3fr_1fr] md:gap-6 md:px-10 md:pb-10 md:pt-12">
             <div className="flex justify-center">
               <Phone src="/app/principal-dashboard.png" alt="Principal dashboard in the Gyanama school app" width={190} className="md:hidden" />

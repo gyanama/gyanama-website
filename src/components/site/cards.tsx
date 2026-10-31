@@ -1,7 +1,6 @@
 'use client';
 
 import { Fragment, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
 import { call } from '@/content/home';
 import { useStory, useTalkLines, type Phase } from '@/components/site/story';
 import { CARD, ICONS, Icon } from '@/components/site/ui';
@@ -125,12 +124,7 @@ export function CallCardH({ className = '', full = false }: { className?: string
           return (
             <div key={s.phase}>
               <div className="h-1 overflow-hidden rounded-full bg-paper">
-                <motion.div
-                  initial={false}
-                  animate={{ width: on ? '100%' : '0%' }}
-                  transition={{ duration: 0.5 }}
-                  className={`h-full rounded-full ${s.phase === 'logged' ? 'bg-good' : 'bg-indigo'}`}
-                />
+                <div className={`h-full origin-left rounded-full transition-transform duration-500 ${on ? 'scale-x-100' : 'scale-x-0'} ${s.phase === 'logged' ? 'bg-good' : 'bg-indigo'}`} />
               </div>
               <div className={`mt-1.5 text-[10px] font-medium ${on ? 'text-ink' : 'text-ink/35'}`}>{s.label}</div>
             </div>
@@ -139,25 +133,19 @@ export function CallCardH({ className = '', full = false }: { className?: string
       </div>
 
       <div className="mt-4 min-h-[9.5rem] space-y-2">
-        <AnimatePresence initial={false}>
-          {transcript.slice(0, lines).map((line) => (
-            <motion.div
-              key={`${lang}-${line.text}`}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className={
-                line.who === 'Parent'
-                  ? 'ml-8 rounded-2xl rounded-tr-md bg-paper px-3.5 py-2.5 text-[13px] leading-snug text-ink/80'
-                  : 'mr-4 rounded-2xl rounded-tl-md bg-[#EEF0FF] px-3.5 py-2.5 text-[13px] leading-snug text-ink'
-              }
-            >
-              <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wider text-indigo/60">{line.who}</span>
-              <Fill text={line.text} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {transcript.slice(0, lines).map((line) => (
+          <div
+            key={`${lang}-${line.text}`}
+            className={
+              line.who === 'Parent'
+                ? 'rise ml-8 rounded-2xl rounded-tr-md bg-paper px-3.5 py-2.5 text-[13px] leading-snug text-ink/80'
+                : 'rise mr-4 rounded-2xl rounded-tl-md bg-[#EEF0FF] px-3.5 py-2.5 text-[13px] leading-snug text-ink'
+            }
+          >
+            <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-wider text-indigo/60">{line.who}</span>
+            <Fill text={line.text} />
+          </div>
+        ))}
         {lines === 0 && (
           <div className="flex h-[9.5rem] flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-ink/10 text-center text-[12px] text-muted">
             <span className={`h-2 w-2 rounded-full ${phase === 'idle' ? 'bg-ink/20' : 'animate-pulse bg-[#C2410C]'}`} />

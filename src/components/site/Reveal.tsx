@@ -1,19 +1,20 @@
 'use client';
 
-import { motion, type HTMLMotionProps } from 'motion/react';
+import { useRef, type CSSProperties, type HTMLAttributes } from 'react';
+import { useInView } from './useInView';
 
-type Props = HTMLMotionProps<'div'> & { delay?: number; y?: number };
+type Props = HTMLAttributes<HTMLDivElement> & { delay?: number; y?: number };
 
-export function Reveal({ delay = 0, y = 18, children, ...rest }: Props) {
+export function Reveal({ delay = 0, y = 18, className = '', style, ...rest }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+  const shown = useInView(ref, { margin: '0px 0px -80px 0px', once: true });
   return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      ref={ref}
+      data-shown={shown || undefined}
+      className={`reveal ${className}`}
+      style={{ '--reveal-y': `${y}px`, '--reveal-delay': `${delay}s`, ...style } as CSSProperties}
       {...rest}
-    >
-      {children}
-    </motion.div>
+    />
   );
 }

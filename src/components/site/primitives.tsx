@@ -6,7 +6,7 @@ const NOISE = `url("data:image/svg+xml,${encodeURIComponent(
 )}")`;
 
 export function Grain({ className = '' }: { className?: string }) {
-  return <div aria-hidden className={`pointer-events-none absolute inset-0 mix-blend-multiply ${className}`} style={{ backgroundImage: NOISE }} />;
+  return <div aria-hidden className={`pointer-events-none absolute inset-0 ${className}`} style={{ backgroundImage: NOISE }} />;
 }
 
 export function mesh(a: string, b: string, base: [string, string]) {

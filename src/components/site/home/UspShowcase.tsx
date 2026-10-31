@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, type ComponentType } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef, useState, type ComponentType, type CSSProperties } from 'react';
 import { Reveal } from '@/components/site/Reveal';
+import { useInView } from '@/components/site/useInView';
 import { CARD, Crafted, Device, ICONS, Icon, SectionHead, type ToneKey } from '@/components/site/ui';
 import { LoggedCard, PillarsCard, QuizSourceCard } from '@/components/site/cards';
 import { WRAP } from '@/components/site/ui';
@@ -133,14 +133,16 @@ function Points({ u }: { u: Usp }) {
 export function UspShowcase() {
   const [i, setI] = useState(0);
   const [held, setHeld] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref);
   useEffect(() => {
-    if (held) return;
+    if (held || !inView) return;
     const t = setInterval(() => setI((x) => (x + 1) % USPS.length), INTERVAL);
     return () => clearInterval(t);
-  }, [held]);
+  }, [held, inView]);
   const u = USPS[i];
   return (
-    <section id="usp" className="bg-white pb-10 pt-14 md:pb-16 md:pt-24">
+    <section ref={ref} id="usp" className="bg-white pb-10 pt-14 md:pb-16 md:pt-24">
       <div className={WRAP}>
         <Reveal>
           <SectionHead kicker="The follow-up" title="What Gyanama does on its own." />
@@ -171,30 +173,20 @@ export function UspShowcase() {
                       <div className={`mt-0.5 font-inter text-[14px] ${on ? 'text-ink/65' : 'text-ink/60'}`}>{x.line}</div>
                     </div>
                   </div>
-                  <AnimatePresence initial={false}>
-                    {on && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-[3.4rem] pt-4">
-                          <Points u={x} />
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div className={`grid transition-[grid-template-rows,opacity] duration-300 ${on ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`} aria-hidden={!on}>
+                    <div className="overflow-hidden">
+                      <div className="pl-[3.4rem] pt-4">
+                        <Points u={x} />
+                      </div>
+                    </div>
+                  </div>
                 </button>
               );
             })}
           </div>
-          <AnimatePresence mode="wait">
-            <motion.div key={u.key} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.35 }} className="overflow-hidden rounded-[2.25rem]">
-              <Stage u={u} />
-            </motion.div>
-          </AnimatePresence>
+          <div key={u.key} className="rise overflow-hidden rounded-[2.25rem]" style={{ '--rise-y': '14px' } as CSSProperties}>
+            <Stage u={u} />
+          </div>
         </div>
 
         <div className="mt-6 lg:hidden">
@@ -216,17 +208,15 @@ export function UspShowcase() {
               </button>
             ))}
           </div>
-          <AnimatePresence mode="wait">
-            <motion.div key={u.key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
-              <h3 className="mt-5 font-fraunces text-[1.35rem] font-medium leading-tight text-ink">{u.line}</h3>
-              <div className="mt-3">
-                <Points u={u} />
-              </div>
-              <div className="mt-5 overflow-hidden rounded-[1.75rem]">
-                <Stage u={u} phone={210} />
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <div key={u.key} className="rise" style={{ '--rise-y': '0px' } as CSSProperties}>
+            <h3 className="mt-5 font-fraunces text-[1.35rem] font-medium leading-tight text-ink">{u.line}</h3>
+            <div className="mt-3">
+              <Points u={u} />
+            </div>
+            <div className="mt-5 overflow-hidden rounded-[1.75rem]">
+              <Stage u={u} phone={210} />
+            </div>
+          </div>
         </div>
       </div>
     </section>

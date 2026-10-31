@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState, type ComponentType } from 'react';
-import { AnimatePresence, motion, useInView, useScroll, useTransform } from 'motion/react';
+import { useEffect, useRef, useState, type ComponentType, type CSSProperties } from 'react';
+import { useInView } from '@/components/site/useInView';
 import { Crafted, Device, ICONS, Icon, TONES, type ToneKey } from '@/components/site/ui';
 import {
   CallLogCard,
@@ -124,57 +124,36 @@ const ALL_FEATURES: Feature[] = [
 
 const INTERVAL = 6500;
 
+const DEVICE_IN = { '--rise-y': '40px' } as CSSProperties;
+const CARD_A_IN = { '--rise-x': '-16px', '--rise-y': '0px', '--rise-delay': '0.15s' } as CSSProperties;
+const CARD_B_IN = { '--rise-y': '16px', '--rise-delay': '0.25s' } as CSSProperties;
+
 function Panel({ f }: { f: Feature }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const ya = useTransform(scrollYProgress, [0, 1], [36, -36]);
-  const yb = useTransform(scrollYProgress, [0, 1], [-20, 30]);
   const A = f.a;
   const B = f.b;
   return (
-    <div ref={ref}>
+    <div>
       <Crafted tone={f.tone} className="h-[470px] rounded-[2rem] md:h-[600px] md:rounded-[2.25rem]">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={f.key}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0"
-          >
-            <div className="absolute left-1/2 top-8 -translate-x-1/2 md:left-[57%] md:top-14">
-              <motion.div
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Device src={f.screen} alt={f.alt} width={272} className="hidden md:block" />
-                <Device src={f.screen} alt={f.alt} width={220} className="md:hidden" />
-              </motion.div>
+        <div key={f.key} className="absolute inset-0">
+          <div className="absolute left-1/2 top-8 -translate-x-1/2 md:left-[57%] md:top-14">
+            <div className="rise" style={DEVICE_IN}>
+              <Device src={f.screen} alt={f.alt} width={272} className="hidden md:block" />
+              <Device src={f.screen} alt={f.alt} width={220} className="md:hidden" />
             </div>
-            <motion.div style={{ y: ya }} className="absolute left-5 top-28 hidden md:block xl:left-7">
-              <motion.div
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-              >
-                <A />
-              </motion.div>
-            </motion.div>
-            <div className="absolute inset-x-0 bottom-5 flex justify-center md:inset-x-auto md:bottom-12 md:right-6 xl:right-8">
-              <motion.div style={{ y: yb }}>
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                >
-                  <B />
-                </motion.div>
-              </motion.div>
+          </div>
+          <div className="parallax-a absolute left-5 top-28 hidden md:block xl:left-7">
+            <div className="rise" style={CARD_A_IN}>
+              <A />
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </div>
+          <div className="absolute inset-x-0 bottom-5 flex justify-center md:inset-x-auto md:bottom-12 md:right-6 xl:right-8">
+            <div className="parallax-b">
+              <div className="rise" style={CARD_B_IN}>
+                <B />
+              </div>
+            </div>
+          </div>
+        </div>
       </Crafted>
       <div className="mt-4 flex flex-col gap-1 px-1 font-inter md:flex-row md:items-start md:justify-between md:gap-6">
         <p className="max-w-xl text-[14.5px] leading-relaxed text-ink/60">{f.detail}</p>
@@ -244,12 +223,10 @@ export function FeatureExplorer({ exclude = [] }: { exclude?: string[] }) {
                   </div>
                 </div>
                 {on && running && (
-                  <motion.span
+                  <span
                     key={`bar-${i}`}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: INTERVAL / 1000, ease: 'linear' }}
-                    className="absolute inset-x-5 bottom-0 h-[2px] origin-left rounded-full bg-indigo/70"
+                    className="bar-grow absolute inset-x-5 bottom-0 h-[2px] rounded-full bg-indigo/70"
+                    style={{ '--bar-duration': `${INTERVAL}ms` } as CSSProperties}
                   />
                 )}
               </button>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
 import { call } from '@/content/home';
 import { useStory, useTalkLines, type Phase } from './story';
 
@@ -53,58 +52,32 @@ export function CallCard({ skin }: { skin: CallSkin }) {
         <span
           className={`inline-block h-2.5 w-2.5 rounded-full ${phase === 'logged' ? skin.dotGood : phase === 'idle' ? 'bg-current opacity-30' : skin.dotAlert} ${phase === 'calling' ? 'animate-pulse' : ''}`}
         />
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={statusText}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.25 }}
-            className={skin.status}
-          >
-            {statusText}
-          </motion.span>
-        </AnimatePresence>
+        <span key={statusText} className={`rise ${skin.status}`}>
+          {statusText}
+        </span>
       </div>
       <p className={skin.trigger}>{call.trigger}</p>
 
       <div className={`space-y-2 ${lines ? "mt-4" : ""}`}>
-        <AnimatePresence initial={false}>
-          {transcript.slice(0, lines).map((line) => (
-            <motion.div
-              key={`${lang}-${line.text}`}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className={line.who === 'Parent' ? skin.parent : skin.school}
-            >
-              <span className={skin.who}>{line.who}</span>
-              {line.text}
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {transcript.slice(0, lines).map((line) => (
+          <div key={`${lang}-${line.text}`} className={`rise ${line.who === 'Parent' ? skin.parent : skin.school}`}>
+            <span className={skin.who}>{line.who}</span>
+            {line.text}
+          </div>
+        ))}
       </div>
 
-      <AnimatePresence>
-        {phase === 'logged' && (
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className={skin.logged}
-          >
-            <span aria-hidden>✓</span>
-            <span>Logged</span>
-            {call.logged.map((f) => (
-              <span key={f.k} className="opacity-80">
-                {f.k}: {f.v}
-              </span>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {phase === 'logged' && (
+        <div className={`rise ${skin.logged}`}>
+          <span aria-hidden>✓</span>
+          <span>Logged</span>
+          {call.logged.map((f) => (
+            <span key={f.k} className="opacity-80">
+              {f.k}: {f.v}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

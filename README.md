@@ -6,7 +6,7 @@ Marketing website for **GYANAMA**, the school app with AI calls to parents.
 ## Tech stack
 - **Next.js 16** (App Router, Cache Components) + **React 19** + **TypeScript 6**
 - **Tailwind CSS 4** with the design tokens in `src/app/globals.css`
-- **motion** for animation, **three.js** + **React Three Fiber** for the home hero
+- CSS animations only (`src/app/globals.css`), with no animation or 3D library in the bundle
 - **Supabase** for the blog, admin login and first-party analytics
 - **Cal.com** embed for demo bookings
 - **Vitest** for content, SEO and route tests

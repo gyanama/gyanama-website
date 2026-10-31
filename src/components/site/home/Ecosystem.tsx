@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'motion/react';
+import { useRef } from 'react';
 import { Reveal } from '@/components/site/Reveal';
+import { useInView } from '@/components/site/useInView';
 import { Crafted, ICONS, Icon } from '@/components/site/ui';
 import { Kicker, WRAP } from '@/components/site/ui';
 import { FilmPlayer } from '@/components/site/home/FilmPlayer';
@@ -58,11 +59,13 @@ function MiniBrowser() {
 }
 
 export function Ecosystem() {
+  const ref = useRef<HTMLElement>(null);
+  const shown = useInView(ref, { once: true });
   return (
-    <figure className="relative aspect-square w-full overflow-hidden rounded-[1.5rem] bg-white/80 ring-1 ring-white sm:aspect-[5/4]">
+    <figure ref={ref} className="relative aspect-square w-full overflow-hidden rounded-[1.5rem] bg-white/80 ring-1 ring-white sm:aspect-[5/4]">
       <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
         {NODES.map((n, i) => (
-          <motion.line
+          <line
             key={n.k}
             x1={n.lx}
             y1={n.y}
@@ -72,10 +75,8 @@ export function Ecosystem() {
             strokeWidth={0.35}
             strokeDasharray="1.2 1.2"
             vectorEffect="non-scaling-stroke"
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15 * i }}
+            className={`transition-opacity duration-700 ${shown ? 'opacity-100' : 'opacity-0'}`}
+            style={{ transitionDelay: `${0.15 * i}s` }}
           />
         ))}
       </svg>
@@ -105,16 +106,15 @@ export function Ecosystem() {
         </div>
       </div>
       {NODES.map((n, i) => (
-        <motion.div
+        <div
           key={n.k}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.3 + 0.12 * i }}
           className="absolute -translate-y-1/2"
           style={n.side === 'l' ? { left: '3%', top: `${n.y}%` } : { right: '3%', top: `${n.y}%` }}
         >
-          <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-white py-1 pl-1 pr-2.5 font-inter shadow-[0_12px_24px_-16px_rgba(39,24,126,0.6)] ring-1 ring-ink/[0.06] sm:gap-2 sm:py-1.5 sm:pl-1.5 sm:pr-3.5">
+          <div
+            className={`flex items-center gap-1.5 whitespace-nowrap rounded-full bg-white py-1 pl-1 pr-2.5 font-inter shadow-[0_12px_24px_-16px_rgba(39,24,126,0.6)] ring-1 ring-ink/[0.06] transition-[opacity,scale] duration-400 sm:gap-2 sm:py-1.5 sm:pl-1.5 sm:pr-3.5 ${shown ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+            style={{ transitionDelay: `${0.3 + 0.12 * i}s` }}
+          >
             <span className="grid h-5 w-5 place-items-center rounded-full bg-peri-wash text-indigo sm:h-7 sm:w-7">
               <Icon d={n.icon} size={12} />
             </span>
@@ -123,7 +123,7 @@ export function Ecosystem() {
               <span className="hidden text-[10.5px] text-ink/55 sm:block">{n.v}</span>
             </span>
           </div>
-        </motion.div>
+        </div>
       ))}
       <figcaption className="sr-only">Gyanama on Android, iOS and the web, all on the same school data, for principals, teachers, students and families.</figcaption>
     </figure>
