@@ -1,131 +1,90 @@
 # GYANAMA Website
 
-
-Marketing website for **GYANAMA** — an AI-powered school management platform.
+Marketing website for **GYANAMA**, the school app with AI calls to parents.
 **Live:** [gyanama.com](https://gyanama.com)
-## Tech Stack
-- **React 18** + **TypeScript** (strict mode)
-- **Vite** — build tool
-- **Tailwind CSS** + **shadcn/ui** — styling & components
-- **Framer Motion** — animations
-- **Cal.com** — scheduling (optional)
-- **Vercel Serverless Functions** — server-side email handling
 
-## Getting Started
+## Tech stack
+- **Next.js 16** (App Router, Cache Components) + **React 19** + **TypeScript 6**
+- **Tailwind CSS 4** with the design tokens in `src/app/globals.css`
+- **motion** for animation, **three.js** + **React Three Fiber** for the home hero
+- **Supabase** for the blog, admin login and first-party analytics
+- **Cal.com** embed for demo bookings
+- **Vitest** for content, SEO and route tests
+- Node **26**
+
+## Getting started
 
 ```bash
-# Clone
-git clone https://github.com/your-org/gyanama-website.git
-cd gyanama-website
-
-# Install dependencies
 npm install
-
-# Set up environment variables
 cp .env.example .env
-# Edit .env with your values
-
-# Start dev server
 npm run dev
 ```
 
-Dev server runs at `http://localhost:8080`
+The dev server runs at `http://localhost:3000`.
 
-## Environment Variables
+## Environment variables
+See [`.env.example`](.env.example).
 
-### Server-side only (Vercel API route — never exposed to browser)
+| Variable | Where | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | client and server | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | client | Supabase anon key (RLS guards access) |
+| `SUPABASE_SERVICE_ROLE_KEY` | server | Analytics ingestion and the admin check on blog publish |
+| `INDEXNOW_KEY` | build and server | IndexNow key for Bing. Empty turns IndexNow off |
+| `INDEXNOW_SUBMIT_ALL` | build | `true` for one production deploy to submit every URL |
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `EMAILJS_SERVICE_ID` | Yes | EmailJS service ID |
-| `EMAILJS_TEMPLATE_ID` | Yes | EmailJS template ID |
-| `EMAILJS_PUBLIC_KEY` | Yes | EmailJS public key |
-| `CONTACT_EMAIL` | No | Recipient email (defaults to gyanamaedu@gmail.com) |
-
-### Client-side (VITE_ prefix — safe public values only)
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_CAL_USERNAME` | No | Cal.com username for scheduling widget |
-| `VITE_CAL_EVENT_SLUG` | No | Cal.com event slug (defaults to `15min-demo`) |
-
-**The site works without any optional variables.** Cal.com buttons fall back to the email form.
-
-## Project Structure
+## Project structure
 
 ```
-gyanama-website/
-├── api/
-│   └── send-demo-request.ts       # Vercel serverless function (email handler)
-├── public/                         # Static assets
-├── src/
-│   ├── components/
-│   │   ├── home/                   # Homepage sections
-│   │   ├── layout/                 # Navbar, Footer, PageLayout
-│   │   ├── scheduling/             # Cal.com embed & popup button
-│   │   └── ui/                     # shadcn/ui + custom components
-│   ├── hooks/                      # useDocumentTitle, useMobile, useToast
-│   ├── lib/                        # constants, env validation, rate limiter
-│   └── pages/                      # Route pages
-├── vercel.json                     # Build config, headers, redirects, rewrites
-├── .env.example                    # Environment variable template
-└── package.json
+src/
+├── app/
+│   ├── (site)/            Public pages, one folder per URL
+│   ├── adminpanel/        Blog admin (noindex)
+│   ├── api/               track and revalidate route handlers
+│   └── sitemap.ts
+├── components/
+│   ├── site/              Nav, footer, home sections, shared UI
+│   ├── landing/           Template for feature, role and platform pages
+│   ├── seo/               JSON-LD schemas
+│   ├── admin/ analytics/ blog/ legal/ scheduling/ ui/
+├── content/               Page copy (home, voice and src/content/pages/*)
+└── lib/                   Site data, routes, metadata helper, blog cache, server helpers
+public/
+├── app/                   Real app screens
+├── photos/                School photos
+├── llms.txt, llms-full.txt, robots.txt
+scripts/
+├── indexnow.mjs           Writes the key file and submits URLs after a production build
+└── seo-guard.mjs          Checks every built page's title, description, h1, canonical and FAQ schema
 ```
 
-## Pages
-
-| Route | Page |
-|-------|------|
-| `/` | Home |
-| `/ai-systems` | AI Systems detail |
-| `/features` | Platform features |
-| `/use-cases` | School use cases |
-| `/about` | About GYANAMA |
-| `/contact-us` | Contact info + social links |
-| `/book-demo` | Demo booking (Cal.com / email form) |
-| `/privacy-policy` | Privacy policy |
-| `/terms-of-service` | Terms of service |
-
-## Deploying to Vercel
-
-1. Push code to GitHub
-2. Import the repo in the Vercel Dashboard (or run `vercel` CLI)
-3. Vercel auto-detects `vercel.json`:
-   - Framework: Vite
-   - Build command: `npm run build:seo`
-   - Output directory: `dist`
-   - API routes: anything under `/api/*` is deployed as a serverless function
-4. Set environment variables in **Project Settings > Environment Variables**:
-   - `EMAILJS_SERVICE_ID`
-   - `EMAILJS_TEMPLATE_ID`
-   - `EMAILJS_PUBLIC_KEY`
-   - `CONTACT_EMAIL` (optional)
-   - `VITE_CAL_USERNAME` (optional)
-   - `VITE_CAL_EVENT_SLUG` (optional)
-5. Add custom domain `gyanama.com` in **Project Settings > Domains**
-   (the `www` → apex redirect is configured in `vercel.json`)
-6. Done
+## Adding a page
+1. Write its content in `src/content/pages/` using the `LandingContent` type.
+2. Add `src/app/(site)/<slug>/page.tsx` that renders `LandingPage` with `pageMetadata`.
+3. Add the path to `STATIC_ROUTES` in `src/lib/routes.ts` and a label in `src/lib/pages.ts`.
+4. Link it from `src/lib/nav.ts` if it belongs in the menu, and add a line to `public/llms.txt`.
+5. Run `npm test`. The content guard fails on dashes, banned words, claims the product does not
+   support, and titles or descriptions outside the length limits.
 
 ## Scripts
 
 | Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server (port 8080) |
-| `npm run build` | Production build |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run test` | Run tests |
+|---|---|
+| `npm run dev` | Dev server |
+| `npm run build` | IndexNow key file, production build, IndexNow submit |
+| `npm start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript |
+| `npm test` | Vitest |
+| `npm run seo:guard` | Check the built HTML of every route (run after a build) |
 
-## Security
+## Blog
+Posts live in Supabase. Publishing in `/adminpanel` refreshes the blog cache through
+`/api/revalidate`, so posts go live without a redeploy. Setup: [`docs/BLOG_ADMIN_SETUP.md`](docs/BLOG_ADMIN_SETUP.md).
 
-- EmailJS credentials are **server-side only** (Vercel API route) — never in the browser bundle
-- HTTP security headers configured in `vercel.json` (CSP, HSTS, X-Frame-Options, etc.)
-- Input sanitization on both client and server
-- Server-side rate limiting by IP (5 requests / 5 min)
-- Client-side rate limiting (3 submissions / 5 min)
-- TypeScript strict mode enabled
-- No source maps in production
+## Deploying
+Vercel builds `main` with the Next.js preset set in `vercel.json`, which also holds the
+`www` redirect, security headers and the `/adminpanel` noindex header.
 
 ## License
-
 All rights reserved. Copyright GYANAMA.

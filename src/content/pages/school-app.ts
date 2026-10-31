@@ -1,0 +1,73 @@
+import type { LandingContent } from './types';
+
+export const schoolApp: LandingContent = {
+  path: '/school-app',
+  title: 'School App for Android and iOS',
+  description: 'Gyanama is a school app for Android and iOS. Principals, teachers, students and families use one app for attendance, homework, exams and PTMs.',
+  breadcrumb: 'School app',
+  kicker: 'Android and iOS app',
+  h1: 'One school app for principals, teachers, students and families.',
+  summary:
+    'Gyanama is a school app for Android 7.0 and later and iOS 13 and later. Each person signs in with a phone number and a one-time code and sees the screens for their role. Teachers mark attendance and set homework, students see their timetable and results, families use the student login, and principals see the whole school.',
+  heroScreen: '/app/principal-dashboard.png',
+  heroAlt: 'Principal home screen in the Gyanama app with attendance, absentee calls and announcements',
+  heroTone: 'peri',
+  facts: [
+    { k: 'Android 7.0+', v: 'On Google Play' },
+    { k: 'iOS 13+', v: 'On the App Store' },
+    { k: '5 roles', v: 'Principal, coordinator, manager, teacher, student' },
+    { k: 'OTP login', v: 'A one-time code on every sign in' },
+  ],
+  sections: [
+    {
+      q: 'What does a principal see in the app?',
+      a: "The principal's home screen shows today's attendance for the whole school, how many students are absent, how many absentee calls have gone out and how many staff are present.",
+      body: 'From the menu the principal opens the Health Score, exams and reports, bully reports, gate passes, forms and the school calendar.',
+      screen: '/app/absentee-logged.png',
+      alt: 'Absentee Call Logs screen showing calls made to families',
+      tone: 'sky',
+      card: 'logged',
+    },
+    {
+      q: 'What can a teacher do from the phone?',
+      a: 'A teacher marks attendance in a few taps, sets homework with a deadline, uploads marks and answers student doubts.',
+      points: ['Accept or decline PTM requests from families', 'Approve or reject leave requests', 'Draft a test paper from a textbook chapter', 'Generate a timetable draft for a class'],
+      screen: '/app/mark-attendance.png',
+      alt: 'Mark Attendance screen for a class in the Gyanama app',
+      tone: 'lilac',
+      card: 'marked',
+    },
+    {
+      q: 'What do students and families see?',
+      a: "Students see today's classes, homework with a submit button, exam dates and results. Families sign in with the student's login, so a parent sees what the child's account shows.",
+      points: ['Request leave and a gate pass', 'Ask a teacher a doubt by subject', 'Request a PTM time', 'Read announcements and the school calendar'],
+      screen: '/app/student-dashboard.png',
+      alt: 'Student home screen in the Gyanama app',
+      tone: 'apricot',
+    },
+    {
+      q: 'Does the app send notifications?',
+      a: 'Yes. The app sends push notifications for announcements, published exam schedules and homework reminders. Each person can turn push notifications off in Settings.',
+      screen: '/app/announcements.png',
+      alt: 'Announcements screen in the Gyanama app',
+      tone: 'sea',
+    },
+    {
+      q: 'Is there an AI assistant in the app?',
+      a: "Yes. Every role has an AI assistant that answers questions about the school from the school's own data, such as today's timetable or pending homework.",
+      screen: '/app/messages.png',
+      alt: 'Messages screen in the Gyanama app',
+      tone: 'marigold',
+    },
+  ],
+  faqs: [
+    { q: 'Which phones does the Gyanama app work on?', a: 'Android phones with Android 7.0 or later, and iPhones with iOS 13 or later.' },
+    { q: 'Do parents need a separate app?', a: "No. Families use the student's login in the same app." },
+    { q: 'Can one phone hold more than one account?', a: 'Yes. You can add several accounts on one phone and switch between them, for example when two children study in the same school.' },
+    { q: 'Is the app available in Hindi?', a: 'The app screens are in English today. The AI calls to families are in Hindi, Hinglish or English, and the family chat in the app also handles Marathi and Tamil.' },
+    { q: 'How do people sign in?', a: 'With their phone number and a one-time code. The code expires in 5 minutes and allows 3 tries.' },
+  ],
+  related: ['/school-web-app', '/for-parents', '/for-teachers', '/student-attendance-management'],
+  updated: '2026-10-31',
+  schema: 'mobile',
+};

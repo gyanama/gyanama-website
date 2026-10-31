@@ -19,8 +19,6 @@ export interface DeviceBreakdown {
   sessions: number;
 }
 
-// All of these read RLS-protected views — only an authenticated admin gets rows.
-
 export function useDailyViews() {
   return useQuery({
     queryKey: ['analytics', 'daily'],

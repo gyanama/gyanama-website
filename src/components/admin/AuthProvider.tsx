@@ -1,3 +1,5 @@
+'use client';
+
 import {
   createContext,
   useContext,
@@ -47,10 +49,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     };
 
-    // Initial session resolution — this is the ONLY time we show the loading
-    // spinner. Subsequent auth events (token refresh on tab focus, etc.) update
-    // state silently and must NOT toggle `loading`, otherwise ProtectedRoute
-    // would unmount the editor and wipe unsaved form content.
     supabase.auth.getSession().then(({ data }) => resolve(data.session));
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {

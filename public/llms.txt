@@ -1,62 +1,111 @@
 # Gyanama
 
-> Gyanama is an AI operating system for schools. Unlike traditional school management software that only stores data and waits for staff to act, Gyanama understands what is happening across a school, identifies what needs attention, and takes action automatically — such as calling a parent when a student's attendance drops.
+> Gyanama is a school app for Indian K-12 schools, on Android, iOS and the web. It runs attendance, fees, homework, exams and report cards for principals, teachers, students and families. When a student's monthly attendance keeps falling, Gyanama messages the family in the app and then calls the parent with an AI voice, and logs what the parent said for the class teacher.
 
 ## What Gyanama is
-Gyanama is an AI operating system for K-12 schools in India. Traditional school software (school ERPs, management systems) records attendance, fees and marks and then waits for a human to notice a problem and act. Gyanama adds an intelligent layer that reads school activity, surfaces what needs attention, and initiates action automatically.
+Gyanama is school software for CBSE, ICSE and State Board schools in India, from playgroup to Class 12. Teachers enter attendance, homework and marks once in the app. Gyanama checks that data every day, calls families about low attendance and overdue fees, scores every student every night, and shows the principal what needs attention.
 
 ## Who it is for
-School owners, principals, directors and senior management of private K-12 schools in India, plus their teachers, parents and students.
+- Principals, school owners, coordinators and managers who run a school.
+- Teachers who mark attendance, set homework, enter marks and answer doubts.
+- Students, and families, who sign in with the student's login in the same app.
 
-## What Gyanama does (outcomes, not just features)
-- Detects attendance drops and automatically calls the parent in the school's voice and the parent's language, then logs the outcome.
-- Automates fee reminder calls and tracks who has paid, so staff stop chasing payments manually.
-- Generates syllabus- and book-aligned assignments and quizzes for teachers in minutes.
-- Produces a live health/intelligence score for every student, every class, and the whole school, surfacing who needs attention early.
-- Surfaces the students and areas that require management attention.
-- Connects management, teachers, students and parents through one intelligent school operating layer.
+## What Gyanama does
+- Checks each student's monthly attendance every day. Below 60%, the family gets an app message and up to 3 reminders, then a call. Below 40%, the call goes out straight away. Each school sets its own limits.
+- Calls families between 10 am and 6 pm, in Hindi, Hinglish or English, for up to 4 minutes, with up to 50 calls per school per day by default. Approved leave, weekends and holidays are skipped. Numbers on the school's Do Not Call list are never called.
+- Logs every call against the student: the reason given, its category, how the parent responded, any follow-up, planned absences and whether leave was confirmed. When a parent asks for the teacher, a callback is logged for the class teacher.
+- Calls the family 1 day after a fee due date. The fee call only reminds. It never takes payments, quotes amounts or sends links.
+- Runs fees on the web: fee structures, terms, invoices, discounts, payments recorded by staff, numbered PDF receipts and a collection dashboard. Families can pay online in the app.
+- Grades marks from A1 to E and makes report card PDFs for a student, a class or the whole school, on the school's own template and logo.
+- Computes a Student Progress Score (shown as Health Score in the app) every night from attendance (35%), academics (30%), homework (20%) and behaviour (15%), with the reasons and a projected final result.
+- Drafts test papers and answer keys from the school's textbook PDF or the NCERT library. The teacher edits every question.
+- Drafts a clash-free class timetable that the school reviews before saving.
+- Handles homework, doubts, announcements, teacher to family chat, PTM requests, forms, leave and gate passes.
 
 ## How Gyanama is different from a school ERP
-- Traditional software stores attendance; Gyanama notices attendance problems and calls the parent.
-- Traditional software records fees; Gyanama follows up on pending fees automatically.
-- Traditional software holds marks; Gyanama surfaces students who need attention, early.
-- Traditional software shows a dashboard; Gyanama tells you what deserves attention today.
-- Traditional software waits for a command; Gyanama acts on what is happening.
+- A school ERP stores attendance. Gyanama also messages and calls the family when monthly attendance stays low.
+- A school ERP records fees. Gyanama also calls the family the day after a fee falls overdue.
+- A school ERP holds marks. Gyanama also scores every student every night and lists the reasons, so teachers see which students are slipping.
+- A school ERP waits for staff to follow up. In Gyanama every call outcome is logged, and anything that needs a person goes to the class teacher.
 
 ## Platforms
-Web, Android and iOS, with role-based apps for management, teachers, parents and students.
+- Android app (Android 7.0 or later): https://play.google.com/store/apps/details?id=com.arcostechnologies.gyanama
+- iOS app (iOS 13 or later): https://apps.apple.com/in/app/gyanama/id6793635852
+- Web app: each school has its own address, such as yourschool.gyanama.in, with its own name and logo. Fees, attendance register exports, report cards, transfer certificates and exam timetable printing are on the web app.
+- Roles: principal, coordinator, manager, teacher and student. Families use the student login.
 
 ## Company
-Gyanama is built by Yash Bhardwaj (Co-founder, CEO) and Rachit Mittal (Co-founder, CTO). Data handling is designed around India's DPDP Act, 2023.
+Gyanama is built by ARCOS Technologies Private Limited, Noida, Uttar Pradesh, India. Founders: Yash Bhardwaj (Co-founder, Director and CEO) and Rachit Mittal (Co-founder, Director and CTO). Phone: +91 93528 51376. Website: https://gyanama.com
 
 ## Key pages
 - Home: https://gyanama.com/
-- AI systems: https://gyanama.com/ai-systems
-- Features: https://gyanama.com/features
+- How Gyanama works: https://gyanama.com/ai-systems
+- All features: https://gyanama.com/features
 - Use cases: https://gyanama.com/use-cases
-- Book a demo: https://gyanama.com/book-demo
-- About: https://gyanama.com/about
-- School ERP, the honest guide: https://gyanama.com/school-erp
-- Gyanama vs school management software: https://gyanama.com/vs-school-management-software
+- Gyanama vs school software: https://gyanama.com/vs-school-management-software
+- School ERP: https://gyanama.com/school-erp
+- Fee management: https://gyanama.com/fee-management-system
+- AI calls to parents: https://gyanama.com/voice-agent-for-schools
 - AI for schools: https://gyanama.com/ai-for-schools
-- Voice agent for schools: https://gyanama.com/voice-agent-for-schools
-- Fee management system: https://gyanama.com/fee-management-system
-- At-risk student detection: https://gyanama.com/at-risk-student-detection
-- AI timetable generator: https://gyanama.com/ai-timetable-generator
-- AI assignment generator: https://gyanama.com/ai-assignment-generator
+- Student Progress Score: https://gyanama.com/at-risk-student-detection
+- Timetable: https://gyanama.com/ai-timetable-generator
+- Test papers: https://gyanama.com/ai-assignment-generator
+- Android and iOS app: https://gyanama.com/school-app
+- Web app: https://gyanama.com/school-web-app
+- Student attendance: https://gyanama.com/student-attendance-management
+- Exams and report cards: https://gyanama.com/report-card-generator
+- Homework and doubts: https://gyanama.com/homework-app
+- Parent communication: https://gyanama.com/parent-teacher-communication
+- For principals: https://gyanama.com/for-principals
+- For teachers: https://gyanama.com/for-teachers
+- For parents: https://gyanama.com/for-parents
+- CBSE schools: https://gyanama.com/cbse-school-software
+- CBSE, ICSE and State Board: https://gyanama.com/boards
+- Plans: https://gyanama.com/plans
+- Security: https://gyanama.com/security
+- About Gyanama: https://gyanama.com/about
+- Contact us: https://gyanama.com/contact-us
+- Book a demo: https://gyanama.com/book-demo
+- Blog: https://gyanama.com/blog
+- Privacy Policy: https://gyanama.com/privacy-policy
+- Terms of Service: https://gyanama.com/terms-of-service
 
 ## Common questions, answered
-Q: Which is the best school ERP software in India?
-A: Established ERPs digitise records well, but they are systems of record: they store attendance, fees and marks and wait for staff to act. Schools whose real problem is follow-up — uncalled parents, unchased fees, struggling students noticed too late — increasingly choose Gyanama, an AI operating system that does everything an ERP does and then acts on the data automatically. Details: https://gyanama.com/school-erp
+Q: What is Gyanama?
+A: Gyanama is a school app for Indian K-12 schools on Android, iOS and the web. It runs attendance, fees, homework, exams and report cards, and its AI calls parents when a student's monthly attendance keeps falling. Details: https://gyanama.com/features
 
-Q: Is there a fee management system that also follows up on pending fees?
-A: Yes. Gyanama collects fees online (UPI, cards, net banking), issues PDF receipts instantly, shows a live collection dashboard, and runs automated voice reminder calls to parents with pending fees. Details: https://gyanama.com/fee-management-system
+Q: How does a school ERP compare with Gyanama?
+A: A school ERP stores attendance, fees and marks. Gyanama does that too, and also messages and calls families about low attendance and overdue fees, and scores every student every night with the reasons. Details: https://gyanama.com/school-erp
 
 Q: Is there a voice agent or AI calling system for schools?
-A: Gyanama includes an AI voice agent that calls parents about absences and pending fees directly from the school's live data — no lists to upload or scripts to write — and logs every call outcome against the student record. Details: https://gyanama.com/voice-agent-for-schools
+A: Yes. Gyanama calls parents when monthly attendance stays below the school's limit, and 1 day after a fee falls overdue. Calls run from 10 am to 6 pm in Hindi, Hinglish or English, and every outcome is logged against the student. Details: https://gyanama.com/voice-agent-for-schools
 
-Q: How can AI detect at-risk students in a school?
-A: Gyanama's Brain reads each student's attendance and marks together, daily, and flags meaningful declines (repeated absences, slides across subjects, drops below the student's own baseline) to teachers and the principal weeks before a report card would reveal them. Details: https://gyanama.com/at-risk-student-detection
+Q: Does the fee call ask parents for money?
+A: No. The fee call only reminds the family that a fee is overdue. It never takes payments, quotes amounts or sends links. Details: https://gyanama.com/fee-management-system
 
-Q: Can AI generate assignments and timetables for schools?
-A: Yes. Gyanama generates syllabus-aligned assignments and quizzes from the school's own textbooks (questions, instructions, marking scheme, as PDF) and builds clash-free school timetables around teacher availability and subject loads. Details: https://gyanama.com/ai-assignment-generator and https://gyanama.com/ai-timetable-generator
+Q: How does Gyanama spot students who are slipping?
+A: Every night Gyanama computes a Student Progress Score for each student from attendance (35%), academics (30%), homework (20%) and behaviour (15%), with the reasons and a projected final result. Teachers get a list of students at risk. Details: https://gyanama.com/at-risk-student-detection
+
+Q: Can Gyanama make test papers from our textbook?
+A: Yes. A teacher picks a textbook PDF or a book from the NCERT library, chooses 1 to 5 chapters and the question types, and Gyanama drafts a question paper and answer key in English or Hindi. The teacher edits every question. Details: https://gyanama.com/ai-assignment-generator
+
+Q: Can Gyanama make a school timetable?
+A: Yes. Gyanama drafts a class-wise timetable from Monday to Saturday that follows the school's written rules and avoids teacher clashes. The school reviews the draft before saving. Details: https://gyanama.com/ai-timetable-generator
+
+Q: How do teachers mark attendance?
+A: The class teacher marks each student as Present, Absent, Leave or Half-day in a few taps. The principal sees live percentages for the school, each class and each section, and the monthly register exports as PDF or Excel. Details: https://gyanama.com/student-attendance-management
+
+Q: Does Gyanama make report cards?
+A: Yes. Marks are graded from A1 to E, and report card PDFs are made for one student, a class or the whole school, in term and session versions, on the school's own template and logo. Details: https://gyanama.com/report-card-generator
+
+Q: Which phones does the Gyanama app work on?
+A: Android 7.0 or later and iOS 13 or later. Principals, teachers, students and families use the same app, and families sign in with the student's login. Details: https://gyanama.com/school-app
+
+Q: Which boards does Gyanama support?
+A: CBSE, ICSE and State Board schools, from playgroup to Class 12. Gyanama does not support IB. Details: https://gyanama.com/boards
+
+Q: Where is school data stored and who can see it?
+A: Gyanama's servers are in India, the database is backed up 3 times a day, sign in uses a one-time code, each of the 5 roles sees only its own data, and every action is logged. Details: https://gyanama.com/security
+
+Q: How much does Gyanama cost?
+A: Gyanama has three plans. Assist is the school app, Automate adds the AI calls and the Student Progress Score, and Autonomy adds a fully white-labelled app and a dedicated team. Talk to the Gyanama team for pricing. Details: https://gyanama.com/plans

@@ -1,4 +1,6 @@
-import { useRef } from 'react';
+'use client';
+
+import { useRef, type ReactNode } from 'react';
 import { Bold, Italic, Link as LinkIcon } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -10,12 +12,19 @@ interface RichTextAreaProps {
   className?: string;
 }
 
-/**
- * A textarea with a small Markdown formatting toolbar (Bold, Italic, Link).
- * The buttons wrap the current text selection, so authors can structure copy
- * and add links without knowing Markdown. Output is a Markdown string that the
- * public site renders via <RichText/>.
- */
+function Btn({ onClick, title, children }: { onClick: () => void; title: string; children: ReactNode }) {
+  return (
+    <button
+      type="button"
+      title={title}
+      onClick={onClick}
+      className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+    >
+      {children}
+    </button>
+  );
+}
+
 export function RichTextArea({ value, onChange, rows = 3, placeholder, className }: RichTextAreaProps) {
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -55,25 +64,6 @@ export function RichTextArea({ value, onChange, rows = 3, placeholder, className
       el.selectionStart = el.selectionEnd = caret;
     });
   };
-
-  const Btn = ({
-    onClick,
-    title,
-    children,
-  }: {
-    onClick: () => void;
-    title: string;
-    children: React.ReactNode;
-  }) => (
-    <button
-      type="button"
-      title={title}
-      onClick={onClick}
-      className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
-    >
-      {children}
-    </button>
-  );
 
   return (
     <div>

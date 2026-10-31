@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { toast } from 'sonner';
 import {
@@ -92,14 +94,13 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
 
   return (
     <div className="space-y-4">
-      {/* Add-block toolbar */}
       <div className="flex flex-wrap gap-2">
         {BLOCK_BUTTONS.map((b) => (
           <button
             key={b.label}
             type="button"
             onClick={() => addBlock(b.type, b.level)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-white text-sm font-medium hover:bg-muted transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-white text-sm font-medium hover:bg-paper transition-colors"
           >
             <b.icon className="w-4 h-4" /> {b.label}
           </button>
@@ -113,8 +114,7 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
       )}
 
       {blocks.map((block, index) => (
-        <div key={index} className="rounded-xl border border-border bg-muted/30 p-4">
-          {/* Block header */}
+        <div key={index} className="rounded-xl border border-border bg-paper/60 p-4">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               {block.type === 'heading'
@@ -138,7 +138,6 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
             </div>
           </div>
 
-          {/* Paragraph */}
           {block.type === 'paragraph' && (
             <RichTextArea
               rows={3}
@@ -148,7 +147,6 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
             />
           )}
 
-          {/* Heading (with H2 / H3 / H4 levels — subheadings nest under headings) */}
           {block.type === 'heading' && (
             <div className="space-y-2">
               <div className="inline-flex rounded-lg border border-border overflow-hidden text-xs">
@@ -183,7 +181,6 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
             </div>
           )}
 
-          {/* Quote */}
           {block.type === 'quote' && (
             <RichTextArea
               rows={2}
@@ -194,7 +191,6 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
             />
           )}
 
-          {/* Image */}
           {block.type === 'image' && (
             <div className="space-y-3">
               <ImageUpload
@@ -211,7 +207,6 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
             </div>
           )}
 
-          {/* List */}
           {block.type === 'list' && (
             <ListEditor
               items={block.value as string[]}
@@ -219,7 +214,6 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
             />
           )}
 
-          {/* Split section */}
           {block.type === 'split_section' && (
             <SplitEditor
               block={block}
@@ -255,7 +249,7 @@ function IconBtn({
       title={title}
       onClick={onClick}
       disabled={disabled}
-      className={`p-1.5 rounded-md hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed ${
+      className={`p-1.5 rounded-md hover:bg-paper disabled:opacity-30 disabled:cursor-not-allowed ${
         danger ? 'text-muted-foreground hover:text-destructive' : 'text-muted-foreground'
       }`}
     >
@@ -278,7 +272,7 @@ function ImageUpload({
   return (
     <div className="flex items-center gap-3">
       {url && <img src={url} alt="" className="h-20 w-32 object-cover rounded-lg border" />}
-      <label className="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-lg border border-border cursor-pointer hover:bg-muted bg-white">
+      <label className="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-lg border border-border cursor-pointer hover:bg-paper bg-white">
         {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4" />}
         {url ? 'Replace' : 'Upload image'}
         <input

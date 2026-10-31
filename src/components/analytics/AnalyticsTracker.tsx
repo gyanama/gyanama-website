@@ -1,5 +1,7 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 const ENDPOINT = '/api/track';
 const HEARTBEAT_MS = 15_000;
@@ -21,78 +23,46 @@ function getDevice(): 'mobile' | 'tablet' | 'desktop' {
   return 'desktop';
 }
 
-// Don't track the admin panel or prerender (Playwright sets navigator.webdriver).
 function shouldTrack(path: string): boolean {
-  if (typeof navigator !== 'undefined' && navigator.webdriver) return false;
-  if (path.startsWith('/adminpanel')) return false;
-  return true;
+  if (navigator.webdriver) return false;
+  return !path.startsWith('/adminpanel');
 }
 
-/**
- * Lightweight first-party analytics. Records a page view on every route change
- * and sends periodic heartbeats + a final beacon so per-session duration can be
- * computed server-side. Must be rendered inside <BrowserRouter>.
- */
+function send(body: string, beacon: boolean) {
+  if (beacon && navigator.sendBeacon) {
+    navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'application/json' }));
+    return;
+  }
+  fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true }).catch(() => undefined);
+}
+
 export function AnalyticsTracker() {
-  const location = useLocation();
-  const pathRef = useRef(location.pathname);
-  pathRef.current = location.pathname;
+  const pathname = usePathname();
+  const pathRef = useRef(pathname);
 
-  // Page view on each route change.
   useEffect(() => {
-    const path = location.pathname;
-    if (!shouldTrack(path)) return;
+    pathRef.current = pathname;
+    if (!shouldTrack(pathname)) return;
+    send(JSON.stringify({ type: 'pageview', session_id: getSessionId(), path: pathname, referrer: document.referrer || null, device: getDevice() }), false);
+  }, [pathname]);
 
-    const body = JSON.stringify({
-      type: 'pageview',
-      session_id: getSessionId(),
-      path,
-      referrer: document.referrer || null,
-      device: getDevice(),
-    });
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-      keepalive: true,
-    }).catch(() => {
-      /* analytics is best-effort; never surface errors to users */
-    });
-  }, [location.pathname]);
-
-  // Heartbeats + final beacon to capture session duration.
   useEffect(() => {
-    const sendHeartbeat = (useBeacon: boolean) => {
+    const heartbeat = (beacon: boolean) => {
       const path = pathRef.current;
       if (!shouldTrack(path)) return;
-      const payload = {
-        type: 'heartbeat',
-        session_id: getSessionId(),
-        path,
-      };
-      const body = JSON.stringify(payload);
-      if (useBeacon && navigator.sendBeacon) {
-        navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'application/json' }));
-      } else {
-        fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body,
-          keepalive: true,
-        }).catch(() => {});
-      }
+      send(JSON.stringify({ type: 'heartbeat', session_id: getSessionId(), path }), beacon);
     };
-
-    const interval = window.setInterval(() => sendHeartbeat(false), HEARTBEAT_MS);
+    const interval = window.setInterval(() => heartbeat(false), HEARTBEAT_MS);
     const onHidden = () => {
-      if (document.visibilityState === 'hidden') sendHeartbeat(true);
+      if (document.visibilityState === 'hidden') heartbeat(true);
     };
+    const onHide = () => heartbeat(true);
     document.addEventListener('visibilitychange', onHidden);
-    window.addEventListener('pagehide', () => sendHeartbeat(true));
-
+    window.addEventListener('pagehide', onHide);
     return () => {
       window.clearInterval(interval);
       document.removeEventListener('visibilitychange', onHidden);
+      window.removeEventListener('pagehide', onHide);
     };
   }, []);
 

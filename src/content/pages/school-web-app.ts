@@ -1,0 +1,65 @@
+import type { LandingContent } from './types';
+
+export const schoolWebApp: LandingContent = {
+  path: '/school-web-app',
+  title: 'School Web App for Office and Staff',
+  description: "Gyanama's school web app runs fees, attendance registers, report cards and transfer certificates on your school's own web address.",
+  breadcrumb: 'Web app',
+  kicker: 'Web app',
+  h1: 'The school web app for fees, registers and report cards.',
+  summary:
+    "Gyanama runs on the web as well as on phones. Each school gets its own web address, such as yourschool.gyanama.in, with its own name and logo. Principals, coordinators, managers and teachers sign in there for the work that needs a big screen: fees, the monthly attendance register, report cards, transfer certificates and timetables.",
+  heroScreen: '/app/principal-dashboard.png',
+  heroAlt: 'Principal dashboard in Gyanama',
+  heroTone: 'sky',
+  facts: [
+    { k: 'Your address', v: 'yourschool.gyanama.in' },
+    { k: 'PDF and Excel', v: 'Attendance register exports' },
+    { k: 'Report cards', v: 'For a student, a class or the school' },
+    { k: 'TC', v: 'Numbered transfer certificates' },
+  ],
+  sections: [
+    {
+      q: 'Which work is done on the web app?',
+      a: 'Fee management, attendance register exports, report cards, transfer certificates and printing the exam timetable all happen on the web app.',
+      body: 'Everything else, from attendance to homework and announcements, works on both the web and the Android and iOS app.',
+      screen: '/app/fee-payment.png',
+      alt: 'Fee payment screen in Gyanama',
+      tone: 'apricot',
+      card: 'receipt',
+    },
+    {
+      q: 'How does fee management work on the web?',
+      a: 'The office sets up fee structures with terms, raises invoices, adds charges and discounts, and records cash, cheque or UPI payments. Every payment gets a numbered PDF receipt.',
+      points: ['Bulk fee slips for a class', 'A dashboard of collected and due fees', 'The school connects its own Razorpay account'],
+      screen: '/app/fee-payment.png',
+      alt: 'Fee payment screen in Gyanama',
+      tone: 'marigold',
+      card: 'feeReminder',
+    },
+    {
+      q: 'What can the office export?',
+      a: 'The monthly attendance register for a section or a class, as PDF or Excel, in A4 or A3. All sections can be downloaded together as one ZIP file.',
+      screen: '/app/attendance-summary.png',
+      alt: 'Attendance summary screen in Gyanama',
+      tone: 'lilac',
+      card: 'register',
+    },
+    {
+      q: 'How are report cards made?',
+      a: "Teachers enter marks, Gyanama grades them from A1 to E, and the school downloads report cards as PDFs for one student, a class or the whole school. Report cards use the school's own template and logo.",
+      screen: '/app/score-cards.png',
+      alt: 'Score cards screen in Gyanama',
+      tone: 'peri',
+    },
+  ],
+  faqs: [
+    { q: 'Does each school get its own web address?', a: "Yes. Each school has its own subdomain, such as yourschool.gyanama.in, with the school's name and logo." },
+    { q: 'Who uses the web app?', a: 'Principals, coordinators, managers and teachers. Students and families can also sign in on the web.' },
+    { q: 'Can we import our timetable from Excel?', a: 'Yes. Timetables can be imported and exported as Excel files. For students, staff and classes, send us your Excel sheets and our team imports them.' },
+    { q: 'Can we print transfer certificates?', a: 'Yes. The web app makes a numbered transfer certificate as a PDF, with dates also written in words.' },
+  ],
+  related: ['/school-app', '/fee-management-system', '/report-card-generator', '/student-attendance-management'],
+  updated: '2026-10-31',
+  schema: 'software',
+};
