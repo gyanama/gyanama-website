@@ -175,8 +175,12 @@ export function UspShowcase() {
                   </div>
                   <div className={`grid transition-[grid-template-rows,opacity] duration-300 ${on ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`} aria-hidden={!on}>
                     <div className="overflow-hidden">
-                      <div className="pl-[3.4rem] pt-4">
-                        <Points u={x} />
+                      <div className="grid pl-[3.4rem] pt-4">
+                        {USPS.map((y) => (
+                          <div key={y.key} className={`[grid-area:1/1] ${y.key === x.key ? '' : 'invisible'}`} aria-hidden={y.key !== x.key}>
+                            <Points u={y} />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -208,14 +212,25 @@ export function UspShowcase() {
               </button>
             ))}
           </div>
-          <div key={u.key} className="rise" style={{ '--rise-y': '0px' } as CSSProperties}>
-            <h3 className="mt-5 font-fraunces text-[1.35rem] font-medium leading-tight text-ink">{u.line}</h3>
-            <div className="mt-3">
-              <Points u={u} />
-            </div>
-            <div className="mt-5 overflow-hidden rounded-[1.75rem]">
-              <Stage u={u} phone={210} />
-            </div>
+          <div className="grid">
+            {USPS.map((x, idx) => {
+              const on = idx === i;
+              return (
+                <div
+                  key={x.key}
+                  aria-hidden={!on}
+                  className={`flex flex-col transition-[opacity,visibility] duration-300 [grid-area:1/1] ${on ? 'opacity-100' : 'invisible opacity-0'}`}
+                >
+                  <h3 className="mt-5 font-fraunces text-[1.35rem] font-medium leading-tight text-ink">{x.line}</h3>
+                  <div className="mt-3">
+                    <Points u={x} />
+                  </div>
+                  <div className="mt-auto overflow-hidden rounded-[1.75rem] pt-5">
+                    <Stage u={x} phone={210} />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

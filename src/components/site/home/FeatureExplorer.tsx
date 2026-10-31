@@ -128,7 +128,7 @@ const DEVICE_IN = { '--rise-y': '40px' } as CSSProperties;
 const CARD_A_IN = { '--rise-x': '-16px', '--rise-y': '0px', '--rise-delay': '0.15s' } as CSSProperties;
 const CARD_B_IN = { '--rise-y': '16px', '--rise-delay': '0.25s' } as CSSProperties;
 
-function Panel({ f }: { f: Feature }) {
+function Panel({ f, all }: { f: Feature; all: Feature[] }) {
   const A = f.a;
   const B = f.b;
   return (
@@ -155,9 +155,17 @@ function Panel({ f }: { f: Feature }) {
           </div>
         </div>
       </Crafted>
-      <div className="mt-4 flex flex-col gap-1 px-1 font-inter md:flex-row md:items-start md:justify-between md:gap-6">
-        <p className="max-w-xl text-[14.5px] leading-relaxed text-ink/60">{f.detail}</p>
-        {f.note && <p className="shrink-0 text-xs text-muted md:pt-1">{f.note}</p>}
+      <div className="mt-4 grid">
+        {all.map((x) => (
+          <div
+            key={x.key}
+            aria-hidden={x.key !== f.key}
+            className={`flex flex-col gap-1 px-1 font-inter [grid-area:1/1] md:flex-row md:items-start md:justify-between md:gap-6 ${x.key === f.key ? '' : 'invisible'}`}
+          >
+            <p className="max-w-xl text-[14.5px] leading-relaxed text-ink/60">{x.detail}</p>
+            {x.note && <p className="shrink-0 text-xs text-muted md:pt-1">{x.note}</p>}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -232,7 +240,7 @@ export function FeatureExplorer({ exclude = [] }: { exclude?: string[] }) {
               </button>
               {on && (
                 <div className="mt-3 pb-4 lg:hidden">
-                  <Panel f={x} />
+                  <Panel f={x} all={[x]} />
                 </div>
               )}
             </li>
@@ -240,7 +248,7 @@ export function FeatureExplorer({ exclude = [] }: { exclude?: string[] }) {
         })}
       </ul>
       <div className="hidden lg:block">
-        <Panel f={f} />
+        <Panel f={f} all={FEATURES} />
       </div>
     </div>
   );
