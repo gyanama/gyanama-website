@@ -9,7 +9,6 @@ Marketing website for **GYANAMA**, the school app with AI calls to parents.
 - CSS animations only (`src/app/globals.css`), with no animation or 3D library in the bundle
 - **Supabase** for the blog, admin login and first-party analytics
 - **Cal.com** embed for demo bookings
-- **Vitest** for content, SEO and route tests
 - Node **26**
 
 ## Getting started
@@ -63,8 +62,7 @@ scripts/
 2. Add `src/app/(site)/<slug>/page.tsx` that renders `LandingPage` with `pageMetadata`.
 3. Add the path to `STATIC_ROUTES` in `src/lib/routes.ts` and a label in `src/lib/pages.ts`.
 4. Link it from `src/lib/nav.ts` if it belongs in the menu, and add a line to `public/llms.txt`.
-5. Run `npm test`. The content guard fails on dashes, banned words, claims the product does not
-   support, and titles or descriptions outside the length limits.
+5. Run `npm run build`, then `npm run seo:guard` to check the new page's title, description, h1 and canonical.
 
 ## Scripts
 
@@ -75,7 +73,6 @@ scripts/
 | `npm start` | Serve the production build |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript |
-| `npm test` | Vitest |
 | `npm run seo:guard` | Check the built HTML of every route (run after a build) |
 
 ## Blog
