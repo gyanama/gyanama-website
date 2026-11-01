@@ -11,6 +11,25 @@ Marketing website for **GYANAMA**, the school app with AI calls to parents.
 - **Cal.com** embed for demo bookings
 - Node **26**
 
+## Before you start working
+- Read this README and the workspace rules in the root `CLAUDE.md` (no test files, no Co-Authored-By, never commit `.claude` or `.env`).
+- A push to `main` deploys to gyanama.com through Vercel. Work on a branch and open a PR; merge only when asked.
+- Local `.env` usually points at the live Supabase project. Blog posts, analytics rows and admin actions you make locally are real. `scripts/seed-blogs.mjs` writes real posts.
+- Build locally with `npx next build`. `npm run build` also calls IndexNow, which submits URLs to Bing (it is skipped only on Vercel preview builds).
+- After any copy or page change: `npx next build`, then `npm run seo:guard`, then check the page in a browser at 375 px and desktop, light and dark.
+
+## Things to remember
+- **Copy rules** (there is no automated guard any more, check by hand):
+  - no dashes as punctuation (em or en), no AI-sounding filler;
+  - every claim must be true of the product today;
+  - never name partner schools, quote anyone or state a school count; use the store badges and product facts;
+  - show real app screens from `public/app/`, not walls of screenshots.
+- **New page:** follow "Adding a page" below. A page missing from `STATIC_ROUTES` is left out of the sitemap.
+- **New third-party script, font, iframe or API:** add its origin to the `Content-Security-Policy` in `vercel.json`, or the browser blocks it in production.
+- **Images:** keep them small (see `scripts/optimize-images.mjs`); `.png`, `.svg` and `.webp` are cached for a day.
+- **Blog:** content lives in Supabase, not in git. Publishing refreshes the cache through `/api/revalidate`.
+- **Admin panel:** `/adminpanel` must stay `noindex` (header in `vercel.json`).
+
 ## Getting started
 
 ```bash
