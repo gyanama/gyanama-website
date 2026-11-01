@@ -14,7 +14,7 @@ Marketing website for **GYANAMA**, the school app with AI calls to parents.
 ## Before you start working
 - Read this README and the workspace rules in the root `CLAUDE.md` (no test files, no Co-Authored-By, never commit `.claude` or `.env`).
 - A push to `main` deploys to gyanama.com through Vercel. Work on a branch and open a PR; merge only when asked.
-- Local `.env` usually points at the live Supabase project. Blog posts, analytics rows and admin actions you make locally are real. `scripts/seed-blogs.mjs` writes real posts.
+- Check which Supabase project your local `.env` uses. If it is the production project, blog posts, analytics rows and admin actions you make locally are real, and `scripts/seed-blogs.mjs` writes real posts.
 - Build locally with `npx next build`. `npm run build` also calls IndexNow, which submits URLs to Bing (it is skipped only on Vercel preview builds).
 - After any copy or page change: `npx next build`, then `npm run seo:guard`, then check the page in a browser at 375 px and desktop, light and dark.
 
