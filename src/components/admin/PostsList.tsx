@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { Loader2, Plus, Pencil, Trash2, ExternalLink } from 'lucide-react';
+import { LoaderCircle, Plus, Pencil, Trash, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -100,7 +100,7 @@ export default function PostsList() {
 
       {isLoading && (
         <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center">
-          <Loader2 className="w-5 h-5 animate-spin" /> Loading posts…
+          <LoaderCircle className="w-5 h-5 animate-spin" /> Loading posts…
         </div>
       )}
 
@@ -190,7 +190,7 @@ export default function PostsList() {
                         className="p-2 text-muted-foreground hover:text-destructive"
                         title="Delete"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash className="w-4 h-4" />
                       </button>
                     </div>
                   </TableCell>

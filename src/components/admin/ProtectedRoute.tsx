@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 import { useAuth } from './AuthProvider';
 
 export function ProtectedRoute({ children }: { children: ReactNode }) {
@@ -17,7 +17,7 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
   if (loading || !allowed) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+        <LoaderCircle className="w-6 h-6 animate-spin text-muted-foreground" />
       </div>
     );
   }

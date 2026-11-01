@@ -12,9 +12,8 @@ import {
   CartesianGrid,
   PieChart,
   Pie,
-  Cell,
 } from 'recharts';
-import { Loader2, Users, Clock, MousePointerClick } from 'lucide-react';
+import { LoaderCircle, Users, Clock, MousePointerClick } from 'lucide-react';
 import {
   useDailyViews,
   useTopPaths,
@@ -81,9 +80,10 @@ export default function Analytics() {
     views: Number(p.views),
   }));
 
-  const deviceData = (devices.data ?? []).map((d) => ({
+  const deviceData = (devices.data ?? []).map((d, i) => ({
     name: d.device,
     value: Number(d.sessions),
+    fill: COLORS[i % COLORS.length],
   }));
 
   const s = summary.data;
@@ -94,7 +94,7 @@ export default function Analytics() {
 
       {loading && (
         <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center">
-          <Loader2 className="w-5 h-5 animate-spin" /> Loading analytics…
+          <LoaderCircle className="w-5 h-5 animate-spin" /> Loading analytics…
         </div>
       )}
 
@@ -189,11 +189,7 @@ export default function Analytics() {
                       innerRadius={60}
                       outerRadius={100}
                       paddingAngle={2}
-                    >
-                      {deviceData.map((_, i) => (
-                        <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                      ))}
-                    </Pie>
+                    />
                     <Tooltip />
                   </PieChart>
                 </ResponsiveContainer>

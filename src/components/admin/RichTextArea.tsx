@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { Bold, Italic, Link as LinkIcon } from 'lucide-react';
+import { LetterB, Italic, Link as LinkIcon } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 
 interface RichTextAreaProps {
@@ -68,8 +68,8 @@ export function RichTextArea({ value, onChange, rows = 3, placeholder, className
   return (
     <div>
       <div className="flex items-center gap-0.5 mb-1.5">
-        <Btn title="Bold (**)" onClick={() => surround('**')}>
-          <Bold className="w-4 h-4" />
+        <Btn title="LetterB (**)" onClick={() => surround('**')}>
+          <LetterB className="w-4 h-4" />
         </Btn>
         <Btn title="Italic (*)" onClick={() => surround('*')}>
           <Italic className="w-4 h-4" />

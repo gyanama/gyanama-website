@@ -11,9 +11,9 @@ import {
   Columns2,
   ArrowUp,
   ArrowDown,
-  Trash2,
+  Trash,
   Plus,
-  Loader2,
+  LoaderCircle,
   X,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -133,7 +133,7 @@ export function BlockEditor({ blocks, onChange }: BlockEditorProps) {
                 <ArrowDown className="w-4 h-4" />
               </IconBtn>
               <IconBtn title="Delete" onClick={() => removeBlock(index)} danger>
-                <Trash2 className="w-4 h-4" />
+                <Trash className="w-4 h-4" />
               </IconBtn>
             </div>
           </div>
@@ -273,7 +273,7 @@ function ImageUpload({
     <div className="flex items-center gap-3">
       {url && <img src={url} alt="" className="h-20 w-32 object-cover rounded-lg border" />}
       <label className="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-lg border border-border cursor-pointer hover:bg-paper bg-white">
-        {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4" />}
+        {uploading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4" />}
         {url ? 'Replace' : 'Upload image'}
         <input
           type="file"

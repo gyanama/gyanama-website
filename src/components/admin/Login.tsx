@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState, type SubmitEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { Loader2, Lock } from 'lucide-react';
+import { LoaderCircle, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -22,7 +22,7 @@ export default function AdminLogin() {
     if (signedIn) router.replace('/adminpanel/posts');
   }, [signedIn, router]);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
@@ -75,7 +75,7 @@ export default function AdminLogin() {
           {error && <p className="text-sm text-destructive">{error}</p>}
 
           <Button type="submit" variant="hero" className="w-full" disabled={submitting}>
-            {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign in'}
+            {submitting ? <LoaderCircle className="w-4 h-4 animate-spin" /> : 'Sign in'}
           </Button>
         </form>
       </div>

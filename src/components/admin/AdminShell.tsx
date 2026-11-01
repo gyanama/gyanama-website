@@ -3,15 +3,15 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { FileText, PlusCircle, BarChart3, LogOut } from 'lucide-react';
+import { FileText, CirclePlus, ChartColumn, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/components/admin/AuthProvider';
 
 const navItems = [
   { to: '/adminpanel/posts', label: 'Posts', icon: FileText },
-  { to: '/adminpanel/posts/new', label: 'New Post', icon: PlusCircle },
-  { to: '/adminpanel/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/adminpanel/posts/new', label: 'New Post', icon: CirclePlus },
+  { to: '/adminpanel/analytics', label: 'Analytics', icon: ChartColumn },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {

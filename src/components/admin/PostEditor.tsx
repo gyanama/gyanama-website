@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Loader2, Upload, Save, Send, ArrowLeft, Wand2 } from 'lucide-react';
+import { LoaderCircle, Upload, Save, Send, ArrowLeft, WandSparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -179,7 +179,7 @@ export default function PostEditor() {
   if (isEdit && isLoading) {
     return (
       <div className="flex items-center gap-2 text-muted-foreground py-12 justify-center">
-        <Loader2 className="w-5 h-5 animate-spin" /> Loading…
+        <LoaderCircle className="w-5 h-5 animate-spin" /> Loading…
       </div>
     );
   }
@@ -273,7 +273,7 @@ export default function PostEditor() {
                 title="Auto-estimate from content"
                 onClick={() => update({ read_time: estimateReadTime(form.content) })}
               >
-                <Wand2 className="w-4 h-4" />
+                <WandSparkles className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -301,7 +301,7 @@ export default function PostEditor() {
               />
             )}
             <label className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border border-border cursor-pointer hover:bg-paper bg-white">
-              {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+              {uploading ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
               {form.cover_image_url ? 'Replace' : 'Upload'}
               <input
                 type="file"
@@ -366,11 +366,11 @@ export default function PostEditor() {
 
         <div className="flex items-center gap-3 pt-2 sticky bottom-0 bg-background/80 backdrop-blur py-3">
           <Button variant="outline" onClick={() => save(false)} disabled={saving || uploading}>
-            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {saving ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             Save draft
           </Button>
           <Button variant="hero" onClick={() => save(true)} disabled={saving || uploading}>
-            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+            {saving ? <LoaderCircle className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
             Publish
           </Button>
         </div>
